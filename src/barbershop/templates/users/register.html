@@ -1,6 +1,13 @@
 {% extends "users/base.html" %}
 {% block content %} 
 <section>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-content-center">
+            <div class="col-2 col-sm-3 col-md-3 col-lg-1 col-xl-2 mt-2" id="logo"><img src="{{ logo.image.url }}" /></div>
+        </div>
+    </div>
+</section>
+<section>
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center align-content-center">
                 <div class="col-8 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
@@ -13,10 +20,10 @@
                                 
                             </fieldset>
                             <div class="form-group">
-                                <button class="btn btn-outline-info">Sign Up</button>
+                                <input class="confirm-button" type="submit" value="Sign Up">
                             </div>
                             <div class="border-top pt-3 text-center">
-                                    <small class="text-muted">Already Have An Account?</small><a class='ml-2 text-info' href="#">Sign In</a>
+                                    <small class="text-muted">Already Have An Account?</small><a class='ml-2 text-danger' href="{% url 'login_view' %}">Sign In</a>
                                 
                             </div>
                     </form>

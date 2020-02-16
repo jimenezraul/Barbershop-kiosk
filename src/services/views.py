@@ -146,16 +146,19 @@ def login_view(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        if user is not None:
-            if 'next' in request.POST:
-                login(request, user)
-                return redirect(request.POST.get('next'))
+        try:
+            if user is not None:
+                if 'next' in request.POST:
+                    login(request, user)
+                    return redirect(request.POST.get('next'))
+                else:
+                    login(request, user)
+                    return redirect('barbershop-waitinglist')
             else:
-                login(request, user)
-                return redirect('barbershop-waitinglist')
-        else:
-            messages.error(request,'username or password not correct')
-            return redirect(request.POST.get('next'))
+                messages.error(request,'username or password is not correct')
+                return redirect(request.POST.get('next'))
+        except:
+            return redirect('barbershop-waitinglist')
     context= {
         'logo': logo,
     }

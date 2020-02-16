@@ -77,15 +77,15 @@
                                     <form action="{% url 'login_view' %}" class="site-form shadow" method="post">
                                         {% csrf_token %}
                                             <h1>Log In</h1>
-                                            <input id="id_name" type="username" placeholder="Username" name="username" value=""/>
-                                            <input id="id_barber"type="password" placeholder="Password" name="password" value=""/>     
+                                            <input class="r-client-info mb-3" type="username" placeholder="Username" name="username" value="" required>
+                                            <input class="r-client-info" type="password" placeholder="Password" name="password" value="" required>     
                                         {% if request.GET.next %}
                                           <input type="hidden" name="next" value="{{ request.GET.next }}">
                                         {% endif %}
                                         <input class="confirm-button" type="submit" value="Log in">
 
                                         <div class="border-top pt-3 text-center">
-                                            <small class="text-muted">Don't Have An Account?</small><a class='ml-2 text-info' href="{% url 'register' %}">Sign up</a>
+                                            <small class="text-muted">Create an Account!</small><a class='ml-2 text-danger' href="{% url 'register' %}">Sign up</a>
                                         
                                     </div>
                                 </form> 

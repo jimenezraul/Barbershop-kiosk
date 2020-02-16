@@ -282,12 +282,11 @@ label{
   font-weight: 500;
   margin: 20px auto;
   border-radius: 5px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #777676;
   padding: 7px;
   text-indent: 15px;
   height: 42px;
-  background: #f7f9fc;
-  box-shadow: inset 1px 3px 6px rgb(173, 173, 173);
+ 
 }
 .sign-up-button{
   display:block;
@@ -554,19 +553,18 @@ margin-top: 20px;
   width:80%;
   margin: auto;
   border-radius: 25px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #dc3545;
   padding: 7px;
   height: 42px;
-  color:white;
-  background-color: #dc3545;
+  color: #dc3545;
+  background-color: #ffffff;
   height: 42px;
-  border: 1px solid rgb(173, 173, 173);
   margin-top: 20px;
   margin-bottom: 20px;
 }
 .confirm-button:hover{
   color: #ffffff;
-  background-color: #c02f3e;
+  background-color: #dc3545;
   text-shadow: 2px solid #ffffff;
   text-decoration: none;
 }
@@ -657,8 +655,7 @@ margin-top: 20px;
   border: 1px solid #c4c4c4;
   text-indent: 15px;
   height: 42px;
-  background: #f7f9fc;
-  box-shadow: inset 1px 3px 6px rgb(173, 173, 173);
+  
 }
 
 .services, .weather-link{

@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
+        <link href="{% static 'barbershop/assets/css/cropper.min.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
@@ -121,5 +122,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
         <script src="{% static 'barbershop/assets/js/better-nav.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
     </body>
 </html>
