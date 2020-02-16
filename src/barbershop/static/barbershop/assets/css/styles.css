@@ -1,0 +1,701 @@
+body {
+  background-color: rgb(90, 92, 110);
+}
+
+.navbar {
+  border-bottom: 1px solid red;
+  border-right: 1px solid red;
+  border-left: 1px solid red;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+#logo-style {
+  font-family: 'Kaushan Script', cursive;
+  color: #d90202;
+  text-shadow: -3px 5px 5px rgba(0, 0, 0, 0.8);
+  font-size: 30px;
+  width: 20%;
+}
+
+.menu-style {
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+#logo img {
+  width: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+#welcome {
+  color: #505e6c!important;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+#appointment {
+  font-size: 40px;
+  font-family: 'Kaushan Script', cursive;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+#bar-color {
+  background-color: #1e2c3b;
+}
+
+#center-info {
+  background-color: #1e2c3b;
+  border-radius: 15px;
+  border: 1px solid red;
+  height: 250px;
+  width: 85%;
+  margin-bottom: 50px;
+}
+
+.booknow {
+  padding: 2px 55px;
+  border-radius: 30px;
+  border: 2px solid white;
+}
+
+.booknow:hover {
+  color: #000000;
+  background-color: #ffffff;
+  padding: 2px 55px;
+  margin-top: 15px;
+  border-radius: 30px;
+  border: 2px solid rgb(255,255,255);
+  text-decoration: none;
+}
+
+#center-bar {
+  margin-top: 13px;
+}
+
+.fab.fa-instagram {
+  color: transparent;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: white;
+  background-color: rgba(0,98,204,0);
+}
+
+.permanent-marker {
+  font-size: 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.fas.fa-phone {
+  color: #d90202;
+  margin-bottom: 1.5rem;
+}
+
+.fas.fa-map-marker-alt {
+  color: #d90202;
+}
+
+.text-shadow {
+  text-shadow: -3px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.location {
+  background-color: #ffffff;
+}
+
+.instagram {
+  font-size: xx-large;
+}
+
+#pics {
+  background-color: rgb(98, 31, 31);
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+}
+
+@media (min-width: 300px) {
+  .item-pic {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 90%;
+  }
+}
+
+@media (min-width: 576px) {
+  .item-pic {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 90%;
+  }
+}
+
+@media (min-width: 768px) {
+  .item-pic {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .item-pic {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 80%;
+  }
+}
+
+.fa-facebook {
+  color: #4469b0;
+  font-size: 35px;
+  margin-top: 30px;
+}
+
+.facebook {
+  font-size: xx-large;
+}
+
+.permanent-marker.phone a:hover {
+  color: rgb(255,255,255);
+  background-color: rgba(255,255,255,0);
+  padding: 1px 41px;
+  border-radius: 25px;
+  border: 2px solid white;
+  text-decoration: none;
+}
+
+.permanent-marker.phone a {
+  color: black;
+  background-color: #ffffff;
+  padding: 1px 41px;
+  border-radius: 25px;
+  border: 2px solid white;
+}
+
+.permanent-marker.location a {
+  color: black;
+  font-size: smaller;
+  background-color: white;
+  padding: 8px 18px;
+  border-radius: 25px;
+  border: 2px solid white;
+}
+
+.permanent-marker.location a:hover {
+  color: rgb(255,255,255);
+  background-color: rgba(255,255,255,0);
+  padding: 8px 18px;
+  border-radius: 25px;
+  border: 2px solid white;
+  text-decoration: none;
+}
+
+#appt-center {
+  height: 100%;
+  background-color: #1e2c3b;
+  border-bottom: 1px solid red;
+  border-top: 1px solid red;
+}
+#wait-list {
+  height: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-bottom: 10px;
+}
+.b-border {
+  border-bottom: 2px solid white;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+} 
+
+@media (min-width: 300px) {
+  .fas.fa-user-tie {
+    color: white;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .fas.fa-user-tie {
+    color: white;
+    font-size: 17px;
+    padding-left: 10px;
+  }
+}
+.article{
+  color: white;
+}
+.site-form{
+  display:block;
+  border:1px solid rgb(160, 159, 159);
+  max-width: 450px;
+  width: 100%;
+  margin: 30px 0;
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  color: #505e6c;
+}
+.site-form h1{
+  font-size: 40px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+label{
+  display:none;
+}
+#id_name, #id_barber, #id_zip_code{
+  display:block;
+  width:80%;
+  font-weight: 500;
+  margin: 20px auto;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  padding: 7px;
+  text-indent: 15px;
+  height: 42px;
+  background: #f7f9fc;
+  box-shadow: inset 1px 3px 6px rgb(173, 173, 173);
+}
+.sign-up-button{
+  display:block;
+  width:80%;
+  margin: auto;
+  border-radius: 25px;
+  border: 1px solid #c4c4c4;
+  padding: 7px;
+  text-indent: 15px;
+  height: 42px;
+  color:white;
+  height: 42px;
+  border: 1px solid rgb(173, 173, 173);
+  
+}
+.sign-up-button:hover{
+  color: #000000;
+  text-shadow: 2px solid #ffffff;
+}
+
+.site-form p{
+  font-size: medium;
+  color: #000000;
+  font-weight: 600;
+}
+::placeholder {
+  color:rgb(80,94,108);
+   opacity: 1; /* Firefox */
+ }
+h3{
+  padding:0;
+  color: #212529;
+  margin: 10px 0;
+}
+.panel{
+  background: #ecf4fb;
+  border-radius:4px;
+  margin-bottom: 2px;
+  padding-right: 10px;
+  min-height: 20px;
+}
+.list-table{
+  min-height: 100vh;
+}
+.div-border{
+  border-bottom: 1px solid black;
+}
+.table-btn{
+  height: 100%;
+}
+.barber-btn{
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+.client-btn{
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+.delete-btn{
+  font-size: 20px;
+  border: none;
+  color: #ffffff;
+  color:white;
+  background-color: #dc3545;
+  border-radius: 25px;
+  padding:2px 20px;
+  
+}
+.delete-btn:hover{
+  background-color: #c02f3e;
+}
+.client-bar{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.separator{
+  border-right: 2px solid #cacaca;
+}
+.card{
+margin-top: 20px;
+}
+
+.time{
+  display: flex;
+  color: #ffffff;
+  background-color: #dc3545;
+  border-radius: 25px;
+  margin: 0 auto 0 auto;
+  font-size: 25px;
+  padding: 0;
+}
+
+.video-stream{
+  width: 100%;
+  height: 250px;
+}
+
+
+
+.minutes{
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: large;
+}
+.ewt{
+  margin-top: 10px;
+  font-weight: bold;
+}
+.card-body{
+  padding: 0 20px;
+}
+
+.select-barber{
+  margin: 0!important;
+  padding: 0!important;
+  color: #000000;
+  font-weight: bold;
+}
+.gold{
+  background-color: #d4af37;
+}
+.timename{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+.wel{
+  font-weight: bold!important;
+  font-size: 25px;
+}
+
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+ margin-right: 15px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+.popup .hide {
+  visibility: hidden;
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;} 
+  to {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity:0 ;}
+}
+
+.d-bottom{
+  margin-bottom: 30px!important;
+}
+.sky{
+  margin: 0;
+}
+.font-l{
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.city{
+  font-size: 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.temp{
+  font-size: 25px;
+  border-radius: 25px;
+  width: 50%!important;
+  padding: 0px 0;
+}
+.description{
+  font-size: 15px;
+}
+
+.font-b{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}
+.sky img{
+  height: 100px;
+  width: 100px;
+}
+.r-client-info{
+  width: 80%;
+  padding: 2px 15px;
+  border-radius: 5px;
+  border: 1px solid var(--dark);
+  opacity: .4;
+}
+
+.edit{
+  font-size: 30px;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+}
+.edit:hover{
+  color: rgb(204, 204, 204);
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+}
+.fa-arrow-circle-left{
+  font-size: 35px;
+}
+.fa-arrow-circle-left:hover{
+  color: rgb(204, 204, 204);
+}
+.b-list{
+  padding: 0;
+  margin: 0;
+}
+
+.confirm-button{
+  display:block;
+  width:80%;
+  margin: auto;
+  border-radius: 25px;
+  border: 1px solid #c4c4c4;
+  padding: 7px;
+  height: 42px;
+  color:white;
+  background-color: #dc3545;
+  height: 42px;
+  border: 1px solid rgb(173, 173, 173);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.confirm-button:hover{
+  color: #ffffff;
+  background-color: #c02f3e;
+  text-shadow: 2px solid #ffffff;
+  text-decoration: none;
+}
+.form-name{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content{
+  height: 100vh;
+}
+
+.fa-user-cog{
+  font-size: 30px;
+}
+
+.fa-plus-circle{
+  font-size: 25px;
+  color: #dc3545;
+}
+
+.barber-plus{
+  margin-bottom: 10px!important;
+  background-color: #dc3545;
+  border-radius: 20px;
+  text-decoration: none!important;
+  padding: 5px 15px;
+}
+.barber-plus:hover{
+  background-color: #c02f3e;
+}
+
+.refresh{
+  color: white;
+  background-color: #dc3545;
+  padding: 10px;
+  border-radius: 25px;
+  
+}
+.count{
+  margin: 0;
+  padding: 0;
+}
+
+.chart-bg{
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+}
+.chart{
+  color: #ffffff;
+  font-size: 32px;
+}
+.chart:hover{
+  color: #ffffff;
+}
+.red{
+  color: #dc3545;
+}
+.red:hover{
+  color: #c02f3e;
+}
+
+.admin{
+  color: white;
+  font-size: 25px;
+}
+.admin:hover{
+  color: #c4c4c4;
+}
+
+.completed-btn{
+  background-color: #ffffff;
+  border: 0;
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+#id_service, #id_price{
+  display:block;
+  width:95%;
+  font-weight: 500;
+  margin: 20px auto;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  text-indent: 15px;
+  height: 42px;
+  background: #f7f9fc;
+  box-shadow: inset 1px 3px 6px rgb(173, 173, 173);
+}
+
+.services, .weather-link{
+  margin: 0;
+  padding: 0;
+}
+
+.fa-calendar-alt{
+  font-size: 35px;
+}
+
+.logo{
+  width: 50%;
+  border-radius: 10px;
+  
+}
+
+#id_image{
+  width: 100%;
+  border: 2px solid grey;
+  background-color: #dc3545;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.img_logo{
+  width: 30%;
+  height: 30%;
+}
+
+.logout{
+  font-size: 30px;
+  padding-left: 25px;
+}
+
+.logout:hover{
+  font-size: 30px;
+  padding-left: 25px;
+  color: #c4c4c4;
+}

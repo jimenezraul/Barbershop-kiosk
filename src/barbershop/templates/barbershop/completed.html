@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        
+        {% if title %}
+            <title>Barbershop | {{ title }}</title>
+        {% else %}
+            <title>Barbershop</title>
+        {% endif %}
+        <link rel="icon" type="image/jpeg" sizes="16x16" href="{% static 'barbershop/assets/img/16x16.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="{% static 'barbershop/assets/img/32x32.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="180x180" href="{% static 'barbershop/assets/img/180x180.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="192x192" href="{% static 'barbershop/assets/img/192x192.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="512x512" href="{% static 'barbershop/assets/img/512x512.jpg' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="manifest" href="{% static 'barbershop/manifest.json' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Lightbox-Gallery.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
+        <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132458520-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'UA-132458520-1');
+        </script>
+    </head>
+    <body>
+     
+{% block content %}
+
+    <section>
+        <div class="container">
+        <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
+            <div class="col-3 text-center">
+                <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
+                <p class="b-list">Back</p>
+            </div>
+            <div class="col-6">
+                    <h2 class="text-center text-dark" id="welcome">Completed</h2>
+            </div>
+                <div class="col-3 text-center">
+                    {% if title == "Last_Year" %}
+                    <a href="{% url 'barbershop-completed' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
+                    <p class="b-list">{{ todays_year }}</p>
+                    {% else %}
+                    <a href="{% url 'barbershop-completed_last_year' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
+                    <p class="b-list">{{ last_year }}</p>
+                    {% endif %}
+                </div>  
+        </div>
+    </div>
+    </section>
+    {% for message in messages %}
+        <div class="row d-flex justify-content-center align-items-center align-content-center">
+            <div id="mydiv" class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
+                {{ message }}
+            </div>
+        </div>
+            <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    {% endfor %}
+<section class="list-table">
+    <div class="row my-5 justify-content-center">
+        <div class="col-11 col-sm-10 col-lg-8 col-xl-7 chart-bg shadow">
+            {% if title == "Last_Year" %}
+            <h4 class="text-center">{{ last_year }}</h4>
+            {% else %}
+            <h4 class="text-center">{{ todays_year }}</h4>
+            {% endif %}
+          <canvas data-bs-chart="{&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dic&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Walking Clients&quot;,&quot;backgroundColor&quot;:&quot;#c32e2e&quot;,&quot;borderColor&quot;:&quot;#dd2525&quot;,&quot;data&quot;:[&quot;{{ JAN.count }}&quot;,&quot;{{ FEB.count }}&quot;,&quot;{{ MAR.count }}&quot;,&quot;{{ APR.count }}&quot;,&quot;{{ MAY.count }}&quot;,&quot;{{ JUN.count }}&quot;,&quot;{{ JULY.count }}&quot;,&quot;{{ AUG.count }}&quot;,&quot;{{ SEP.count }}&quot;,&quot;{{ OCT.count }}&quot;,&quot;{{ NOV.count }}&quot;,&quot;{{ DIC.count }}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}">
+          </canvas>
+        </div>
+      </div>
+    
+    
+        <script
+            src="{% static 'barbershop/assets/js/jquery.min2.js' %}"></script>
+            <script src="{% static 'barbershop/assets/js/bootstrap.min.js' %}"></script>
+            <script src="{% static 'barbershop/assets/js/chart.min.js' %}"></script>
+            <script src="{% static 'barbershop/assets/js/bs-init.js' %}"></script>
+            {% if title == "Last_Year" %}
+            {% else %}
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-header bg-danger">
+                <div class="row d-flex justify-content-center align-items-center align-content-center client-bar">
+                        <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                            <h4 class="font-l">Client</h4>
+                         </div>
+                        <div class="col-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                            <H4 class="font-l">Barber</H4>
+                         </div>
+                        <div class="col-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                            <h4 class="font-l">Date</h4>
+                        </div>
+                        <div class="col-2 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                            <p>Customers Completed</p>
+                            <h6 class="count">{{ completed.count }}</h6>
+                        </div>
+                </div>
+            </div>
+                        
+    
+            <div class="card-body">
+                <div class="client">
+                    {% for complete in completed %}
+    
+                    <div id='client' class="client">
+                            <div class="row d-flex justify-content-center align-items-center align-content-center">
+                                    <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                        <h3 class="client-btn">{{ complete.name }}</h3>
+                                    </div>
+                                    <div class="col-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                        <h3 class="barber-btn">{{ complete.barber }}</h3>
+                                    </div>
+                                    <div class="col-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                        <h3>{{ complete.date }}</h3>
+                                    </div>
+                                    <div class="col-2 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                        <div class="table-btn my-3">
+                                        </div>
+                                    </div>
+                                    
+                            </div>
+                    </div>
+        
+                    {% endfor %} 
+                    {% endif %}
+                </div>
+                    
+               
+                    <script type="text/javascript"
+                            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                            <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                            <script src="{% static 'barbershop/assets/js/count.js' %}"></script>
+                            <script>
+                                // When the user clicks on div, open the popup
+                                function showFunction() {
+                                  var popup = document.getElementById("myPopup");
+                                  popup.classList.toggle("show");
+                                  $('#btnviewdetails').text('Cancel').button("refresh")
+                                }
+                                function hideFunction() {
+                                  var popup = document.getElementById("myPopup");
+                                  popup.classList.toggle("hide");
+                                }
+                                </script>
+            </div>
+        </div>
+    </div>
+</section>
+        <div class="footer-dark mt-4">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                      
+                
+                        
+                    </div>
+                    <p class="copyright">The Barbershop WaitingList© 2018-2019</p>
+                </div>
+            </footer>
+           
+            
+            
+{% endblock content %}

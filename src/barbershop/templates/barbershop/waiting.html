@@ -1,0 +1,204 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        
+        {% if title %}
+            <title>Barbershop | {{ title }}</title>
+        {% else %}
+            <title>Barbershop</title>
+        {% endif %}
+        <link rel="icon" type="image/jpeg" sizes="16x16" href="{% static 'barbershop/assets/img/16x16.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="{% static 'barbershop/assets/img/32x32.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="180x180" href="{% static 'barbershop/assets/img/180x180.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="192x192" href="{% static 'barbershop/assets/img/192x192.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="512x512" href="{% static 'barbershop/assets/img/512x512.jpg' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="manifest" href="{% static 'barbershop/manifest.json' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Lightbox-Gallery.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
+        <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132458520-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'UA-132458520-1');
+        </script>
+    </head>
+    <body>
+     
+{% block content %}
+    <section>
+        <div class="container">
+        <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
+            <div class="col-3 d-flex justify-content-center">
+                <img class="img-fluid img_logo" src="{{ logo.image.url }}" alt="">
+            </div>
+            <div class="col-6">
+                    <h2 class="text-center text-dark" id="welcome">Waiting List</h2>
+            </div>
+                <div class="col-3 text-center">
+                    <h4 class="ewt">Estimated Wait Time</h4>
+                     <div class="col-11 col-sm-11 col-md-8 col-lg-5 time justify-content-center">{{ eta }}
+                     </div>
+                     <p class="timename">{{ time_display }}</p>
+                              
+
+                </div>  
+        </div>
+    </div>
+    </section>
+<section class="list-table">
+        
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-9">
+                <div class="card shadow">
+                    <div class="card-header bg-danger">
+                        <div class="row d-flex justify-content-center align-items-center align-content-center client-bar">
+                                <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center separator">
+                                    <h4 class="font-l">Client</h4>
+                                </div>
+                                <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center separator">
+                                    <H4 class="font-l">Barber</H4>
+                                </div>
+                                <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <h4 class="font-l">Time</h4>
+                                </div>
+                        </div>
+                    </div>
+                                
+                    {% for message in messages %}
+                        <div id="mydiv" class="alert alert-danger alert-dismissible fade show message text-center" role="alert">
+                            {{ message }}
+                        </div>
+                        <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    {% endfor %}
+                    <div class="card-body">
+                                <div class="client">
+                                    {% for client in clients %}
+
+                                    <div id='client' class="client">
+                                            <div class="row d-flex justify-content-center align-items-center align-content-center">
+                                                    <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center my-1">
+                                                        <h4 class="client-btn text-dark">{{ client.name }}</h4>
+                                                    </div>
+                                                    <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center my-1">
+                                                        <h4 class="barber-btn text-dark">{{ client.barber }}</h4>
+                                                    </div>
+                                                    <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center my-1">
+                                                        <h4 class="text-dark">{{ client.date }}</h4>
+                                                    </div>
+                                                    
+                                                    
+                                            </div>
+                                    </div>
+                        
+                                    {% endfor %} 
+                                    
+                                    
+                            
+                                    <script type="text/javascript"
+                                            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                                            <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                                            <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                                            
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Weather</h4>
+                    </div>
+                    <div class="weather-link">
+                        <div class="card-body text-center">
+                                <figure class="sky">
+                                        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                                    </figure>
+                            <h4 class="card-title font-b city">{{ city_weather.city }}</h4>
+                            <p class="card-text font-b bg-danger temp mx-auto text-white">{{ city_weather.temperature }}°F</p>
+                            <p class="card-text d-bottom font-b description">{{ city_weather.description }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Prices</h4></div>
+                    <div class="services">
+                        <div class="card-body">
+                            <h4 class="card-title font-b city mt-3">Men's Haircut</h4>
+                            {% for service in menservices %}
+                            <p class="">{{ service.service }} - ${{ service.price }}</p>
+                            {% endfor %}
+                            <h4 class="card-title font-b city mt-3">Kid's Haircut</h4>
+                            {% for service in kidservices %}
+                            <p class="">{{ service.service }} - ${{ service.price }}</p>
+                            {% endfor %}
+                            <h4 class="card-title font-b city mt-3">Other Services</h4>
+                            {% for service in otherservices %}
+                            <p class="">{{ service.service }} - ${{ service.price }}</p>
+                            {% endfor %}
+                            <p class="d-bottom"></p>
+                        </div>
+                    </div>
+            </div>
+            <!-- 
+            {% if user.is_authenticated %}
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Users</h4></div>
+                    <div class="">
+                        <div class="card-body">
+                            <h4 class="card-title font-b city mt-3">Profile</h4>
+                            <p class="">Welcome, {{ user.first_name }}! </p>
+                            <p class="d-bottom"></p>
+                        </div>
+                    </div>
+            </div>
+            {% endif %}  
+            -->
+            </div>
+                
+        </div>
+    </div>
+</section>
+
+        <div class="footer-dark">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                      
+                
+                        
+                    </div>
+                    <p class="copyright">The Barbershop WaitingList© 2018-2019</p>
+                </div>
+            </footer>
+        </div>
+            
+            
+{% endblock content %}
