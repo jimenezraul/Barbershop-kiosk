@@ -134,36 +134,3 @@ def delete_otherservice(request, id):
         instance.delete()
         messages.success(request, f"{instance} was successfully deleted from list!")
         return redirect('barbershop-settings')
-
-def login_view(request):
-    logo = LogoImage.objects.all()
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
-
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        try:
-            if user is not None:
-                if 'next' in request.POST:
-                    login(request, user)
-                    return redirect(request.POST.get('next'))
-                else:
-                    login(request, user)
-                    return redirect('barbershop-waitinglist')
-            else:
-                messages.error(request,'username or password is not correct')
-                return redirect(request.POST.get('next'))
-        except:
-            return redirect('barbershop-waitinglist')
-    context= {
-        'logo': logo,
-    }
-    return render(request, "users/login.html", context)
-
-def logout_view(request):
-    logout(request)
-    return redirect('login_view')

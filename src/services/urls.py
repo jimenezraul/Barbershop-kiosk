@@ -12,7 +12,4 @@ urlpatterns = [
     path('new_men_service/', views.new_men_service, name='services-newmen'),
     path('new_kid_service/', views.new_kid_service, name='services-newkid'),
     path('new_other_service/', views.new_other_service, name='services-newother'),
-    path('login_view/', views.login_view, name='login_view'),
-    path('logout_view/', views.logout_view, name='logout_view'),
-    
 ]

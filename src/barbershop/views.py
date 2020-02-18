@@ -22,7 +22,7 @@ from django.contrib.auth.decorators import login_required
 
 _LOGGER = logging.getLogger()
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def waitinglist(request):
     clients = Clients.objects.filter(user=request.user)
     date_now = [(client.date) for client in clients]
@@ -61,7 +61,7 @@ def waitinglist(request):
     }
     return render(request, "barbershop/waitinglist.html", context)
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def waiting(request):
     kid = KidServices.objects.all()
     men = MenServices.objects.all()
@@ -159,7 +159,7 @@ def waiting(request):
     }
     return render(request, "barbershop/waiting.html", context)
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def signup(request):
     logo = LogoImage.objects.all()
 
@@ -185,7 +185,7 @@ def signup(request):
     }
         return render(request, "barbershop/signup.html", context)
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def delete_client(request, id):
     instance = Clients.objects.get(pk=id)
     
@@ -206,7 +206,7 @@ def delete_client(request, id):
     }
         return render(request, 'barbershop/delete.html', context)
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def update(request, id): 
     logo = LogoImage.objects.all()
     if logo.count() == 1:
@@ -229,7 +229,7 @@ def update(request, id):
     }
         return render(request, 'barbershop/update.html', context) 
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def update_client(request):
     clients = Clients.objects.all()
     context= {
@@ -238,7 +238,7 @@ def update_client(request):
     }
     return render(request, "barbershop/update_client.html", context)
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def settings(request): 
     this_year = date.today().year
     last_year = this_year - 1
@@ -340,7 +340,7 @@ def settings(request):
     
     return render(request, 'barbershop/settings.html', context) 
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def delete_barber(request, id): 
     instance = Barbers.objects.get(pk=id)
     if request.method == 'POST':
@@ -348,7 +348,7 @@ def delete_barber(request, id):
         messages.success(request, f"{instance} was successfully deleted from list!")
         return redirect('barbershop-settings')
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def newbarber(request): 
     if request.method == 'POST':
         form = forms.NewBarber(request.POST)
@@ -359,7 +359,7 @@ def newbarber(request):
             messages.success(request, f"{name} was successfully added!")
             return redirect('barbershop-settings')
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def zipcode(request, id): 
     instance = ZipCode.objects.get(pk=id)
     if request.method == 'POST':
@@ -369,7 +369,7 @@ def zipcode(request, id):
             messages.success(request, "Zip Code was successfully Updated!")
             return redirect('barbershop-settings')
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def add_zip(request): 
     if request.method == 'POST':
         form = forms.ZipCodes(request.POST)
@@ -379,7 +379,7 @@ def add_zip(request):
             messages.success(request, f"Zip Code: {zipcode} was successfully added!")
             return redirect('barbershop-settings')
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def completed(request): 
 
     this_year = date.today().year
@@ -436,7 +436,7 @@ def completed(request):
     }
     return render(request, 'barbershop/completed.html', context) 
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def completed_last_year(request): 
 
     this_year = date.today().year
@@ -494,7 +494,7 @@ def completed_last_year(request):
     }
     return render(request, 'barbershop/completed.html', context)
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def upload_image(request):
     if request.method == 'POST':
         form = forms.ImageUploadForm(request.POST, request.FILES)
@@ -503,7 +503,7 @@ def upload_image(request):
             messages.success(request, "Logo Uploaded!")
             return redirect('barbershop-settings')
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def image_update(request, id): 
     instance = LogoImage.objects.get(pk=id)
     if request.method == 'POST':
@@ -513,7 +513,7 @@ def image_update(request, id):
             messages.success(request, "Your Logo was Updated!")
             return redirect('barbershop-settings')
 
-@login_required(login_url='login_view')
+@login_required(login_url='register')
 def jsonlist(request):
     queryset = MenServices.objects.all()
     print(queryset)
