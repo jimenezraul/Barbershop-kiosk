@@ -1,6 +1,4 @@
 import requests
-from django.conf import settings
-from django.core import serializers
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Clients, Barbers, ZipCode, CompletedClients, LogoImage
@@ -13,7 +11,6 @@ from datetime import datetime, date
 import asyncio
 import logging
 from django.views.generic import UpdateView
-from django.db import models
 from django.views.generic.edit import UpdateView
 from decimal import *
 from django.contrib.auth.models import User
@@ -582,25 +579,3 @@ def image_update(request, id):
             form.save()
             messages.success(request, "Your Logo was Updated!")
             return redirect('barbershop-settings')
-
-
-@login_required(login_url='register')
-def jsonlist(request):
-    queryset = MenServices.objects.all()
-    print(queryset)
-    total = 0
-    for service in queryset:
-        prices = service.price
-        total += prices
-    print(f'SubTotal: ${total}')
-    tax_rate = Decimal(.06)
-    tax = total * tax_rate
-    tax = round(tax, 2)
-    print(f'Tax: ${tax}')
-    total = total + tax
-    total = round(total, 2)
-    print(f'Total: ${total}')
-
-    queryset = serializers.serialize('json', queryset)
-
-    return HttpResponse(queryset, content_type="application/json")

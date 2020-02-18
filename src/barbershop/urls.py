@@ -19,5 +19,4 @@ urlpatterns = [
     path('completed/last_year/', views.completed_last_year, name='barbershop-completed_last_year'),
     path('logo/uploaded/', views.upload_image, name='barbershop-upload_image'),
     path('logo/uploaded/<id>', views.image_update, name='barbershop-image_update'),
-    path('json/', views.jsonlist, name='barbershop-json'),
 ]
