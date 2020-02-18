@@ -24,6 +24,7 @@ def register(request):
     context = {
         'form': form,
         'logo': logo,
+        'title': "Login - Register",
     }
     return render(request, 'users/register.html', context)
 
@@ -53,8 +54,9 @@ def login_view(request):
             return redirect('barbershop-waitinglist')
     context= {
         'logo': logo,
+        'title': "Login - Register",
     }
-    return render(request, "users/login.html", context)
+    return render(request, "users/register.html", context)
 
 def logout_view(request):
     logout(request)

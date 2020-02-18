@@ -6,7 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>register-login</title>
+    {% if title %}
+    <title>Barbershop | {{ title }}</title>
+    {% else %}
+    <title>Barbershop</title>
+    {% endif %}
     <link rel="stylesheet" href="{% static 'users/assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700,700i,800,800i,900,900i&amp;subset=cyrillic,cyrillic-ext">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700,700i,900&amp;subset=latin-ext">
@@ -32,6 +36,16 @@
             </div>
         </div>
     </div>
+    {% for message in messages %}
+            <div class="row d-flex justify-content-center align-items-center align-content-center mb-0">
+                <div id="mydiv" class="col-12 alert alert-danger alert-dismissible fade show message text-center mb-0" id="success-alert" role="alert">
+                    {{ message }}
+                </div>
+            </div>
+            <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        {% endfor %}
     <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
         <div class="container-fluid">
             <div class="row">
