@@ -117,7 +117,7 @@ def waiting(request):
             'description': r['weather'][0]['description'],
             'icon': r['weather'][0]['icon'],
         }
-    clients = Clients.objects.all()
+    clients = Clients.objects.filter(user=request.user)
     fmt = '%H:%M'
     wel_message = ''
     try:
