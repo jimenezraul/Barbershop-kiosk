@@ -41,18 +41,6 @@
   margin-bottom: 30px;
 }
 
-.register-photo form .form-control {
-  /*background: #f7f9fc;*/
-  /*border: none;*/
-  /*border-bottom: 1px solid #dfe7f1;*/
-  /*border-radius: 0;*/
-  /*box-shadow: none;*/
-  /*outline: none;*/
-  /*color: inherit;*/
-  /*text-indent: 6px;*/
-  /*height: 40px;*/
-}
-
 @media (min-width: 300px) {
   .login-form {
     background: #f7f9fc;
