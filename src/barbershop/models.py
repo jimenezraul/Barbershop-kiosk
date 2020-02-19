@@ -16,12 +16,14 @@ class Clients(models.Model):
 class Barbers(models.Model):
 
     barber = models.CharField(max_length=30)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.barber
 
 class ZipCode(models.Model):
     zip_code = models.CharField(max_length=5, default=10001)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.zip_code
@@ -31,6 +33,7 @@ class CompletedClients(models.Model):
     name = models.CharField(max_length=30)
     barber = models.CharField(max_length=30)
     date = models.DateField(max_length=30)
+    
 
     def __str__(self):
         return self.name
@@ -39,4 +42,5 @@ class CompletedClients(models.Model):
 class LogoImage(models.Model):
     
     image = models.ImageField(upload_to='logo_image/')
+    
 

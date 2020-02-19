@@ -4,6 +4,7 @@ from . import models
 from .models import Clients, Barbers, ZipCode, CompletedClients, LogoImage
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import gettext as _
+from django.contrib.auth.models import User
 
 class CreateClient(forms.ModelForm):
    
@@ -14,15 +15,15 @@ class CreateClient(forms.ModelForm):
     name = forms.CharField(label='',
                     widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'Please Enter Your Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only'}))
 
-    def __init__(self, *args, **kwargs):
-        super(CreateClient, self).__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):
+    #     super(CreateClient, self).__init__(*args, **kwargs)
 
-        choices_none = [(None, 'Select a Barber')]
-        choices = [(barber.barber, barber.barber)
-                   for barber in Barbers.objects.all()]
+    #     choices_none = [(None, 'Select a Barber')]
+    #     choices = [(barber.barber, barber.barber)
+    #                for barber in Barbers.objects.all()]
 
-        self.fields['barber'] = forms.ChoiceField(choices=choices_none + choices)
-
+    #     self.fields['barber'] = forms.ChoiceField(choices=choices_none + choices)
+        
 class UpdateForm(forms.ModelForm):
     class Meta:
         model = models.Clients
@@ -43,6 +44,7 @@ class NewBarber(forms.ModelForm):
 
     barber = forms.CharField(label='',
                     widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'New Barber\'s Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}))
+    
 
 class CompletedForm(forms.ModelForm):
    

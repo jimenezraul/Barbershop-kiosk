@@ -11,10 +11,12 @@ from barbershop.models import LogoImage
 
 def new_men_service(request): 
     if request.method == 'POST':
-        form = forms.MenServiceForm(request.POST)
+        form = forms.MenServiceForm(request.POST, request.user)
         if form.is_valid():
             service = form.cleaned_data['service']
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(request, f"{service} was successfully added!")
             return redirect('barbershop-settings')
     else:
@@ -25,7 +27,9 @@ def new_kid_service(request):
         form = forms.KidServiceForm(request.POST)
         if form.is_valid():
             service = form.cleaned_data['service']
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(request, f"{service} was successfully added!")
             return redirect('barbershop-settings')
     else:
@@ -36,7 +40,9 @@ def new_other_service(request):
         form = forms.OtherServiceForm(request.POST)
         if form.is_valid():
             service = form.cleaned_data['service']
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(request, f"{service} was successfully added!")
             return redirect('barbershop-settings')
     else:

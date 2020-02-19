@@ -76,7 +76,13 @@
                                         {% csrf_token %}
                                             <h1>Sign Up</h1>
                                         {{ form.name }}
-                                        {{ form.barber }}
+                                        <select name="barber" required="" id="id_barber">
+                                            <option value="" selected="">Select a Barber</option>
+                                            <option value="Any">Any</option>
+                                            {% for barber in barberlist %}
+                                                <option value="{{ barber }}">{{ barber }}</option>
+                                            {% endfor %}
+                                        </select>
                                         <p>For any available Barber please select Any.</p>
                                         <input class="confirm-button" id="my-signup" type="submit" value="Sign Up">
                                 </form> 

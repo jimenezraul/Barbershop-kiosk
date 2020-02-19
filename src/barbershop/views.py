@@ -64,10 +64,10 @@ def waitinglist(request):
 
 @login_required(login_url='register')
 def waiting(request):
-    kid = KidServices.objects.all()
-    men = MenServices.objects.all()
-    other = OtherServices.objects.all()
-    zip = ZipCode.objects.all()
+    kid = KidServices.objects.filter(user=request.user)
+    men = MenServices.objects.filter(user=request.user)
+    other = OtherServices.objects.filter(user=request.user)
+    zip = ZipCode.objects.filter(user=request.user)
     logo = LogoImage.objects.all()
     """
     total = 0  
@@ -181,13 +181,14 @@ def signup(request):
     else:
         logo = None
 
-    barberlist = Barbers.objects.all()
+    barberlist = Barbers.objects.filter(user=request.user)
     if request.method == 'POST':
-        form = forms.CreateClient(request.POST)
+        form = forms.CreateClient(request.POST,request.user)
         if form.is_valid():
-            form.save()
-            messages.success(
-                request, "You has been added to the list. Thank You!")
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            messages.success(request, "You has been added to the list. Thank You!")
             return redirect('barbershop-signup')
     else:
         form = forms.CreateClient()
@@ -306,11 +307,11 @@ def settings(request):
             date=datetime.now())
 
     # Database objects
-    barbers = Barbers.objects.all()
-    zip_code = ZipCode.objects.all()
-    menservices = MenServices.objects.all()
-    kidservices = KidServices.objects.all()
-    otherservices = OtherServices.objects.all()
+    barbers = Barbers.objects.filter(user=request.user)
+    zip_code = ZipCode.objects.filter(user=request.user)
+    menservices = MenServices.objects.filter(user=request.user)
+    kidservices = KidServices.objects.filter(user=request.user)
+    otherservices = OtherServices.objects.filter(user=request.user)
     logo = LogoImage.objects.all()
     # Forms
     men_form = forms2.MenServiceForm()
@@ -333,7 +334,9 @@ def settings(request):
         form = forms.NewBarber(request.POST)
         if form.is_valid():
             name = form.cleaned_data['barber']
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(request, f"{name} was successfully added!")
             return redirect('barbershop-settings')
 
@@ -385,11 +388,10 @@ def delete_barber(request, id):
 @login_required(login_url='register')
 def newbarber(request):
     if request.method == 'POST':
-        form = forms.NewBarber(request.POST)
-        barber = form['barber']
+        form = forms.NewBarber(request.POST, request.user)
         if form.is_valid():
             name = form.cleaned_data['barber']
-            form.save()
+            print(request.user)
             messages.success(request, f"{name} was successfully added!")
             return redirect('barbershop-settings')
 
@@ -408,10 +410,12 @@ def zipcode(request, id):
 @login_required(login_url='register')
 def add_zip(request):
     if request.method == 'POST':
-        form = forms.ZipCodes(request.POST)
+        form = forms.ZipCodes(request.POST, request.user)
         if form.is_valid():
             zipcode = form.cleaned_data['zip_code']
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(
                 request, f"Zip Code: {zipcode} was successfully added!")
             return redirect('barbershop-settings')
