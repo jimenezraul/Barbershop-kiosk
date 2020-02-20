@@ -106,7 +106,6 @@
                             <h4 class="font-l">Time</h4>
                         </div>
                         <div class="d-none d-md-flex col-2 text-center text-white justify-content-center align-items-center align-content-center">
-                            <a class="admin" href="/admin"><i class="fas fa-user-lock"></i></a>
                             <a class="logout" href="{% url 'logout_view' %}"><i class="fas fa-sign-out-alt"></i></a>
                         </div>
                     </div>
@@ -118,7 +117,17 @@
                         {% for client in clients %}
 
                         <div id='client' class="client">
+                        
                             <div class="row d-flex justify-content-center align-items-center align-content-center border-bottom">
+                                <div class="d-block d-md-flex col-1 text-center text-white justify-content-center align-items-center align-content-center m-0 p-0">
+                                    <div class="d-block d-md-none table-btn my-1">
+                                        <form action="{% url 'barbershop-update' client.id %}">
+                                            {% csrf_token %}
+                                            <button class="completed-btn red" type="submit"><i
+                                                    class="fas fa-pencil-alt"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
                                 <div class="col-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
                                     <h4 class="client-btn text-dark">{{ client.name }}</h4>
                                 </div>
@@ -137,8 +146,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div
-                                    class="col-1 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center m-0 p-0">
+                                <div class="col-1 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center m-0 p-0">
                                     <div class="table-btn my-1">
                                         <form action="{% url 'barbershop-delete' client.id %}">
                                             {% csrf_token %}

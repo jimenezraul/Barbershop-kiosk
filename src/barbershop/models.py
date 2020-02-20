@@ -44,3 +44,5 @@ class LogoImage(models.Model):
     image = models.ImageField(upload_to='logo_image/')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
 
+    def __str__(self):
+        return self.image.name
