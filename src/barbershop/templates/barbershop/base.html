@@ -1,10 +1,11 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<div lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        
         {% if title %}
             <title>Barbershop | {{ title }}</title>
         {% else %}
@@ -25,7 +26,6 @@
         <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
-        <link href="{% static 'barbershop/assets/css/cropper.min.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
@@ -47,84 +47,22 @@
         </script>
     </head>
     <body>
-            <div class="container">
-                    <nav class="navbar navbar-dark navbar-expand-md" id="bar-color">
-                        <div class="container-fluid"><a class="navbar-brand" id="logo-style" href=""><img class="logo-face" src="{% static 'signup:barbershop/Raul Barber Logo.png' %}">Raul<span class="text-white">TheBarber</span></a><button data-toggle="collapse"
-                                class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                            <div class="collapse navbar-collapse" id="navcol-1">
-                                <ul class="nav navbar-nav ml-auto menu-style">
-                                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'barbershop:barbershop-waitinglist' %}">Home</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'barbershop:barbershop-waiting' %}">Prices</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'barbershop:barbershop-settings' %}">Gallery&nbsp;</a></li>
-                                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'barbershop:barbershop-signup' %}">Appointments</a></li>
-                                </ul>
-                                <a href="{% url 'barbershop:barbershop-signup' %}"><i class="fas fa-user-tie"></i></a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-                <div class="container" id="vacation-alert">
-                        <div class="row">
-                            <div class="col"><div class="alert alert-danger" role="alert"><span><strong>Vacation</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo.</span></div></div>
-                        </div>
-                    </div>
-                    <section>
-                        <div class="container">
-                            <div class="row d-flex justify-content-center align-content-center">
-                                <div class="col-8 col-sm-7 col-md-6 col-lg-5 col-xl-4" id="logo"><img src="{% static 'barbershop/assets/img/Barber-logo.png' %}" /></div>
-                            </div>
-                        </div>
-                    </section>
-                    <section>
         {% block content %}{% endblock %}
 
+        <!-- Footer-->
         <div class="footer-dark">
-                <footer>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-3 item">
-                                <h3>Services</h3>
-                                <p class="text-white-50 footer-p">Regular Haircut</p>
-                                <p class="text-white-50 footer-p">Skin Fade</p>
-                                <p class="text-white-50 footer-p">Skin Blowout | Taper</p>
-                                <p class="text-white-50 footer-p">Kid`s Haircut</p>
-                                <p class="text-white-50 footer-p">Beard Trim | Shave</p>
-                                <p class="text-white-50 footer-p">Shape-up | Line-up</p>
-                                <p class="text-white-50 footer-p">Eyebrows</p>
-                                <p class="text-white-50 footer-p">We do any type of Haircut.</p>
-                            </div>
-                            <div class="col-sm-6 col-md-3 item">
-                                <h3>Working Hours</h3>
-                                <p class="text-white-50 footer-p">Monday --Day off--</p>
-                                <p class="text-white-50 footer-p">Tuesday --Day off--</p>
-                                <p class="text-white-50 footer-p">Wednesday 12pm-7pm</p>
-                                <p class="text-white-50 footer-p">Thrusday 10am-7pm</p>
-                                <p class="text-white-50 footer-p">Friday 10am-7pm</p>
-                                <p class="text-white-50 footer-p">Saturday 10am-7pm</p>
-                                <p class="text-white-50 footer-p">Sunday 10am-7pm</p>
-                            </div>
-                            <div class="col-md-6 item text">
-                                <h3>Customer Satisfaction &nbsp;<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h3>
-                                <p>As a Professional Barber, customer satisfaction is my first priority. I am committed to provide the best service and quality for all my customers.</p>
-                            </div>
-                            <div class="col item social"><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Ffb.me%2Fbarbershop81&amp;h=AT0XQKHOpjsSiKugFNi6kYjQwCDEWbXdKI-cyGadIzk1GrTTsP7F6AgUxHH3bDj5qgq7iInW8aw4yMbuPdYYAKOH7pEi9iv1b-3zAbQgs_rk0IMaY8uwxFanuMdPC38JbgkdvWcWKCg"><i class="icon ion-social-facebook"></i></a>
-                                <a
-                                    href="https://www.snapchat.com/add/jimenezraul1981"><i class="icon ion-social-snapchat"></i></a><a href="https://www.instagram.com/raul.thebarber"><i class="icon ion-social-instagram"></i></a></div>
-                        </div>
-                        <p class="copyright">barbershop © 2018-2019</p>
-                    </div>
-                </footer>
-
-        <script src="{% static 'barbershop/assets/js/jquery.min.js' %}"></script>
-        <script src="{% static 'barbershop/assets/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'barbershop/assets/js/smart-forms.min.js' %}"></script>
-        <script src="{% static 'barbershop/assets/js/bs-animation.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-        <script src="{% static 'barbershop/assets/js/better-nav.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
-    {% block javascript %}
-    {% endblock %}
+            <footer>
+                <div class="container">
+                    <div class="row">
+                     </div>
+                    <p class="copyright">The Barbershop Kiosk© 2020</p>
+                </div>
+            </footer>
+           
+            </div>
+            
     </body>
 </html>
+
+
+

@@ -53,11 +53,22 @@ def waitinglist(request):
     except:
         final_list = '0:00'
         time_display = "Minutes"
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(clients, 20)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
     context = {
-        'clients': clients,
+        'clients': users,
         'eta': final_list,
         'time_display': time_display,
         'title': "BarberView",
+        'users': users,
     }
     return render(request, "barbershop/waitinglist.html", context)
 
@@ -68,7 +79,7 @@ def waiting(request):
     men = MenServices.objects.filter(user=request.user)
     other = OtherServices.objects.filter(user=request.user)
     zip = ZipCode.objects.filter(user=request.user)
-    logo = LogoImage.objects.all()
+    logo = LogoImage.objects.filter(user=request.user)
     """
     total = 0  
 
@@ -174,7 +185,7 @@ def waiting(request):
 
 @login_required(login_url='register')
 def signup(request):
-    logo = LogoImage.objects.all()
+    logo = LogoImage.objects.filter(user=request.user)
 
     if logo.count() == 1:
         logo = logo[0]
@@ -210,6 +221,7 @@ def delete_client(request, id):
         form.name = instance.name
         form.barber = instance.barber
         form.date = date.today()
+        form.user = instance.user
         form.save()
         instance.delete()
         messages.success(request, f"{form.name} is Completed!")
@@ -276,29 +288,29 @@ def settings(request):
     DIC = 12
 
     JAN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JAN, date__year__lte=this_year, date__month__lte=JAN)
+        date__year__gte=this_year, date__month__gte=JAN, date__year__lte=this_year, date__month__lte=JAN,user=request.user)
     FEB = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=FEB, date__year__lte=this_year, date__month__lte=FEB)
+        date__year__gte=this_year, date__month__gte=FEB, date__year__lte=this_year, date__month__lte=FEB,user=request.user)
     MAR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAR, date__year__lte=this_year, date__month__lte=MAR)
+        date__year__gte=this_year, date__month__gte=MAR, date__year__lte=this_year, date__month__lte=MAR,user=request.user)
     APR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=APR, date__year__lte=this_year, date__month__lte=APR)
+        date__year__gte=this_year, date__month__gte=APR, date__year__lte=this_year, date__month__lte=APR,user=request.user)
     MAY = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAY, date__year__lte=this_year, date__month__lte=MAY)
+        date__year__gte=this_year, date__month__gte=MAY, date__year__lte=this_year, date__month__lte=MAY,user=request.user)
     JUN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUN, date__year__lte=this_year, date__month__lte=JUN)
+        date__year__gte=this_year, date__month__gte=JUN, date__year__lte=this_year, date__month__lte=JUN,user=request.user)
     JUL = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUL, date__year__lte=this_year, date__month__lte=JUL)
+        date__year__gte=this_year, date__month__gte=JUL, date__year__lte=this_year, date__month__lte=JUL,user=request.user)
     AUG = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=AUG, date__year__lte=this_year, date__month__lte=AUG)
+        date__year__gte=this_year, date__month__gte=AUG, date__year__lte=this_year, date__month__lte=AUG,user=request.user)
     SEP = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=SEP, date__year__lte=this_year, date__month__lte=SEP)
+        date__year__gte=this_year, date__month__gte=SEP, date__year__lte=this_year, date__month__lte=SEP,user=request.user)
     OCT = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=OCT, date__year__lte=this_year, date__month__lte=OCT)
+        date__year__gte=this_year, date__month__gte=OCT, date__year__lte=this_year, date__month__lte=OCT,user=request.user)
     NOV = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=NOV, date__year__lte=this_year, date__month__lte=NOV)
+        date__year__gte=this_year, date__month__gte=NOV, date__year__lte=this_year, date__month__lte=NOV,user=request.user)
     DIC = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC)
+        date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC,user=request.user)
 
     completed_clients = CompletedClients.objects.all()
 
@@ -312,7 +324,7 @@ def settings(request):
     menservices = MenServices.objects.filter(user=request.user)
     kidservices = KidServices.objects.filter(user=request.user)
     otherservices = OtherServices.objects.filter(user=request.user)
-    logo = LogoImage.objects.all()
+    logo = LogoImage.objects.filter(user=request.user)
     # Forms
     men_form = forms2.MenServiceForm()
     kid_form = forms2.KidServiceForm()
@@ -384,18 +396,6 @@ def delete_barber(request, id):
             request, f"{instance} was successfully deleted from list!")
         return redirect('barbershop-settings')
 
-
-@login_required(login_url='register')
-def newbarber(request):
-    if request.method == 'POST':
-        form = forms.NewBarber(request.POST, request.user)
-        if form.is_valid():
-            name = form.cleaned_data['barber']
-            print(request.user)
-            messages.success(request, f"{name} was successfully added!")
-            return redirect('barbershop-settings')
-
-
 @login_required(login_url='register')
 def zipcode(request, id):
     instance = ZipCode.objects.get(pk=id)
@@ -441,40 +441,48 @@ def completed(request):
     DIC = 12
 
     JAN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JAN, date__year__lte=this_year, date__month__lte=JAN)
+        date__year__gte=this_year, date__month__gte=JAN, date__year__lte=this_year, date__month__lte=JAN,user=request.user)
     FEB = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=FEB, date__year__lte=this_year, date__month__lte=FEB)
+        date__year__gte=this_year, date__month__gte=FEB, date__year__lte=this_year, date__month__lte=FEB,user=request.user)
     MAR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAR, date__year__lte=this_year, date__month__lte=MAR)
+        date__year__gte=this_year, date__month__gte=MAR, date__year__lte=this_year, date__month__lte=MAR,user=request.user)
     APR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=APR, date__year__lte=this_year, date__month__lte=APR)
+        date__year__gte=this_year, date__month__gte=APR, date__year__lte=this_year, date__month__lte=APR,user=request.user)
     MAY = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAY, date__year__lte=this_year, date__month__lte=MAY)
+        date__year__gte=this_year, date__month__gte=MAY, date__year__lte=this_year, date__month__lte=MAY,user=request.user)
     JUN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUN, date__year__lte=this_year, date__month__lte=JUN)
+        date__year__gte=this_year, date__month__gte=JUN, date__year__lte=this_year, date__month__lte=JUN,user=request.user)
     JUL = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUL, date__year__lte=this_year, date__month__lte=JUL)
+        date__year__gte=this_year, date__month__gte=JUL, date__year__lte=this_year, date__month__lte=JUL,user=request.user)
     AUG = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=AUG, date__year__lte=this_year, date__month__lte=AUG)
+        date__year__gte=this_year, date__month__gte=AUG, date__year__lte=this_year, date__month__lte=AUG,user=request.user)
     SEP = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=SEP, date__year__lte=this_year, date__month__lte=SEP)
+        date__year__gte=this_year, date__month__gte=SEP, date__year__lte=this_year, date__month__lte=SEP,user=request.user)
     OCT = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=OCT, date__year__lte=this_year, date__month__lte=OCT)
+        date__year__gte=this_year, date__month__gte=OCT, date__year__lte=this_year, date__month__lte=OCT,user=request.user)
     NOV = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=NOV, date__year__lte=this_year, date__month__lte=NOV)
+        date__year__gte=this_year, date__month__gte=NOV, date__year__lte=this_year, date__month__lte=NOV,user=request.user)
     DIC = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC)
+        date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC,user=request.user)
 
-    completed_clients = CompletedClients.objects.all()
+    completed_clients = CompletedClients.objects.filter(user=request.user)
 
     if completed_clients.count() > 0:
-        completed_clients = CompletedClients.objects.filter(
+        completed_clients = CompletedClients.objects.filter(user=request.user,
             date=datetime.now())
 
+    page = request.GET.get('page', 1)
+    paginator = Paginator(completed_clients, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
     context = {
         'todays_year': this_year,
         'last_year': last_year,
-        'completed': completed_clients,
+        'completed': users,
         'JAN': JAN,
         'FEB': FEB,
         'MAR': MAR,
@@ -487,7 +495,8 @@ def completed(request):
         'OCT': OCT,
         'NOV': NOV,
         'DIC': DIC,
-        'title': 'Completed'
+        'title': 'Completed',
+        'users': users,
     }
     return render(request, 'barbershop/completed.html', context)
 
@@ -512,34 +521,34 @@ def completed_last_year(request):
     DIC = 12
 
     JAN = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=JAN, date__year__lte=last_year, date__month__lte=JAN)
+        date__year__gte=last_year, date__month__gte=JAN, date__year__lte=last_year, date__month__lte=JAN,user=request.user)
     FEB = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=FEB, date__year__lte=last_year, date__month__lte=FEB)
+        date__year__gte=last_year, date__month__gte=FEB, date__year__lte=last_year, date__month__lte=FEB,user=request.user)
     MAR = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=MAR, date__year__lte=last_year, date__month__lte=MAR)
+        date__year__gte=last_year, date__month__gte=MAR, date__year__lte=last_year, date__month__lte=MAR,user=request.user)
     APR = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=APR, date__year__lte=last_year, date__month__lte=APR)
+        date__year__gte=last_year, date__month__gte=APR, date__year__lte=last_year, date__month__lte=APR,user=request.user)
     MAY = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=MAY, date__year__lte=last_year, date__month__lte=MAY)
+        date__year__gte=last_year, date__month__gte=MAY, date__year__lte=last_year, date__month__lte=MAY,user=request.user)
     JUN = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=JUN, date__year__lte=last_year, date__month__lte=JUN)
+        date__year__gte=last_year, date__month__gte=JUN, date__year__lte=last_year, date__month__lte=JUN,user=request.user)
     JUL = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=JUL, date__year__lte=last_year, date__month__lte=JUL)
+        date__year__gte=last_year, date__month__gte=JUL, date__year__lte=last_year, date__month__lte=JUL,user=request.user)
     AUG = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=AUG, date__year__lte=last_year, date__month__lte=AUG)
+        date__year__gte=last_year, date__month__gte=AUG, date__year__lte=last_year, date__month__lte=AUG,user=request.user)
     SEP = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=SEP, date__year__lte=last_year, date__month__lte=SEP)
+        date__year__gte=last_year, date__month__gte=SEP, date__year__lte=last_year, date__month__lte=SEP,user=request.user)
     OCT = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=OCT, date__year__lte=last_year, date__month__lte=OCT)
+        date__year__gte=last_year, date__month__gte=OCT, date__year__lte=last_year, date__month__lte=OCT,user=request.user)
     NOV = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=NOV, date__year__lte=last_year, date__month__lte=NOV)
+        date__year__gte=last_year, date__month__gte=NOV, date__year__lte=last_year, date__month__lte=NOV,user=request.user)
     DIC = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=DIC, date__year__lte=last_year, date__month__lte=DIC)
+        date__year__gte=last_year, date__month__gte=DIC, date__year__lte=last_year, date__month__lte=DIC,user=request.user)
 
-    completed_clients = CompletedClients.objects.all()
+    completed_clients = CompletedClients.objects.filter(user=request.user)
 
     if completed_clients.count() > 0:
-        completed_clients = CompletedClients.objects.filter(
+        completed_clients = CompletedClients.objects.filter(user=request.user,
             date=datetime.now())
 
     context = {
@@ -566,9 +575,11 @@ def completed_last_year(request):
 @login_required(login_url='register')
 def upload_image(request):
     if request.method == 'POST':
-        form = forms.ImageUploadForm(request.POST, request.FILES)
+        form = forms.ImageUploadForm(request.POST, request.FILES, request.user)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
             messages.success(request, "Logo Uploaded!")
             return redirect('barbershop-settings')
 

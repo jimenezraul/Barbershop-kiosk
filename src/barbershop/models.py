@@ -33,7 +33,7 @@ class CompletedClients(models.Model):
     name = models.CharField(max_length=30)
     barber = models.CharField(max_length=30)
     date = models.DateField(max_length=30)
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
@@ -42,5 +42,5 @@ class CompletedClients(models.Model):
 class LogoImage(models.Model):
     
     image = models.ImageField(upload_to='logo_image/')
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
 

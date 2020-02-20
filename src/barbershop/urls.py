@@ -12,7 +12,6 @@ urlpatterns = [
     path('update_client/', views.update_client, name='barbershop-update_client'),
     path('settings/', views.settings, name='barbershop-settings'),
     path('<id>/delete_barber/', views.delete_barber, name='barbershop-delete_barber'),
-    path('newbarber/', views.newbarber, name='barbershop-newbarber'),
     path('<id>/zipcode/', views.zipcode, name='barbershop-zipcode'),
     path('addzip/', views.add_zip, name='barbershop-addzip'),
     path('completed/', views.completed, name='barbershop-completed'),

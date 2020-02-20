@@ -50,7 +50,7 @@ class CompletedForm(forms.ModelForm):
    
     class Meta:
         model = models.CompletedClients
-        fields = ["name","barber","date"]
+        fields = ["name","barber","date","user"]
 
 class ImageUploadForm(forms.ModelForm):
 

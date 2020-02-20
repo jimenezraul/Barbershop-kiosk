@@ -49,7 +49,7 @@ def new_other_service(request):
         return redirect('barbershop-settings')
         
 def update_menservices(request, id): 
-    logo = LogoImage.objects.all()
+    logo = LogoImage.objects.filter(user=request.user)
 
     if logo.count() == 1:
         logo = logo[0]
@@ -73,7 +73,7 @@ def update_menservices(request, id):
         return render(request, 'barbershop/service_update.html', context)
 
 def update_kidservices(request, id): 
-    logo = LogoImage.objects.all()
+    logo = LogoImage.objects.filter(user=request.user)
 
     if logo.count() == 1:
         logo = logo[0]
@@ -97,7 +97,7 @@ def update_kidservices(request, id):
         return render(request, 'barbershop/service_update.html', context)
 
 def update_otherservices(request, id): 
-    logo = LogoImage.objects.all()
+    logo = LogoImage.objects.filter(user=request.user)
     
     if logo.count() == 1:
         logo = logo[0]
