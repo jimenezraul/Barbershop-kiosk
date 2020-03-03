@@ -10,4 +10,5 @@ urlpatterns = [
     path('', include('photocrop.urls')),
     path('', include('services.urls')),
     path('', include('users.urls')),
+    path('', include('user_profile.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

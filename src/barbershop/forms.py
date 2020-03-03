@@ -1,7 +1,7 @@
 from django import forms
 from django.db import models
 from . import models
-from .models import Clients, Barbers, ZipCode, CompletedClients, LogoImage
+from .models import Client, Barbers, ZipCode, CompletedClients, LogoImage
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class CreateClient(forms.ModelForm):
    
     class Meta:
-        model = models.Clients
+        model = models.Client
         fields = ["name","barber"]
 
     name = forms.CharField(label='',
@@ -26,7 +26,7 @@ class CreateClient(forms.ModelForm):
         
 class UpdateForm(forms.ModelForm):
     class Meta:
-        model = models.Clients
+        model = models.Client
         fields = ["name","barber"]
 
 class ZipCodes(forms.ModelForm):

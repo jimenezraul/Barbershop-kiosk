@@ -58,6 +58,8 @@
     {% block content %}
      
     {% endblock content %}
+    <script src="{% static 'user_profile/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'user_profile/assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static 'barbershop/assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'barbershop/assets/js/smart-forms.min.js' %}"></script>
@@ -66,7 +68,7 @@
     <script src="{% static 'barbershop/assets/js/better-nav.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
     <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
-{% block javascript %}
-{% endblock %}
+    {% block javascript %}
+    {% endblock %}
 </body>
 </html>

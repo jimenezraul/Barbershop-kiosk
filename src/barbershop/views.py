@@ -1,7 +1,7 @@
 import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Clients, Barbers, ZipCode, CompletedClients, LogoImage
+from .models import Client, Barbers, ZipCode, CompletedClients, LogoImage
 from services.models import MenServices, KidServices, OtherServices
 from . import forms
 from services import forms as forms2
@@ -23,7 +23,7 @@ _LOGGER = logging.getLogger()
 
 @login_required(login_url='register')
 def waitinglist(request):
-    clients = Clients.objects.filter(user=request.user)
+    clients = Client.objects.filter(user=request.user)
     date_now = [(client.date) for client in clients]
     fmt = '%H:%M'
     wel_message = ''
@@ -128,7 +128,7 @@ def waiting(request):
             'description': r['weather'][0]['description'],
             'icon': r['weather'][0]['icon'],
         }
-    clients = Clients.objects.filter(user=request.user)
+    clients = Client.objects.filter(user=request.user)
     fmt = '%H:%M'
     wel_message = ''
     try:
@@ -214,7 +214,7 @@ def signup(request):
 
 @login_required(login_url='register')
 def delete_client(request, id):
-    instance = Clients.objects.get(pk=id)
+    instance = Client.objects.get(pk=id)
 
     form = forms.CompletedClients()
     if request.method == 'POST':
@@ -242,7 +242,7 @@ def update(request, id):
         logo = logo[0]
     else:
         logo = None
-    instance = Clients.objects.get(pk=id)
+    instance = Client.objects.get(pk=id)
     if request.method == 'POST':
         form = forms.UpdateForm(request.POST or None, instance=instance)
         if form.is_valid():
@@ -261,7 +261,7 @@ def update(request, id):
 
 @login_required(login_url='register')
 def update_client(request):
-    clients = Clients.objects.all()
+    clients = Client.objects.all()
     context = {
         'clients': clients,
         'title': 'Update'

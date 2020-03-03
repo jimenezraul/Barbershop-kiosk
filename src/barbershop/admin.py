@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Clients, Barbers, ZipCode, CompletedClients, LogoImage
+from .models import Client, Barbers, ZipCode, CompletedClients, LogoImage
 
-admin.site.register(Clients)
+admin.site.register(Client)
 admin.site.register(Barbers)
 admin.site.register(ZipCode)
 admin.site.register(CompletedClients)

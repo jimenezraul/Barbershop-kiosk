@@ -2,7 +2,7 @@
 {% load static %}
 
     {% block content %}
-
+    
     <section>
         <div class="container">
             <!--Display Desktop Bar-->
@@ -14,6 +14,9 @@
                     </div>
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-3">
                         <a href="{% url 'barbershop-settings' %}"><i class="red fas fa-user-cog"></i></a>
+                    </div>
+                    <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2">
+                        <a class="chart" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -44,16 +47,20 @@
                     </div>
                     <p class="timename d-block d-md-none">{{ time_display }}</p>
                 </div>
-                <div class="col-12 col-md-3 d-flex justify-content-center">
-                    <div class="col-2 col-sm-3 col-md-4 col-lg-3 text-center mt-2 mb-2 ml-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="col-2 col-sm-3 text-center mt-2 mb-2 ml-3">
                         <a class="chart" href="{% url 'barbershop-completed'%}"><i class="red fas fa-chart-bar"></i></a>
                     </div>
-                    <div class="col-2 col-sm-3 col-md-4 col-lg-3 text-center mt-3">
+                    <div class="col-2 col-sm-3 text-center mt-3">
                         <a href="{% url 'barbershop-settings' %}"><i class="red fas fa-user-cog"></i></a>
                     </div>
-                    <div class="col-2 col-sm-3 col-md-4 col-lg-3 text-center mt-2 mb-2 ml-3">
+                    <div class="col-2 col-sm-3 text-center mt-2">
+                        <a class="chart" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
+                    </div>
+                    <div class="col-2 col-sm-3 text-center mt-2">
                         <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
                     </div>
+                    
                 </div>
             </div>
         </div>

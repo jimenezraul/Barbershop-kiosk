@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'services',
     'photocrop',
+    'user_profile',
 ]
 
 MIDDLEWARE = [

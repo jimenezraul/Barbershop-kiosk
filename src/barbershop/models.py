@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.conf import settings
 
-class Clients(models.Model):
+class Client(models.Model):
     
     name = models.CharField(max_length=30)
     barber = models.CharField(max_length=30)

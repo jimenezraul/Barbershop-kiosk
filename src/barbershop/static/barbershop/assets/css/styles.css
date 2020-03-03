@@ -276,7 +276,7 @@ a {
 label{
   display:none;
 }
-#id_name, #id_barber, #id_zip_code{
+#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email{
   display:block;
   width:80%;
   font-weight: 500;
