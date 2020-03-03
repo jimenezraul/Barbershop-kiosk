@@ -696,3 +696,9 @@ margin-top: 20px;
   padding-left: 25px;
   color: #c4c4c4;
 }
+
+.login-pic{
+  margin-top: 2px;
+  width: 40px;
+  height: 40px;
+}

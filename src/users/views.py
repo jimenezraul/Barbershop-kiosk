@@ -6,6 +6,7 @@ from barbershop.models import LogoImage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from barbershop.models import LogoImage
+from django.contrib.auth.decorators import login_required
 
 def register(request): 
     """Register a new user.""" 
@@ -64,6 +65,7 @@ def logout_view(request):
     logout(request)
     return redirect('register')
 
+@login_required(login_url='register')
 def update_user_info(request, id):
     instance = User.objects.get(pk=id)
     logo = LogoImage.objects.filter(user=request.user)

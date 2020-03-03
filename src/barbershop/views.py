@@ -1,4 +1,5 @@
 import requests
+from photocrop.models import Photo
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Client, Barbers, ZipCode, CompletedClients, LogoImage
@@ -23,6 +24,10 @@ _LOGGER = logging.getLogger()
 
 @login_required(login_url='register')
 def waitinglist(request):
+    photos = Photo.objects.filter(user=request.user)
+    if photos.count() == 1:
+        photos = photos[0]
+        
     clients = Client.objects.filter(user=request.user)
     date_now = [(client.date) for client in clients]
     fmt = '%H:%M'
@@ -69,6 +74,7 @@ def waitinglist(request):
         'time_display': time_display,
         'title': "BarberView",
         'users': users,
+        'photos':photos,
     }
     return render(request, "barbershop/waitinglist.html", context)
 
