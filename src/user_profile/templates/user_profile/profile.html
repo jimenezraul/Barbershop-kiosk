@@ -88,7 +88,7 @@
                         {% endfor %}
                 </div>
                 {% if photo.count == 0 %}
-                <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{% static 'user_profile/assets/img/man.jpg' %}" height="200px" width="200px"></div>
+                <div class="col-12 text-center pic-col"><i class="red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
                 {% else %}
                 <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ photo.file.url }}" height="200px" width="200px"></div>
                 {% endif %}
@@ -169,11 +169,7 @@
       <h5>City: <span class='pro-info'>{{ address.city }}</span></h5>
       <h5>State: <span class='pro-info'>{{ address.state }}</span></h5>
       <h5>ZipCode: <span class='pro-info'>{{ address.zip_code }}</span></h5>
-      {% if address.count == 0 %}
         <button class="btn btn-primary shadow" type="submit">Edit Info</button>
-      {% else %}
-        <button class="btn btn-primary shadow" type="submit">Update Info</button>
-      {% endif %}
   </form>
   </div>
 </div></div>

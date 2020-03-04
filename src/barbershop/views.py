@@ -17,6 +17,8 @@ from decimal import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from photocrop.models import Photo
+
 
 
 _LOGGER = logging.getLogger()
@@ -331,6 +333,9 @@ def settings(request):
     kidservices = KidServices.objects.filter(user=request.user)
     otherservices = OtherServices.objects.filter(user=request.user)
     logo = LogoImage.objects.filter(user=request.user)
+    photos = Photo.objects.filter(user=request.user)
+    if photos.count() == 1:
+        photos = photos[0]
     # Forms
     men_form = forms2.MenServiceForm()
     kid_form = forms2.KidServiceForm()
@@ -388,6 +393,7 @@ def settings(request):
         'NOV': NOV,
         'DIC': DIC,
         'todays_year': this_year,
+        'photos':photos,
     }
 
     return render(request, 'barbershop/settings.html', context)

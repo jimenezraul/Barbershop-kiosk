@@ -76,7 +76,6 @@
   background-color: white;
   color: #000000;
   opacity: 0.75;
-  box-shadow: .4rem .5rem 1rem rgba(0,0,0,.30)!important;
 }
 
 .footer-dark .item.social > a:hover {
