@@ -702,3 +702,16 @@ margin-top: 20px;
   width: 40px;
   height: 40px;
 }
+
+.messages{
+  position: absolute;
+}
+
+.title-bar{
+ position: relative;
+}
+
+.heading-col{
+  position: absolute;
+  top: 2px;
+}

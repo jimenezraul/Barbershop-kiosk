@@ -415,7 +415,7 @@ def zipcode(request, id):
         form = forms.ZipCodes(request.POST or None, instance=instance)
         if form.is_valid():
             instance.save()
-            messages.success(request, "Zip Code was successfully Updated!")
+            messages.success(request, "Zip Code was Updated!")
             return redirect('barbershop-settings')
 
 

@@ -50,7 +50,9 @@
         <section>
             <div class="container">
                 <div class="row d-flex justify-content-center align-content-center">
-                    <div class="col-3 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-2" id="logo"><img src="{{ logo.image.url }}" /></div>
+                    <div class="col-3 col-sm-4 col-md-3 col-lg-2 col-xl-2 mt-2" id="logo">
+                        <img src="{{ logo.image.url }}" />
+                    </div>
                 </div>
             </div>
         </section>
@@ -60,18 +62,22 @@
 
         <section>
                 <div class="container">
-                        {% for message in messages %}
+                        
                     <div class="row d-flex justify-content-center align-items-center align-content-center">
-                        <div id="mydiv" class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
-                            {{ message }}
-                        </div>
-                    </div>
-                        <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                        {% endfor %}
-                    <div class="row d-flex justify-content-center align-items-center align-content-center">
-                            <div class="col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                            <div class="col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center title-bar">
+                                <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8 heading-col d-flex justify-content-center">
+                                    {% for message in messages %}
+                                    
+                                        <div id="alert-mobile" class="col-10 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    
+                                        
+                                        {% endfor %}
+                                        <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                                </div>
                                     <form action="{% url 'barbershop-signup' %}" class="site-form shadow" method="post">
                                         {% csrf_token %}
                                             <h1>Sign Up</h1>

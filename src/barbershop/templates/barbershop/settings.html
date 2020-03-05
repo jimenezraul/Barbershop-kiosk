@@ -9,8 +9,21 @@
                     <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
                     <p class="b-list">Back</p>
                 </div>
-                <div class="col-7 col-md-8">
+                <div class="col-7 col-md-8 title-bar">
                         <h2 class="text-center text-dark" id="welcome"> Settings</h2>
+                        <div class="col-12 heading-col d-flex justify-content-center">
+                            {% for message in messages %}
+                            
+                                <div id="alert-mobile" class="col-10 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
+                                    {{ message }}
+                                </div>
+                            
+                                
+                                {% endfor %}
+                                <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                        </div>
                 </div>
                 {% if photos.count == 0 %}
                     <div class="col-1 text-center p-0 pl-lg-5">
@@ -29,17 +42,7 @@
                 </div>  
             </div>
         </div>
-    <!-- Messages -->
-    {% for message in messages %}
-            <div class="row d-flex justify-content-center align-items-center align-content-center mb-0">
-                <div id="mydiv" class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center mb-0" id="success-alert" role="alert">
-                    {{ message }}
-                </div>
-            </div>
-            <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        {% endfor %}
+    
     </section>
     <!--  Cards Section -->
 <section class="list-table">

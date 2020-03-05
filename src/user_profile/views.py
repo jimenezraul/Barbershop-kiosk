@@ -8,6 +8,7 @@ from .forms import AddressForm
 from .models import Address
 from django.contrib import messages
 
+
 @login_required(login_url='register')
 def profile(request):
     address = Address.objects.filter(user=request.user)

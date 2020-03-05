@@ -25,9 +25,22 @@
                     </div>
                     {% endif %}
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 title-bar">
                     <h2 class="text-center text-dark" id="welcome"></i> Barber View
                     </h2>
+                    <div class="col-12 heading-col d-flex justify-content-center">
+                        {% for message in messages %}
+                        
+                            <div id="mydiv" class="col-12 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
+                                {{ message }}
+                            </div>
+                        
+                            
+                            {% endfor %}
+                            <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    </div>
                 </div>
                 <div class="col-12 col-md-3 text-center">
                     <h4 class="ewt">Estimated Wait Time</h4>
@@ -42,9 +55,22 @@
             <!--display Mobile Bar-->
             <div class="d-flex d-md-none row justify-content-center align-content-center align-items-center shadow bg-light"
                 id="wait-list">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 title-bar">
                     <h2 class="text-center text-dark" id="welcome"></i> Barber View
                     </h2>
+                    <div class="col-12 heading-col d-flex justify-content-center">
+                        {% for message in messages %}
+                        
+                            <div id="alert-mobile" class="col-10 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
+                                {{ message }}
+                            </div>
+                        
+                            
+                            {% endfor %}
+                            <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                    </div>
                 </div>
                 <div class="col-12 col-md-3 text-center">
                     <h5 class="ewt">Estimated Wait Time</h5>
@@ -77,20 +103,6 @@
             </div>
         </div>
     </section>
-    {% for message in messages %}
-    <div class="row d-flex justify-content-center align-items-center align-content-center">
-        <div id="mydiv"
-            class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center"
-            id="success-alert" role="alert">
-            {{ message }}
-        </div>
-    </div>
-    <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    {% endfor %}
     <!-- 
 <div class="container">
     <div class="row justify-content-center">
