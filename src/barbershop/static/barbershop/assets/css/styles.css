@@ -640,7 +640,7 @@ margin-top: 20px;
 .completed-btn{
   background-color: #ffffff;
   border: 0;
-  font-size: 30px;
+  font-size: 20px;
   padding: 0;
   margin: 0;
 }
@@ -714,4 +714,17 @@ margin-top: 20px;
 .heading-col{
   position: absolute;
   top: 2px;
+}
+
+.bg-grey{
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.table{
+  margin-bottom: 0;
+}
+
+.font-weight-bold{
+  border-bottom: 0px!important;
 }
