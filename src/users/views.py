@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm
+from .forms import UserRegisterForm
 from barbershop.models import LogoImage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -64,26 +64,3 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('register')
-
-@login_required(login_url='register')
-def update_user_info(request, id):
-    instance = User.objects.get(pk=id)
-    logo = LogoImage.objects.filter(user=request.user)
-    if request.method == 'POST':
-        form = UserUpdateForm(request.POST or None, instance=instance)
-        if form.is_valid():
-            instance.save()
-            messages.success(request, "Your Info was successfully Updated!")
-            return redirect('user-profile')
-
-    form = UserUpdateForm(instance=instance)
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
-    
-    context={
-        'form':form,
-        'logo':logo,
-    }
-    return render(request, "users/update_user_info.html", context)

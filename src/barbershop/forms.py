@@ -58,4 +58,6 @@ class ImageUploadForm(forms.ModelForm):
         model = models.LogoImage
         fields = ['image']
         
+    #barbershop = forms.CharField(label='',required=False,
+                    #widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'Barbershop Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only'}))
     image = forms.ImageField(label=_('Company Logo'),required=False, error_messages = {'invalid':_("Image files only")}, widget=forms.FileInput)

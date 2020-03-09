@@ -7,6 +7,8 @@ from barbershop.models import LogoImage
 from .forms import AddressForm
 from .models import Address
 from django.contrib import messages
+from .forms import UserUpdateForm
+
 
 
 @login_required(login_url='register')
@@ -60,3 +62,26 @@ def user_address(request):
         'title':'Address',
         }
     return render(request, 'user_profile/user_address.html', context)
+
+@login_required(login_url='register')
+def update_user_info(request, id):
+    instance = User.objects.get(pk=id)
+    logo = LogoImage.objects.filter(user=request.user)
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST or None, instance=instance)
+        if form.is_valid():
+            instance.save()
+            messages.success(request, "Your Info was successfully Updated!")
+            return redirect('user-profile')
+
+    form = UserUpdateForm(instance=instance)
+    if logo.count() == 1:
+        logo = logo[0]
+    else:
+        logo = None
+    
+    context={
+        'form':form,
+        'logo':logo,
+    }
+    return render(request, "user_profile/update_user_info.html", context)

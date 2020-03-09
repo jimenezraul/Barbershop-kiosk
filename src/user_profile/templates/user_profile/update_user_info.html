@@ -74,7 +74,7 @@
                             <div class="col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
                                     <form action="{% url 'update_user_info' user.id %}" class="site-form shadow" method="post">
                                         {% csrf_token %}
-                                        <h1>Personal Info</h1>
+                                        <h1>Owner Info</h1>
                                         {{ form.first_name}}
                                         {{ form.last_name}}
                                         {{ form.email}}

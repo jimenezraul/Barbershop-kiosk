@@ -6,16 +6,16 @@
         <div class="container">
         <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
             <div class="col-3 d-flex justify-content-center">
-                <img class="img-fluid img_logo" src="{{ logo.image.url }}" alt="">
+                
             </div>
             <div class="col-6">
                     <h2 class="text-center text-dark" id="welcome">Waiting List</h2>
             </div>
                 <div class="col-3 text-center">
-                    <h4 class="ewt">Estimated Wait Time</h4>
+                     <h5 class="ewt text-g">Estimated Wait Time</h5>
                      <div class="col-11 col-sm-11 col-md-8 col-lg-5 time justify-content-center">{{ eta }}
                      </div>
-                     <p class="timename">{{ time_display }}</p>
+                     <p class="timename text-g">{{ time_display }}</p>
                               
 
                 </div>  
@@ -221,8 +221,15 @@
                     </div>
                 </div>-->
             </div>
-            
+
             <div class="col-3">
+                {% if logo.count == 0 %}
+                
+                {% else %}
+                <div class="card shadow">
+                    <img class="logo-bg" src="{{ logo.image.url }}" alt="Image">
+                </div>
+                {% endif %}
                 <div class="card">
                     <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Weather</h4>
                     </div>
@@ -231,33 +238,33 @@
                                 <figure class="sky">
                                         <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
                                     </figure>
-                            <h4 class="card-title font-b city">{{ city_weather.city }}</h4>
+                            <h4 class="card-title font-b city text-g">{{ city_weather.city }}</h4>
                             <p class="card-text font-b bg-danger temp mx-auto text-white">{{ city_weather.temperature }}°F</p>
-                            <p class="card-text d-bottom font-b description">{{ city_weather.description }}</p>
+                            <p class="card-text d-bottom font-b description text-g">{{ city_weather.description }}</p>
 
                         </div>
                     </div>
                 </div>
-            <div class="card mb-4">
-                <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Prices</h4></div>
-                    <div class="services">
-                        <div class="card-body">
-                            <h4 class="card-title font-b city mt-3">Men's Haircut</h4>
-                            {% for service in menservices %}
-                            <p class="">{{ service.service }} - ${{ service.price }}</p>
-                            {% endfor %}
-                            <h4 class="card-title font-b city mt-3">Kid's Haircut</h4>
-                            {% for service in kidservices %}
-                            <p class="">{{ service.service }} - ${{ service.price }}</p>
-                            {% endfor %}
-                            <h4 class="card-title font-b city mt-3">Other Services</h4>
-                            {% for service in otherservices %}
-                            <p class="">{{ service.service }} - ${{ service.price }}</p>
-                            {% endfor %}
-                            <p class="d-bottom"></p>
+                <div class="card mb-4">
+                    <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Prices</h4></div>
+                        <div class="services">
+                            <div class="card-body">
+                                <h4 class="card-title font-b city mt-3 text-g">Men's Haircut</h4>
+                                {% for service in menservices %}
+                                <p class="">{{ service.service }} - ${{ service.price }}</p>
+                                {% endfor %}
+                                <h4 class="card-title font-b city mt-3 text-g">Kid's Haircut</h4>
+                                {% for service in kidservices %}
+                                <p class="">{{ service.service }} - ${{ service.price }}</p>
+                                {% endfor %}
+                                <h4 class="card-title font-b city mt-3 text-g">Other Services</h4>
+                                {% for service in otherservices %}
+                                <p class="">{{ service.service }} - ${{ service.price }}</p>
+                                {% endfor %}
+                                <p class="d-bottom"></p>
+                            </div>
                         </div>
-                    </div>
-            </div>
+                </div>
             <!-- 
             {% if user.is_authenticated %}
             <div class="card mb-4">

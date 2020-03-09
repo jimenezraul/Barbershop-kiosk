@@ -276,7 +276,9 @@ a {
 label{
   display:none;
 }
-#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email{
+#id_name, #id_barber, #id_zip_code, 
+#id_first_name, #id_last_name, 
+#id_email, #id_barbershop{
   display:block;
   width:80%;
   font-weight: 500;
@@ -669,8 +671,13 @@ margin-top: 20px;
 
 .logo{
   width: 50%;
-  border-radius: 10px;
-  
+}
+
+.logo-bg{
+  border-radius: 5px;
+  background-color: rgba(90, 92, 110);
+  border: 2px solid white;
+  width: 100%;
 }
 
 #id_image{
@@ -725,6 +732,9 @@ margin-top: 20px;
   margin-bottom: 0;
 }
 
-.font-weight-bold{
-  border-bottom: 0px!important;
+
+
+.text-g{
+  color: #505e6c!important;
 }
+

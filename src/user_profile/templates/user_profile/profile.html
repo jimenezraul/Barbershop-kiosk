@@ -149,7 +149,7 @@
         <div class="container">
             <div class="row d-flex justify-content-center card-margin">
                 <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4"><div class="card shadow">
-  <h5 class="card-header">Personal Info</h5>
+  <h5 class="card-header">Owner Info</h5>
   <div class="card-body">
       <h5>Name: <span class='pro-info'>{{ user.first_name }}</span></h5>
       <h5>Last Name: <span class='pro-info'>{{ user.last_name }}</span></h5>
@@ -161,7 +161,7 @@
   </div>
 </div></div>
                 <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4"><div class="card shadow">
-  <h5 class="card-header">Address Info</h5>
+  <h5 class="card-header">Business Address Info</h5>
   <div class="card-body">
     <form action="{% url 'user-address' %}">
       {% csrf_token %}

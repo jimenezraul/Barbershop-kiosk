@@ -18,18 +18,3 @@ class UserRegisterForm(UserCreationForm):
     password2 = forms.CharField(label='',
                     widget=forms.PasswordInput(attrs={"class": 'r-client-info','placeholder': 'Confirm Password'}))
 
-class UserUpdateForm(UserChangeForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email']
-
-    first_name = forms.CharField(label='',
-                    widget=forms.TextInput(attrs={"class": 'r-client-info','placeholder': 'First Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}))
-    
-    last_name = forms.CharField(label='',
-                    widget=forms.TextInput(attrs={"class": 'r-client-info','placeholder': 'Last Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only '}))
-
-    email = forms.CharField(label='',
-                    widget=forms.EmailInput(attrs={"class": 'r-client-info','placeholder': 'Email'}))

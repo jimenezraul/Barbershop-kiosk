@@ -105,7 +105,7 @@ def waiting(request):
     if logo.count() == 1:
         logo = logo[0]
     else:
-        logo = None
+        logo = LogoImage.objects.filter(user=request.user)
 
     if zip.count() > 0:
         zip_code = str(zip[0])
