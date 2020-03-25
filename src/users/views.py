@@ -16,12 +16,12 @@ def register(request):
     else:
         logo = None
     if request.method == 'POST':
-    # Show blank registration form. 
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
+            form.save()
             messages.success(request, f'Account created for {username}!')
-            return redirect("signup:raulthebarber-home")
+            return redirect("barbershop-waitinglist")
     else:
         form = UserRegisterForm()
     context = {

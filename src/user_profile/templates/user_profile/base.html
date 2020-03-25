@@ -1,10 +1,11 @@
 {% load static %}
-
+{% load pwa %}
 
 <!DOCTYPE html>
 <html>
 
 <head>
+    {% progressive_web_app_meta %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     {% if title %}
@@ -21,7 +22,7 @@
     <link href="{% static 'barbershop/assets/css/cropper.min.css' %}" rel="stylesheet">
 </head>
 
-<body style="background-color: #5a5c6e;">
+<body>
     {% block content %}{% endblock %}
     <script src="{% static 'user_profile/assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'user_profile/assets/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -30,7 +31,7 @@
     <script src="{% static 'barbershop/assets/js/smart-forms.min.js' %}"></script>
     <script src="{% static 'barbershop/assets/js/bs-animation.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="{% static 'barbershop/assets/js/better-nav.js' %}"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
     <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
     {% block javascript %}

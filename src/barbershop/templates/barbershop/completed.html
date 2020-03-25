@@ -5,22 +5,23 @@
     <section>
         <div class="container">
         <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
-            <div class="col-3 text-center">
-                <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
-                <p class="b-list">Back</p>
-            </div>
-            <div class="col-6">
+            
+            <div class="col-12 position-relative">
+                <div class="col-auto position-absolute arrow text-center">
+                    <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
+                </div>
                     <h2 class="text-center text-dark" id="welcome">Completed</h2>
+                    <div class="col-auto position-absolute year text-center">
+                        {% if title == "Last_Year" %}
+                        <a href="{% url 'barbershop-completed' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
+                        <p class="b-list">{{ todays_year }}</p>
+                        {% else %}
+                        <a href="{% url 'barbershop-completed_last_year' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
+                        <p class="b-list">{{ last_year }}</p>
+                        {% endif %}
+                    </div>  
             </div>
-                <div class="col-3 text-center">
-                    {% if title == "Last_Year" %}
-                    <a href="{% url 'barbershop-completed' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
-                    <p class="b-list">{{ todays_year }}</p>
-                    {% else %}
-                    <a href="{% url 'barbershop-completed_last_year' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
-                    <p class="b-list">{{ last_year }}</p>
-                    {% endif %}
-                </div>  
+                
         </div>
     </div>
     </section>
@@ -36,11 +37,17 @@
     {% endfor %}
 <section class="list-table">
     <div class="row my-5 justify-content-center">
-        <div class="col-11 col-sm-10 col-lg-8 col-xl-7 chart-bg shadow">
+        <div class="col-11 col-sm-10 col-lg-8 col-xl-7 chart-bg shadow position-relative">
             {% if title == "Last_Year" %}
             <h4 class="text-center">{{ last_year }}</h4>
             {% else %}
             <h4 class="text-center">{{ todays_year }}</h4>
+            <div class="count">
+                <div class="col-auto count-num position-absolute">
+                    <p>Completed Today - {{ users.paginator.count }}</p>
+                </div>
+            </div>
+            </th>
             {% endif %}
           <canvas data-bs-chart="{&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dic&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Walking Clients&quot;,&quot;backgroundColor&quot;:&quot;#c32e2e&quot;,&quot;borderColor&quot;:&quot;#dd2525&quot;,&quot;data&quot;:[&quot;{{ JAN.count }}&quot;,&quot;{{ FEB.count }}&quot;,&quot;{{ MAR.count }}&quot;,&quot;{{ APR.count }}&quot;,&quot;{{ MAY.count }}&quot;,&quot;{{ JUN.count }}&quot;,&quot;{{ JULY.count }}&quot;,&quot;{{ AUG.count }}&quot;,&quot;{{ SEP.count }}&quot;,&quot;{{ OCT.count }}&quot;,&quot;{{ NOV.count }}&quot;,&quot;{{ DIC.count }}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}">
           </canvas>
@@ -55,8 +62,123 @@
             <script src="{% static 'barbershop/assets/js/bs-init.js' %}"></script>
             {% if title == "Last_Year" %}
             {% else %}
+
     <div class="container">
-        <div class="card shadow mb-4">
+        <!--Grid column-->
+        <div class="col-md-12 text-left p-0">
+                    
+            <div class="card mb-4">
+                <div class="card-body p-0">
+    
+                    <!-- Client table -->
+                    <div class="table-responsive rounded-lg">
+    
+                        <table class="table product-table">
+    
+                            <!-- Table head -->
+                            <thead class="bg-grey lighten-5">
+                                <tr>
+                                    
+                                    <th class="font-weight-bold text-center">
+                                        <strong>Client</strong>
+                                    </th>
+                                    <th class="font-weight-bold text-center">
+                                        <strong>Barber</strong>
+                                    </th>
+                                    
+                                    <th class="font-weight-bold text-center">
+                                        <strong>Date</strong>
+                                    </th>
+            
+                                </tr>
+                            </thead>
+                            <!-- /.Table head -->
+    
+                            <!-- Table body -->
+                            <tbody class="client">
+                                {% for complete in completed %}
+                                <!-- First row -->
+                                <tr id='client' class="client">
+                            
+                                    <td>
+                                        <h5 class="text-center">
+                                            <strong>{{ complete.name }}</strong>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5 class="text-center">
+                                            <strong>{{ complete.barber }}</strong>
+                                        </h5>
+                                    </td>
+                                    
+                                    <td>
+                                        <p class="text-center">
+                                            <strong>{{ complete.date }}</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <!-- /.First row -->
+                                {% endfor %}
+                            </tbody>
+                            <!-- /.Table body -->
+                            <script type="text/javascript"
+                            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                            <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                            <script src="{% static 'barbershop/assets/js/count.js' %}"></script>
+                            <script>
+                                // When the user clicks on div, open the popup
+                                function showFunction() {
+                                  var popup = document.getElementById("myPopup");
+                                  popup.classList.toggle("show");
+                                  $('#btnviewdetails').text('Cancel').button("refresh")
+                                }
+                                function hideFunction() {
+                                  var popup = document.getElementById("myPopup");
+                                  popup.classList.toggle("hide");
+                                }
+                                </script>
+                            
+                        </table>
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-6 d-flex justify-content-center">
+                                    {% if users.has_other_pages %}
+                                        <ul class="pagination mt-3">
+                                            {% if users.has_previous %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                                            {% else %}
+                                                <li class="disabled"><a class="page-link">&laquo;</a></li>
+                                            {% endif %}
+                                            {% for i in users.paginator.page_range %}
+                                            {% if users.number == i %}
+                                                <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></a></span></li>
+                                            {% else %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% if users.has_next %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                                            {% else %}
+                                                <li class="disabled"><a class="page-link">&raquo;</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <!-- /.Shopping Cart table -->
+    
+                </div>
+    
+            </div>
+    
+        </div>
+        <!--Grid column-->
+
+
+
+       <!-- <div class="card shadow mb-4">
             <div class="card-header bg-danger">
                 <div class="row d-flex justify-content-center align-items-center align-content-center client-bar">
                         <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
@@ -148,7 +270,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </section>
 {% endblock content %}

@@ -77,11 +77,9 @@
                                         {% csrf_token %}
                                         <h1>Address</h1>
                                         {{ form }}
-                                        {% if address.count == 1 %}
+                                       
                                         <input class="confirm-button" id="my-signup" type="submit" value="Update">
-                                        {% else %}
-                                        <input class="confirm-button" id="my-signup" type="submit" value="Submit">
-                                        {% endif %}
+                                        <a href="{% url 'user-profile' %}" class="confirm-button">Cancel</a>
                                 </form> 
                             
                             </div>

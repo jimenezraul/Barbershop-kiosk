@@ -1,6 +1,6 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
-
+{% load pwa %}
     {% block content %}
     
     <section>
@@ -21,7 +21,7 @@
                     </div>
                     {% else %}
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2">
-                        <a href="{% url 'user-profile'%}"><img class="rounded-circle login-pic" src="{{ photos.file.url }}"/></a>
+                        <a href="{% url 'user-profile'%}"><img class="circle-shadow rounded-circle login-pic" src="{{ photos.file.url }}"/></a>
                     </div>
                     {% endif %}
                     <div class="col-2 col-sm-3 text-center mt-2">
@@ -130,10 +130,10 @@
     <div class="col-md-12 text-left">
 
         <div class="card">
-            <div class="card-body">
+            <div class="card-body p-0">
 
                 <!-- Client table -->
-                <div class="table-responsive">
+                <div class="table-responsive rounded-lg">
 
                     <table class="table product-table">
 

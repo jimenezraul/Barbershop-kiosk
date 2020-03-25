@@ -1,4 +1,4 @@
-#!/Users/raul/Desktop/website/bin/python
+#!/Users/raul/Documents/GitHub/Barbershop-kiosk/bin/python
 
 import sys
 import getopt

@@ -61,7 +61,7 @@
     <div class="register-photo">
         <div class="form-container">
             <div class="image-holder d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell" style="background-image: url({% static 'users/assets/img/Barber.jpg' %})"></div>
-            <form method="post" action="{% url 'register' %}">
+            <form action="{% url 'register' %}" method="POST">
                 {% csrf_token %}
                 <h2 class="text-center"><strong>Create</strong> an account.</h2><input class="form-control mb-3 register-form" type="text" name="username" placeholder="Username" required="">
                 <div class="form-group"><input class="form-control register-form" type="email" name="email" placeholder="Email" required=""></div>

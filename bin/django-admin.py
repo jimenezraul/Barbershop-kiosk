@@ -1,4 +1,4 @@
-#!/Users/raul/Desktop/website/bin/python3
+#!/Users/raul/Documents/GitHub/Barbershop-kiosk/bin/python3
 from django.core import management
 
 if __name__ == "__main__":

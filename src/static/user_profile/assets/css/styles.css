@@ -1,0 +1,168 @@
+body {
+  background-color: #495c85;
+}
+
+.row.profile-top-row {
+  position: relative;
+  min-height: 200px;
+  background: rgb(235,236,242);
+  border-bottom: 2px solid white;
+}
+
+.profile-image {
+  border: 3px solid white;
+}
+
+.pic-col {
+  position: absolute;
+  top: 100px;
+}
+
+.fas.fa-arrow-circle-left:hover {
+  color: #98242f;
+}
+
+.fas.fa-arrow-circle-left {
+  color: #dc3545;
+  border-radius: 50%;
+  font-size: 35px;
+}
+
+.back-col {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.fas.fa-camera {
+  color: white;
+  background-color: rgb(46,51,95);
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.fas.fa-camera:hover {
+  color: white;
+  background-color: rgb(33,35,67);
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.camera-col {
+  top: 170px;
+  left: 70px;
+}
+
+.card-margin {
+  margin-top: 80px;
+}
+
+.pro-info {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.card-body h5 {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.btn.btn-primary {
+  font-size: smaller;
+  position: absolute;
+  right: 15px;
+}
+
+.card-header {
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background: #dc3545;
+}
+
+.btn.btn-primary {
+  background: #2e335f;
+  border-radius: 25px;
+  border: 1px solid white;
+}
+
+.btn.btn-primary:hover {
+  background: rgb(33,35,67);
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.barber-icon-col {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.barber-icon:hover {
+  background-color: #98242f;
+}
+
+.barber-icon {
+  fill: white;
+  font-size: 23px;
+  font-weight: bold;
+  background-color: #dc3545;
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.barber-notif {
+  background-color: red;
+  height: 20px;
+  width: 20px;
+  color: white;
+  border-radius: 50%;
+  padding: 0;
+  border: 2px solid white;
+  font-size: x-small;
+  position: absolute;
+  top: 18px;
+  right: 25px;
+}
+
+.barber-notif p {
+  margin: 0;
+  padding: 0;
+}
+
+.row-2 {
+  margin-top: 10px;
+  height: 30px;
+  background: #dc3546;
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
+}
+
+select, label, input{
+  display: none;
+}
+
+#id_street,#id_city,#id_state{
+  display:block;
+  width:80%;
+  font-weight: 500;
+  margin: 20px auto;
+  border-radius: 5px;
+  border: 1px solid #777676;
+  padding: 7px;
+  text-indent: 15px;
+  height: 42px;
+ 
+}
+.red{
+  color: #dc3545;
+}
+
+.fa-user-circle{
+font-size: 200px;
+background-color: white;
+border-radius: 50%;
+}

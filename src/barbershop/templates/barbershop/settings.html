@@ -5,12 +5,16 @@
     <section>
         <div class="container">
             <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
-                <div class="col-2 text-center">
-                    <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
-                    <p class="b-list">Back</p>
-                </div>
-                <div class="col-7 col-md-8 title-bar">
+                <div class="col-12 position-relative">
+                    <div class="col-auto position-absolute arrow text-center">
+                        <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
+                    </div>
                         <h2 class="text-center text-dark" id="welcome"> Settings</h2>
+                        
+                        <div class="col-auto log-out position-absolute text-center">
+                            <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
+                        </div>
+
                         <div class="col-12 heading-col d-flex justify-content-center">
                             {% for message in messages %}
                             
@@ -25,21 +29,9 @@
                                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
                         </div>
                 </div>
-                {% if photos.count == 0 %}
-                    <div class="col-1 text-center p-0 pl-lg-5">
-                        <a class="chart" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
-                    </div>
-                    {% else %}
-                    <div class="col-1 text-center p-0 pl-lg-5">
-                        <a href="{% url 'user-profile'%}"><img class="rounded-circle login-pic" src="{{ photos.file.url }}"/></a>
-                    </div>
-                    {% endif %}
-                <div class="col-1 text-center">
-                    <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
-                </div>  
-                <div class="col-1 d-md-none text-center">
-                    
-                </div>  
+                
+                  
+            
             </div>
         </div>
     
