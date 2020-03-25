@@ -66,6 +66,7 @@ def user_address(request):
 @login_required(login_url='register')
 def update_user_info(request, id):
     instance = User.objects.get(pk=id)
+    print(request.user.id)
     logo = LogoImage.objects.filter(user=request.user)
     if request.method == 'POST':
         form = UserUpdateForm(request.POST or None, instance=instance)
