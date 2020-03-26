@@ -102,9 +102,6 @@
   color: rgb(246,249,94);
 }
 
-.appt-p {
-}
-
 #table {
   width: 95%;
   margin: 0;
@@ -143,15 +140,12 @@
 }
 
 .container {
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 3px;
+  padding-left: 3px;
 }
 
 .logo-face {
   width: 60px;
   display: none;
-}
-
-#logo-style {
 }
 

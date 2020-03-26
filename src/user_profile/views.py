@@ -8,11 +8,13 @@ from .forms import AddressForm
 from .models import Address
 from django.contrib import messages
 from .forms import UserUpdateForm
+from barbershop.models import Client
 
 
 
 @login_required(login_url='register')
 def profile(request):
+    clients = Client.objects.filter(user=request.user)
     address = Address.objects.filter(user=request.user)
     if address.count() == 1:
         address = address[0]
@@ -28,6 +30,7 @@ def profile(request):
         'photo':photos,
         'title':'Profile',
         'address':address,
+        'clients':clients,
         }
     return render(request, 'user_profile/profile.html', context)
 

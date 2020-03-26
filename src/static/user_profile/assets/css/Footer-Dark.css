@@ -72,13 +72,12 @@
   text-align: center;
   border-radius: 50%;
   margin: 0 8px;
-  background-color: #dc3545;
+  background-color: #495c85;
   color: white;
-  opacity: 0.75;
 }
 
 .footer-dark .item.social > a:hover {
-  opacity: 0.9;
+  background-color: #dc3546;
 }
 
 .footer-dark .copyright {
@@ -87,11 +86,6 @@
   opacity: 0.3;
   font-size: 13px;
   margin-bottom: 0;
-}
-
-.col-auto.heading-col {
-  position: absolute;
-  top: 40px;
 }
 
 .color-bg {

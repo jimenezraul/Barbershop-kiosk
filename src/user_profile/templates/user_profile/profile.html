@@ -1,62 +1,62 @@
 {% extends 'user_profile/base.html' %}
 {% load static %}
 {% block javascript %}
-  <script>
-    $(function () {
+<script>
+  $(function () {
 
-      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-      $("#id_file").change(function () {
-        if (this.files && this.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $("#image").attr("src", e.target.result);
-            $("#modalCrop").modal("show");
-          }
-          reader.readAsDataURL(this.files[0]);
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#id_file").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function () {
+      $image.cropper({
+        viewMode: 1,
+        aspectRatio: 1/1,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+        ready: function () {
+          $image.cropper("setCanvasData", canvasData);
+          $image.cropper("setCropBoxData", cropBoxData);
         }
       });
-
-      /* SCRIPTS TO HANDLE THE CROPPER BOX */
-      var $image = $("#image");
-      var cropBoxData;
-      var canvasData;
-      $("#modalCrop").on("shown.bs.modal", function () {
-        $image.cropper({
-          viewMode: 1,
-          aspectRatio: 1/1,
-          minCropBoxWidth: 200,
-          minCropBoxHeight: 200,
-          ready: function () {
-            $image.cropper("setCanvasData", canvasData);
-            $image.cropper("setCropBoxData", cropBoxData);
-          }
-        });
-      }).on("hidden.bs.modal", function () {
-        cropBoxData = $image.cropper("getCropBoxData");
-        canvasData = $image.cropper("getCanvasData");
-        $image.cropper("destroy");
-      });
-
-      $(".js-zoom-in").click(function () {
-        $image.cropper("zoom", 0.1);
-      });
-
-      $(".js-zoom-out").click(function () {
-        $image.cropper("zoom", -0.1);
-      });
-
-      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-      $(".js-crop-and-upload").click(function () {
-        var cropData = $image.cropper("getData");
-        $("#id_x").val(cropData["x"]);
-        $("#id_y").val(cropData["y"]);
-        $("#id_height").val(cropData["height"]);
-        $("#id_width").val(cropData["width"]);
-        $("#formUpload").submit();
-      });
-
+    }).on("hidden.bs.modal", function () {
+      cropBoxData = $image.cropper("getCropBoxData");
+      canvasData = $image.cropper("getCanvasData");
+      $image.cropper("destroy");
     });
-  </script>
+
+    $(".js-zoom-in").click(function () {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function () {
+      $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function () {
+      var cropData = $image.cropper("getData");
+      $("#id_x").val(cropData["x"]);
+      $("#id_y").val(cropData["y"]);
+      $("#id_height").val(cropData["height"]);
+      $("#id_width").val(cropData["width"]);
+      $("#formUpload").submit();
+    });
+
+  });
+</script>
   <script>
     $(".fa-camera").click(function () {
     $("input[type='file']").trigger('click');
@@ -69,32 +69,45 @@
 </script>
 {% endblock %}
 {% block content %}
-    <div>
-        <div class="container-fluid">
+    <section>
+        <div class="container">
+          
             <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
-                <div class="col-auto heading-col">
-                    <h3 class="text-danger">Welcome {{ user.first_name}}!</h3>
-                </div>
-                <div class="col-auto heading-col">
-                    {% for message in messages %}
-                    <div class="row d-flex justify-content-center align-items-center align-content-center">
-                        <div id="mydiv" class="col-12 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
-                            {{ message }}
-                        </div>
-                    </div>
-                        <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                        {% endfor %}
+                <div class="col-12 col-md-6 heading-col">
+                  <h2 class="text-center text-dark" id="welcome">Welcome {{ user.first_name}}!
+                  </h2>
+                    
                 </div>
                 {% if photo.count == 0 %}
                 <div class="col-12 text-center pic-col"><i class="red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
                 {% else %}
                 <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ photo.file.url }}" height="200px" width="200px"></div>
                 {% endif %}
-                <div class="col-auto text-center text-white barber-icon-col"><i class="la la-scissors barber-icon"></i></div>
-                <div class="col-2 text-center barber-notif"><p>0</p></div>
+                  <a href="{% url 'barbershop-waitinglist' %}"><div class="col-auto text-center text-white barber-icon-col"><i class="fas fa-bell"></i></div></a>
+              <!--start notifications-->
+                <div id="notification">
+                {% if clients.count == 0 %}
+        
+                {% else %}
+                
+                  <div class="col-2 text-center barber-notif"><p>{{ clients.count }}</p></div>
+                {% endif %}
+              </div>
+              <script src="{% static 'barbershop/assets/js/notification.js' %}"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+              <!--end notifications-->
                 <div class="col-auto back-col"><a href="{% url 'barbershop-waitinglist' %}"><i class="fas fa-arrow-circle-left"></i></a></div>
+                <div class="col-auto heading-col">
+                  {% for message in messages %}
+                  <div class="row d-flex justify-content-center align-items-center align-content-center">
+                      <div id="mydiv" class="mt-2 col-12 alert alert-danger fade show message text-center" id="success-alert" role="alert">
+                          {{ message }}
+                      </div>
+                  </div>
+                      <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+                      {% endfor %}
+                </div>
                 <form action="{% url 'photo' %}" method="post" enctype="multipart/form-data" id="formUpload">
                     {% csrf_token %}
                     <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
@@ -107,37 +120,37 @@
                 
             </div>
         </div>
-    </div>
+    </section>
     <div>
 
 <!-- MODAL TO CROP THE IMAGE -->
-  <div class="modal fade" id="modalCrop">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Crop the photo</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="image" style="max-width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span class="glyphicon glyphicon-zoom-in"></span>
           </button>
-          <h4 class="modal-title">Crop the photo</h4>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span class="glyphicon glyphicon-zoom-out"></span>
+          </button>
         </div>
-        <div class="modal-body">
-          <img src="" id="image" style="max-width: 100%;">
-        </div>
-        <div class="modal-footer">
-          <div class="btn-group pull-left" role="group">
-            <button type="button" class="btn btn-default js-zoom-in">
-              <span class="glyphicon glyphicon-zoom-in"></span>
-            </button>
-            <button type="button" class="btn btn-default js-zoom-out">
-              <span class="glyphicon glyphicon-zoom-out"></span>
-            </button>
-          </div>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-          <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
-        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
       </div>
     </div>
   </div>
+</div>
         <div class="container-fluid shadow">
             <div class="row row-2">
                 <div class="col">
@@ -171,7 +184,7 @@
       <h5>City: <span class='pro-info'>{{ address.city }}</span></h5>
       <h5>State: <span class='pro-info'>{{ address.state }}</span></h5>
       <h5>ZipCode: <span class='pro-info'>{{ address.zip_code }}</span></h5>
-        <button class="btn btn-primary shadow" type="submit">Edit Info</button>
+        <button class="btn btn-primary" type="submit">Edit Info</button>
   </form>
   </div>
 </div></div>
@@ -202,7 +215,7 @@
                         <h3>Company Name</h3>
                         <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
                     </div>
-                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
                 </div>
                 <p class="copyright">The Barbershop Kiosk © 2020</p>
             </div>

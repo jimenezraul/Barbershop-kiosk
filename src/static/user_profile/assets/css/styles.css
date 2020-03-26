@@ -1,12 +1,18 @@
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   background-color: #495c85;
 }
 
 .row.profile-top-row {
   position: relative;
-  min-height: 200px;
+  min-height: 170px;
   background: rgb(235,236,242);
   border-bottom: 2px solid white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .profile-image {
@@ -15,7 +21,7 @@ body {
 
 .pic-col {
   position: absolute;
-  top: 100px;
+  top: 80px;
 }
 
 .fas.fa-arrow-circle-left:hover {
@@ -45,7 +51,7 @@ body {
 
 .fas.fa-camera:hover {
   color: white;
-  background-color: rgb(33,35,67);
+  background-color: #ac2936;
   padding: 10px;
   font-size: 20px;
   border-radius: 50%;
@@ -53,8 +59,8 @@ body {
 }
 
 .camera-col {
-  top: 170px;
-  left: 70px;
+  top: 160px;
+  left: 80px;
 }
 
 .card-margin {
@@ -91,8 +97,7 @@ body {
 }
 
 .btn.btn-primary:hover {
-  background: rgb(33,35,67);
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  background: #ac2936;
 }
 
 .barber-icon-col {
@@ -115,22 +120,22 @@ body {
 }
 
 .barber-notif {
-  background-color: red;
+  background-color: #dc3545;
   height: 20px;
   width: 20px;
   color: white;
   border-radius: 50%;
   padding: 0;
-  border: 2px solid white;
+  border: 1px solid white;
   font-size: x-small;
   position: absolute;
-  top: 18px;
-  right: 25px;
+  top: 10px;
+  right: 28px;
 }
 
 .barber-notif p {
   margin: 0;
-  padding: 0;
+  padding: 1px 2px;
 }
 
 .row-2 {
@@ -166,44 +171,31 @@ font-size: 200px;
 background-color: white;
 border-radius: 50%;
 }
+.fa-bell{
+  background-color: #dc3545;
+  font-size: 22px;
+  padding: 6px 8px;
+  border-radius: 25px;
+}
+.fa-bell:hover{
+  background-color: #98242f;
+}
 
-body {font-family: Arial, Helvetica, sans-serif;}
-  
-  /* The Modal (background) */
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
+#welcome {
+  color: #505e6c!important;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.heading-col {
+  position: absolute;
+  top: 5px;
+}
+
+.container {
+  padding-right: 3px;
+  padding-left: 3px;
+}
