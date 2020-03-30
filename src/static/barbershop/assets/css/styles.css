@@ -277,11 +277,11 @@ label{
 }
 #id_name, #id_barber, #id_zip_code, 
 #id_first_name, #id_last_name, 
-#id_email, #id_barbershop{
+#id_email, #id_barbershop,#id_hire_date,#id_phone,#id_license_num{
   display:block;
   width:80%;
   font-weight: 500;
-  margin: 20px auto;
+  margin: 10px auto;
   border-radius: 5px;
   border: 1px solid #777676;
   padding: 7px;
@@ -759,4 +759,63 @@ margin-top: 20px;
 
 .form{
   height: 90vh;
+}
+
+.indigo.lighten-1 {
+  position: relative;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to right, #dc3545, #495c85);
+  border-radius: 3px;
+}
+
+.avatar{
+  width: 100%;
+  height: 50px;
+}
+
+.avatar img{
+  min-height: 100px;
+  width: 100px;
+  position: absolute;
+  top: 45px;
+  border: 2px solid white;
+}
+
+.avatar i{
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  font-size: 100px;
+  top: 45px;
+  background-color: white;
+  color: #dc3545;
+  border-radius: 50%;
+}
+
+.yes{
+  background-color: #2f89fc;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 25px;
+}
+
+.no{
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 25px;
+}
+
+.vh-80{
+  height: 80vh;
+}
+
+.fa-hand-point-up{
+  font-size: 60px;
+}
+
+.barber-avail{
+  font-size: 28px;
 }

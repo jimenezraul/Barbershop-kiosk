@@ -3,12 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from photocrop.forms import PhotoForm
 from photocrop.models import Photo
-from barbershop.models import LogoImage
+from barbershop.models import LogoImage, Barbers, Client, CompletedClients
 from .forms import AddressForm
 from .models import Address
 from django.contrib import messages
 from .forms import UserUpdateForm
-from barbershop.models import Client
+from barbershop.forms import NewBarber, BarberPhoto
+from django.db.models import Q
+from datetime import datetime, date
 
 
 
@@ -69,7 +71,6 @@ def user_address(request):
 @login_required(login_url='register')
 def update_user_info(request, id):
     instance = User.objects.get(pk=id)
-    print(request.user.id)
     logo = LogoImage.objects.filter(user=request.user)
     if request.method == 'POST':
         form = UserUpdateForm(request.POST or None, instance=instance)
@@ -89,3 +90,84 @@ def update_user_info(request, id):
         'logo':logo,
     }
     return render(request, "user_profile/update_user_info.html", context)
+
+
+@login_required(login_url='register')
+def barber_profile(request, id):
+    barber = Barbers.objects.get(pk=id)
+    photoform = BarberPhoto()
+    clients = Client.objects.filter(Q(user=request.user))
+    clients = clients.filter(Q(barber=barber) | Q(barber='Any'))
+    completed = CompletedClients.objects.filter(completed_by=barber).filter(date=datetime.now())
+    if not barber.phone:
+        area_code = "000"
+        first_3_number = "000"
+        last_4_number = "0000"
+    else:
+        area_code = barber.phone[0:3]
+        first_3_number = barber.phone[3:6]
+        last_4_number = barber.phone[6:]
+
+    form = NewBarber(instance=barber)
+    if barber.available == False:
+        checkbox = "unchecked"
+    else:
+        checkbox = "checked"
+    context = {
+        "barbers":barber,
+        "photoform":photoform,
+        "clients":clients,
+        "form":form,
+        'checkbox': checkbox,
+        "completed":completed,
+        "area_code": area_code,
+        "first_3_number":first_3_number,
+        "last_4_number":last_4_number,
+    }
+    return render(request, "user_profile/barber_profile.html", context)
+
+@login_required(login_url='register')
+def barber_status(request, id):
+    barbers = Barbers.objects.get(pk=id)
+    if request.method == 'POST':
+        form = NewBarber(request.POST or None, instance=barbers)
+        if form.is_valid:
+            form.save()
+            messages.success(request, "Status Updated!")
+            return redirect('barberprofile', id)
+        
+
+    form = NewBarber(instance=barbers)
+    if barbers.available == False:
+        checkbox = "unchecked"
+    else:
+        checkbox = "checked"
+        
+    context={
+        'form':form,
+        'barbers': barbers,
+        'checkbox': checkbox,
+    }
+    return render(request, "user_profile/barber_status.html", context)
+
+@login_required(login_url='register')
+def barber_profile_update(request, id):
+    barbers = Barbers.objects.get(pk=id)
+    if request.method == 'POST':
+        form = NewBarber(request.POST or None, instance=barbers)
+        if form.is_valid:
+            form.save()
+            messages.success(request, "Info Updated!")
+            return redirect('barbershop-settings')
+    
+        
+
+    form = NewBarber(instance=barbers)
+    number = barbers.phone
+    context={
+        'form':form,
+        'barbers': barbers,
+        "number":number,
+
+    }
+    return render(request, "user_profile/barber_profile_update.html", context)

@@ -83,7 +83,17 @@
                 {% else %}
                 <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ photo.file.url }}" height="200px" width="200px"></div>
                 {% endif %}
-                  <a href="{% url 'barbershop-waitinglist' %}"><div class="col-auto text-center text-white barber-icon-col"><i class="fas fa-bell"></i></div></a>
+              
+                  <a href="{% url 'barbershop-settings' %}">
+                    <div class="col-auto text-center text-white settings-icon-col">
+                    <i class="red fas fa-user-cog"></i>
+                  </div>
+                </a>
+                  <a href="{% url 'barbershop-waitinglist' %}">
+                    <div class="col-auto text-center text-white barber-icon-col">
+                      <i class="fas fa-bell"></i>
+                    </div>
+                  </a>
               <!--start notifications-->
                 <div id="notification">
                 {% if clients.count == 0 %}
@@ -98,6 +108,9 @@
               <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
               <!--end notifications-->
                 <div class="col-auto back-col"><a href="{% url 'barbershop-waitinglist' %}"><i class="fas fa-arrow-circle-left"></i></a></div>
+                <div class="col-auto chart-col col-sm-3 col-md-4 col-lg-4 text-center mt-2 mb-2 ml-3">
+                  <a class="chart" href="{% url 'barbershop-completed'%}"><i class="red fas fa-chart-bar"></i></a>
+              </div>
                 <div class="col-auto heading-col">
                   {% for message in messages %}
                   <div class="row d-flex justify-content-center align-items-center align-content-center">

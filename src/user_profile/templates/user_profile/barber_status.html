@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        {% if title %}
+            <title>Barbershop | {{ title }}</title>
+        {% else %}
+            <title>Barbershop</title>
+        {% endif %}
+        <link rel="icon" type="image/jpeg" sizes="16x16" href="{% static 'barbershop/assets/img/16x16.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="{% static 'barbershop/assets/img/32x32.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="180x180" href="{% static 'barbershop/assets/img/180x180.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="192x192" href="{% static 'barbershop/assets/img/192x192.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="512x512" href="{% static 'barbershop/assets/img/512x512.jpg' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="manifest" href="{% static 'barbershop/manifest.json' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Lightbox-Gallery.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
+        <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script>
+  $( function() {
+    $( "#id_hire_date" ).datepicker();
+  } );
+  </script>
+        
+    </head>
+    <body> 
+    {% block content %}
+   
+    
+
+        <section>
+                <div class="container">
+                    <div class="row d-flex justify-content-center align-items-center align-content-center">
+                            <div class="form col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex justify-content-center align-items-center align-content-center">
+                                    <form action="{% url 'barber_status' barbers.id %}" class="site-form shadow" method="POST">
+                                        {% csrf_token %}
+                                        <h1>Barber Status</h1>
+                                        <H5>Barber: <span class="red font-weight-bold">{{ barbers.barber }}</span></H5>
+                                        <div class="d-none">{{ form.barber }}</div>
+                                        <div class="d-none">{{ form.phone }}</div>
+                                        <div class="d-none">{{ form.license_num }}</div>
+                                        <div class="d-none">{{ form.hire_date }}</div>
+                                        <h5>Available: <input type="checkbox" name="available" {{ checkbox }} data-toggle="toggle" data-on="Yes" data-off="No" id="id_available"></h5>
+                                        <input class="confirm-button" id="my-signup" type="submit" value="Save">
+                                        <a href="{% url 'barberprofile' barbers.id %}" class="confirm-button">Cancel</a>
+                                    </form> 
+                            
+                            </div>
+                            
+                    </div>
+                </div>
+                
+            </section>
+
+            <!-- Footer-->
+        <div class="footer-dark">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                     </div>
+                    <p class="copyright">The Barbershop Kiosk© 2020</p>
+                </div>
+            </footer>
+           
+            </div>
+            
+    {% endblock content %}

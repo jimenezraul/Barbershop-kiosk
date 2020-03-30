@@ -1,6 +1,6 @@
 var auto_refresh = setInterval(
     function ()
     {
-    $(' .client').load(' .client');
+    $(' .clients').load(' .clients');
     }, 3000);
     

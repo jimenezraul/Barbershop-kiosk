@@ -1,0 +1,245 @@
+{% extends 'user_profile/base.html' %}
+{% load static %}
+{% block javascript %}
+<script>
+  $(function () {
+
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#id_file").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function () {
+      $image.cropper({
+        viewMode: 1,
+        aspectRatio: 1/1,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+        ready: function () {
+          $image.cropper("setCanvasData", canvasData);
+          $image.cropper("setCropBoxData", cropBoxData);
+        }
+      });
+    }).on("hidden.bs.modal", function () {
+      cropBoxData = $image.cropper("getCropBoxData");
+      canvasData = $image.cropper("getCanvasData");
+      $image.cropper("destroy");
+    });
+
+    $(".js-zoom-in").click(function () {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function () {
+      $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function () {
+      var cropData = $image.cropper("getData");
+      $("#id_x").val(cropData["x"]);
+      $("#id_y").val(cropData["y"]);
+      $("#id_height").val(cropData["height"]);
+      $("#id_width").val(cropData["width"]);
+      $("#formUpload").submit();
+    });
+
+  });
+</script>
+  <script>
+    $(".fa-camera").click(function () {
+    $("input[type='file']").trigger('click');
+    });
+
+    $('input[type="file"]').on('change', function() {
+    var val = $(this).val();
+    $(this).siblings('span').text(val);
+    })
+</script>
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="container">
+          
+            <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
+                <div class="col-12 col-md-6 heading-col">
+                  <h4 class="text-center text-dark" id="welcome">Hello {{ barbers.barber}}!
+                  </h4>
+                    
+                </div>
+                {% if not barbers.file %}
+                <div class="col-12 text-center pic-col"><i class="red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+                {% else %}
+                <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ barbers.file.url }}" height="200px" width="200px"></div>
+                {% endif %}
+                
+              <script src="{% static 'barbershop/assets/js/notification.js' %}"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+              <!--end notifications-->
+                <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i class="fas fa-arrow-circle-left"></i></a></div>
+                <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
+                <div class="client-noti text-center"><p>{{ completed.count }}</p></div>
+                
+                <div class="col-auto heading-col">
+                  {% for message in messages %}
+                  <div class="row d-flex justify-content-center align-items-center align-content-center">
+                      <div id="mydiv" class="mt-2 col-12 alert alert-danger fade show message text-center" id="success-alert" role="alert">
+                          {{ message }}
+                      </div>
+                  </div>
+                      <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+                      {% endfor %}
+                </div>
+                <form action="{% url 'barberphoto' barbers.id %}" method="post" enctype="multipart/form-data" id="formUpload">
+                    {% csrf_token %}
+                    <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
+                <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
+                  <select name="user" id="id_user">
+                    <option value="{{ barbers.barber }}" selected="">{{ user }}</option>
+                  </select>
+                </div>
+                </form> 
+                
+            </div>
+        </div>
+    </section>
+    <div>
+
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Crop the photo</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="image" style="max-width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span class="glyphicon glyphicon-zoom-in"></span>
+          </button>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span class="glyphicon glyphicon-zoom-out"></span>
+          </button>
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <div class="container-fluid shadow">
+            <div class="row row-2">
+                <div class="col">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row d-flex justify-content-center card-margin">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+                  <div class="card shadow">
+                    <h5 class="card-header">Barber Info</h5>
+                    <div class="card-body">
+                        <h5>Name: <span class='pro-info'>{{ barbers.barber }}</span></h5>
+                        <h5>Phone #: <span class='pro-info'>({{ area_code }}) {{ first_3_number }}-{{ last_4_number }}</span></h5>
+                        <h5>License #: <span class='pro-info'>{{ barbers.license_num }}</span></h5>
+                        {% if barbers.available == False %}
+                        <h5>Available: <span class='pro-info no font-weight-bold'>No</span></h5>
+                        {% else %}
+                        <h5>Available: <span class='pro-info yes font-weight-bold'>Yes</span></h5>
+                        {% endif %}
+                        <h5>Hire Date: <span class='pro-info'>{{ barbers.hire_date }}</span></h5>
+                        <form action="{% url 'barber_status' barbers.id %}">
+                          {% csrf_token %}
+                          <button class="btn btn-primary" type="submit">Update Status</button>
+                        </form>
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-4">
+                  <div class="card shadow">
+                    <div class="col-12 card-header d-flex">
+                      <h5 class="col-4 text-center">Client</h5>
+                      <h5 class="col-4 text-center">Barber</h5>
+                    </div>
+                    <div class="barber-clients">
+                    {% for client in clients %}
+                    <div class="p-2 border-bottom card-body d-flex text-center">
+                        <div class="col-4">
+                          <h5>{{ client.name }}</h5>
+                        </div>
+                        <div class="col-4">
+                          <h5>{{ client.barber }}</h5>
+                        </div>
+                          <div class="col-4">
+                            <form action="{% url 'barbershop-delete2' client.id barbers.id %}">
+                                {% csrf_token %}
+                                <button class="completed-btn red" type="submit"><i
+                                        class="fas fa-check"></i></button>
+                            </form>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>Company Name</h3>
+                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                    </div>
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">The Barbershop Kiosk © 2020</p>
+            </div>
+        </footer>
+    </div>
+
+    
+{% endblock %}

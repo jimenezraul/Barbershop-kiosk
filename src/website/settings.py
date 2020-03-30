@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'photocrop',
     'user_profile',
     'pwa',
+    'phone_field',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,5 @@ PWA_APP_SPLASH_SCREEN = [
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
+
+DATE_INPUT_FORMATS = ['%d-%m-%Y']

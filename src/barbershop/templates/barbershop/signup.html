@@ -77,7 +77,10 @@
                                             <option value="" selected="">Select a Barber</option>
                                             <option value="Any">Any</option>
                                             {% for barber in barberlist %}
+                                                {% if barber.available == True %}
                                                 <option value="{{ barber }}">{{ barber }}</option>
+                                                {% else %}
+                                                {% endif %}
                                             {% endfor %}
                                         </select>
                                         <p>For any available Barber please select Any.</p>

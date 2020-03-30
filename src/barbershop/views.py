@@ -27,6 +27,7 @@ _LOGGER = logging.getLogger()
 @login_required(login_url='register')
 def waitinglist(request):
     photos = Photo.objects.filter(user=request.user)
+    barbers = Barbers.objects.filter(user=request.user)
     if photos.count() == 1:
         photos = photos[0]
         
@@ -77,6 +78,7 @@ def waitinglist(request):
         'title': "BarberView",
         'users': users,
         'photos':photos,
+        "barbers":barbers,
     }
     return render(request, "barbershop/waitinglist.html", context)
 
@@ -234,6 +236,33 @@ def delete_client(request, id):
         instance.delete()
         messages.success(request, f"{form.name} is Completed!")
         return redirect('barbershop-waitinglist')
+    else:
+        form = instance
+        context = {
+            'form': form,
+            'title': 'Delete'
+        }
+        return render(request, 'barbershop/delete.html', context)
+
+@login_required(login_url='register')
+def delete_client2(request, id, barber_id):
+    instance = Client.objects.get(pk=id)
+    barber = Barbers.objects.get(pk=barber_id)
+
+    form = forms.CompletedClients()
+    if request.method == 'POST':
+        form.name = instance.name
+        form.barber = instance.barber
+        form.date = date.today()
+        form.user = instance.user
+        form.completed_by = barber
+        form.save()
+        instance.delete()
+        messages.success(request, f"{form.name} is Completed!")
+        try:
+            return redirect('barberprofile', barber.id)
+        except:
+            return redirect('barbershop-waitinglist')
     else:
         form = instance
         context = {
@@ -478,7 +507,6 @@ def completed(request):
         date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC,user=request.user)
 
     completed_clients = CompletedClients.objects.filter(user=request.user)
-
     if completed_clients.count() > 0:
         completed_clients = CompletedClients.objects.filter(user=request.user,
             date=datetime.now())
@@ -606,3 +634,32 @@ def image_update(request, id):
             form.save()
             messages.success(request, "Your Logo was Updated!")
             return redirect('barbershop-settings')
+
+@login_required(login_url='register')
+def barber_pro_list(request):
+    barbers = Barbers.objects.filter(user=request.user)
+    form = forms.NewBarber()
+    if request.method == 'POST':
+        form = forms.NewBarber(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['barber']
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            messages.success(request, f"{name} was successfully added!")
+            return redirect('barbershop-barberprolist')
+    context = {
+        "barbers":barbers,
+        "form":form,
+    }
+    return render(request, "barbershop/barber_pro_list.html", context)
+
+@login_required(login_url='register')
+def barber_profile(request, id):
+    barbers = Barbers.objects.filter(user=request.user)
+    image = [barber.file for barber in barbers]
+    context = {
+        "barbers":barbers,
+        "image":image,
+    }
+    return render(request, "barbershop/barber_profile.html", context)

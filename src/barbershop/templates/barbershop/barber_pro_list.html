@@ -1,0 +1,144 @@
+{% extends 'barbershop/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Top Banner-->
+    <section>
+        <div class="container">
+            <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
+                <div class="col-12 position-relative">
+                    <div class="col-auto position-absolute arrow text-center">
+                        <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
+                    </div>
+                        <h2 class="text-center text-dark" id="welcome"> Barber Profiles</h2>
+                        
+                        <div class="col-auto log-out position-absolute text-center">
+                            <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
+                        </div>
+
+                        <div class="col-12 heading-col d-flex justify-content-center">
+                            {% for message in messages %}
+                            
+                                <div id="alert-mobile" class="col-10 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
+                                    {{ message }}
+                                </div>
+                            
+                                
+                                {% endfor %}
+                                <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                        </div>
+                </div>
+                
+                  
+            
+            </div>
+        </div>
+    
+    </section>
+    <!--
+    <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 card shadow">
+                        
+    
+            <div class="card-body">
+                    <form class="" method="post">
+                        <div class="row d-flex justify-content-center align-items-center align-content-center">
+                            <div class="col-10">
+                                {% csrf_token %}   
+                                {{ form.barber }}
+                            </div>
+                            <div class="col-2">
+                                <button class="completed-btn red" id="my-update" type="submit"><i class="fas fa-user-plus"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                
+                    
+                    
+            </div>
+            
+                    <script type="text/javascript"
+                            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                            <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                            <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                            <script>
+                                // When the user clicks on div, open the popup
+                                function showFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("show");
+                                $('#btnviewdetails').text('Cancel').button("refresh")
+                                }
+                                function hideFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("hide");
+                                }
+                                </script>
+            </div>
+    </div>
+    -->
+   {% if not barbers%}
+   <div class="container">
+        <div class="row d-flex justify-content-center align-items-center align-content-center vh-80">
+                <div class="col-12 text-center text-white">
+                    <h1>You Don't have any Barber yet.</h1>
+                    <p>Add a Barber in settings.</p>
+                </div>
+        </div>
+   </div>
+   {% else %}
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        {% for barber in barbers %}
+            <div class="col-11 col-sm-10 col-md-6 col-lg-4">
+                    <!-- Card -->
+                <div class="card testimonial-card">
+
+                    <!-- Background color -->
+                    <div class="card-up indigo lighten-1"></div>
+                    
+                
+                    <!-- Avatar -->
+                    {% if not barber.file %}
+                    <div class="avatar d-flex justify-content-center text-center">
+                        <i class="fas fa-user-circle"></i>
+                        </div>
+                    {% else %}
+                    <div class="avatar d-flex justify-content-center">
+                        <img src="/media/{{ barber.file }}" class="rounded-circle"
+                            alt="woman avatar">
+                        </div>
+                    {% endif %}
+                
+                    <!-- Content -->
+                    <div class="card-body">
+                    <!-- Name -->
+                    <h4 class="card-title text-center">{{ barber.barber }}</h4>
+                    <hr>
+                    <!-- Quotation -->
+                    <p>Phone #: {{ barber.phone }}</p>
+                    <p>License #: {{ barber.license_num }}</p>
+                    {% if barber.available == False %}
+                    <p>Available: <span class='pro-info no font-weight-bold'>No</span></p>
+                    {% else %}
+                    <p>Available: <span class='pro-info yes font-weight-bold'>Yes</span></p>
+                    {% endif %}
+                    <p>Hire Date: {{ barber.hire_date }}</p>
+                    <hr>
+                    <div class="col-12 d-flex justify-content-end p-0"> 
+                        <form action="{% url 'barberprofile' barber.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-primary mb-3" type="submit">Go to Profile</button>
+                        </form>
+                    </div>
+                    </div>
+                
+                </div>
+            </div>
+        {% endfor %}
+    </div>  
+</div>
+    {% endif %}
+  <!-- Card --> 
+
+{% endblock content %}

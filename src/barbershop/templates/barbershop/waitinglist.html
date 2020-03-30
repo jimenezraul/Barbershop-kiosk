@@ -9,12 +9,10 @@
             <div class="d-none d-md-flex row justify-content-center align-content-center align-items-center shadow bg-light"
                 id="wait-list">
                 <div class="col-12 col-md-3 d-flex justify-content-center">
-                    <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2 mb-2 ml-3">
-                        <a class="chart" href="{% url 'barbershop-completed'%}"><i class="red fas fa-chart-bar"></i></a>
+                    <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-1 mb-2 ml-3">
+                        <a class="chart" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-id-card"></i></a>
                     </div>
-                    <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-3">
-                        <a href="{% url 'barbershop-settings' %}"><i class="red fas fa-user-cog"></i></a>
-                    </div>
+                    
                     {% if photos.count == 0 %}
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2">
                         <a class="chart" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
@@ -84,10 +82,7 @@
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <div class="col-2 col-sm-3 text-center mt-2 mb-2 ml-3">
-                        <a class="chart" href="{% url 'barbershop-completed'%}"><i class="red fas fa-chart-bar"></i></a>
-                    </div>
-                    <div class="col-2 col-sm-3 text-center mt-3">
-                        <a href="{% url 'barbershop-settings' %}"><i class="red fas fa-user-cog"></i></a>
+                        <a class="chart" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-id-card"></i></a>
                     </div>
                     {% if photos.count == 0 %}
                     <div class="col-2 col-sm-3 text-center mt-2">
@@ -105,31 +100,35 @@
             </div>
         </div>
     </section>
-    <!-- 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-4 d-flex justify-content-center bg-danger mt-3 shadow rounded border border-white">
-            <div class="col-3 text-center mt-2 mb-2">
-                <a class="chart" href="{% url 'barbershop-completed'%}"><i class="fas fa-chart-bar"></i></a>
+    <!--Available Barbers-->
+    <div id="barber-avail">
+    <div class="container">
+        <div class="row d-flex justify-content-center mt-2 bg-light rounded">
+            {% for barber in barbers %}
+                {% if barber.available == True %}
+            <div class="col-2 mt-2 mb-2 text-center p-0">
+                {% if not barber.file %}
+                <i class="barber-avail red fas fa-user-circle pl-1 pr-1"></i>
+                <p class="m-0"><small>{{ barber.barber }}</small></p>
+                {% else %}
+                <img class="rounded-circle" src="/media/{{ barber.file }}" alt="" height="30px" width="30px">
+                <p class="m-0"><small>{{ barber.barber }}</small></p>
+                {% endif %}
             </div>
-            <div class="col-3 text-center mt-2">
-                <a class="edit" href="{% url 'barbershop-update_client' %}"><i class="fas fa-edit"></i></a>
-            </div>
-            <div class="col-3 text-center mt-3">
-                <a href="{% url 'barbershop-settings' %}"><i class="fas fa-user-cog text-white"></i></a>
-            </div>
+            {% endif %}
+                {% endfor %}
         </div>
     </div>
-</div>
---> 
-
+    </div>  
+    <!--End Available Barbers-->
+<div class="clients">
 <div class="container">
 <div class="row">
 
     <!--Grid column-->
     <div class="col-md-12 text-left">
 
-        <div class="card">
+        <div class="card mt-2">
             <div class="card-body p-0">
 
                 <!-- Client table -->
@@ -154,19 +153,16 @@
                                 <th class="font-weight-bold text-center">
                                     <strong>Edit</strong>
                                 </th>
-                                <th class="font-weight-bold text-center">
-                                    <strong>Complete</strong>
-                                </th>
                                 
                             </tr>
                         </thead>
                         <!-- /.Table head -->
 
                         <!-- Table body -->
-                        <tbody class="client">
+                        <tbody >
                             {% for client in clients %}
                             <!-- First row -->
-                            <tr id='client' class="client">
+                            <tr>
                         
                                 <td>
                                     <h5 class="text-center">
@@ -191,13 +187,7 @@
                                                 class="fas fa-pencil-alt"></i></button>
                                     </form>
                                 </td>
-                                <td class="font-weight-bold text-center">
-                                    <form action="{% url 'barbershop-delete' client.id %}">
-                                        {% csrf_token %}
-                                        <button class="completed-btn red" type="submit"><i
-                                                class="fas fa-check"></i></button>
-                                    </form>
-                                </td>
+                                
                             </tr>
                             <!-- /.First row -->
                             {% endfor %}
@@ -242,6 +232,7 @@
     </div>
     <!--Grid column-->
 
+</div>
 </div>
 </div>
     
@@ -349,6 +340,7 @@
 
                     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
                     <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                    <script src="{% static 'barbershop/assets/js/barber-avail.js' %}"></script>
                     <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
                     <script>
                         // When the user clicks on div, open the popup
