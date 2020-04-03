@@ -30,7 +30,7 @@
         
         <div class="row d-flex">
             
-            <div class="col-8 mb-4">
+            <div class="col-9 mb-4">
                 <div class="container">
                     <div class="row">
                     
@@ -222,7 +222,7 @@
                 </div>-->
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
                 {% if logo.count == 0 %}
                 
                 {% else %}
@@ -250,16 +250,39 @@
                         <div class="services">
                             <div class="card-body">
                                 <h4 class="card-title font-b city mt-3 text-g">Men's Haircut</h4>
+                               
                                 {% for service in menservices %}
-                                <p class="font-weight-bold">{{ service.service }} - ${{ service.price }}</p>
+                                <div class="col-12 d-flex p-0 m-0">
+                                <div class="col-8 p-0 ">
+                                    <p class="font-weight-bold">{{ service.service }}</p>
+                                </div>
+                                <div class="col-4 p-0">
+                                    <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
+                                </div>
+                                </div>
                                 {% endfor %}
+                        
                                 <h4 class="card-title font-b city mt-3 text-g">Kid's Haircut</h4>
                                 {% for service in kidservices %}
-                                <p class="">{{ service.service }} - ${{ service.price }}</p>
+                                <div class="col-12 d-flex p-0 m-0">
+                                    <div class="col-8 p-0 ">
+                                        <p class="font-weight-bold">{{ service.service }}</p>
+                                    </div>
+                                    <div class="col-4 p-0">
+                                        <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
+                                    </div>
+                                    </div>
                                 {% endfor %}
                                 <h4 class="card-title font-b city mt-3 text-g">Other Services</h4>
                                 {% for service in otherservices %}
-                                <p class="">{{ service.service }} - ${{ service.price }}</p>
+                                <div class="col-12 d-flex p-0 m-0">
+                                    <div class="col-8 p-0 ">
+                                        <p class="font-weight-bold">{{ service.service }}</p>
+                                    </div>
+                                    <div class="col-4 p-0">
+                                        <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
+                                    </div>
+                                    </div>
                                 {% endfor %}
                                 <p class="d-bottom"></p>
                             </div>
