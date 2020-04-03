@@ -131,7 +131,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
+    '/var/www/html/src/static/',
 ]
 
 MEDIA_ROOT = os.path.join('media')
@@ -143,7 +143,7 @@ PWA_APP_DESCRIPTION = "My Barbershop Kiosk"
 PWA_APP_THEME_COLOR = '#0A0302'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'fullscreen'
-PWA_APP_SCOPE = '/waitinglist/'
+PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'any'
 PWA_APP_START_URL = '/'
 PWA_APP_ICONS = [
