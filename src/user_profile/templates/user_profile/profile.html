@@ -74,7 +74,7 @@
           
             <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
                 <div class="col-12 col-md-6 heading-col">
-                  <h4 class="text-center text-dark" id="welcome">Hello {{ user.first_name}}!
+                  <h4 class="d-none d-sm-block text-center text-dark" id="welcome">Hello {{ user.first_name}}!
                   </h4>
                     
                 </div>
@@ -144,7 +144,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Crop the photo</h4>
+        <h4 class="modal-title">Close</h4>
       </div>
       <div class="modal-body">
         <img src="" id="image" style="max-width: 100%;">
@@ -173,7 +173,7 @@
         </div>
     </div>
     <div>
-        <div class="container">
+        <div class="container min-vh-100">
             <div class="row d-flex justify-content-center card-margin">
                 <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4"><div class="card shadow">
   <h5 class="card-header">Owner Info</h5>
@@ -204,36 +204,7 @@
             </div>
         </div>
     </div>
-    <div class="footer-dark">
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>Services</h3>
-                        <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>About</h3>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 item text">
-                        <h3>Company Name</h3>
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
-                    </div>
-                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
-                </div>
-                <p class="copyright">The Barbershop Kiosk © 2020</p>
-            </div>
-        </footer>
-    </div>
+  
 
     
 {% endblock %}

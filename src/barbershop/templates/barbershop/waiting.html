@@ -30,7 +30,7 @@
         
         <div class="row d-flex">
             
-            <div class="col-9 mb-4">
+            <div class="col-8 mb-4">
                 <div class="container">
                     <div class="row">
                     
@@ -222,11 +222,11 @@
                 </div>-->
             </div>
 
-            <div class="col-3">
+            <div class="col-4">
                 {% if logo.count == 0 %}
                 
                 {% else %}
-                <div class="card shadow">
+                <div class="card border-0">
                     <img class="logo-bg" src="{{ logo.image.url }}" alt="Image">
                 </div>
                 {% endif %}
@@ -251,7 +251,7 @@
                             <div class="card-body">
                                 <h4 class="card-title font-b city mt-3 text-g">Men's Haircut</h4>
                                 {% for service in menservices %}
-                                <p class="">{{ service.service }} - ${{ service.price }}</p>
+                                <p class="font-weight-bold">{{ service.service }} - ${{ service.price }}</p>
                                 {% endfor %}
                                 <h4 class="card-title font-b city mt-3 text-g">Kid's Haircut</h4>
                                 {% for service in kidservices %}

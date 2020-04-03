@@ -1,0 +1,17 @@
+.card:hover {
+  box-shadow: 0 .5rem 2rem rgba(0,0,0,0.4)!important;
+}
+
+a {
+  text-decoration: none!important;
+}
+
+.barber-view {
+  font-size: 190px;
+  margin-top: 20px;
+}
+
+.card-title {
+  padding: 30px;
+}
+

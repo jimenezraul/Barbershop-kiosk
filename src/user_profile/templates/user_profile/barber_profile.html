@@ -73,24 +73,67 @@
         <div class="container">
           
             <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
-                <div class="col-12 col-md-6 heading-col">
+                <div class="d-none d-md-block col-12 col-md-6 heading-col">
                   <h4 class="text-center text-dark" id="welcome">Hello {{ barbers.barber}}!
                   </h4>
                     
                 </div>
                 {% if not barbers.file %}
-                <div class="col-12 text-center pic-col"><i class="red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+                <div class="col-12 text-center pic-col"><i class="icon-red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
                 {% else %}
                 <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ barbers.file.url }}" height="200px" width="200px"></div>
                 {% endif %}
                 
-              <script src="{% static 'barbershop/assets/js/notification.js' %}"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+              
               <!--end notifications-->
                 <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i class="fas fa-arrow-circle-left"></i></a></div>
                 <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
-                <div class="client-noti text-center"><p>{{ completed.count }}</p></div>
+                <div id="myBtn" class="col-auto barber_noti"><i class="far fa-bell"></i></div>
+                {% if anniversary.count == 0 %}
+                 
+                {% endif %}
+                {% for anni in anniversary %}
+                      {%if anni.id == barbers.id %}
+                      
+                      {% else %}
+                      <div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div>
+                      {% endif %}
+                {% endfor %}
+                <!--<div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div> -->
+               
+
+                <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
+                  <div role="menu" class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
+                    <span class="close pr-2">&times;</span>
+                    <h6 class="text-white dropdown-header rounded">Notification Center</h6>
+                    <div class="col-12">
+                      {% if anniversary.count == 0 %}
+                      <p class="text-center mt-2">No Notification</p>
+                      {% endif %}
+                      {% if anniversary != 0 %} 
+                      {% for anni in anniversary %}
+                      {%if anni.id == barbers.id %}
+                      {% else %}
+                      <div class="d-flex justify-content-center align-content-center align-items-center">
+                        <div class="col-2 text-center p-0 beer">🍾</div>
+                    
+                      <div class="col-10 mt-2 border-bottom">
+                      <p class="text-center font-weight-bold m-0 ">🥳Congratulate {{ anni.barber }} for another year at the BarberShop!💈</p>
+                      <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>🎉Celebrating 🎈{{ anni.years_in_shop }} years today!🎉</small></p>
+                      </div>
+                    </div>
+                      {% endif %}
+                      {% endfor %}
+                      {% endif %}
+                    </div></div>
+                </div>
+                
+                {% if completed.count == 0 %}
+                <div><p></p></div>
+                {% else %}
+                <div class="client-noti text-center"><p>{{ completed.count }}</p></div> 
+                {% endif %}
+                
                 
                 <div class="col-auto heading-col">
                   {% for message in messages %}
@@ -99,12 +142,11 @@
                           {{ message }}
                       </div>
                   </div>
-                      <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+                      
                       {% endfor %}
                 </div>
                 <form action="{% url 'barberphoto' barbers.id %}" method="post" enctype="multipart/form-data" id="formUpload">
                     {% csrf_token %}
-                    <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
                 <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
                   <select name="user" id="id_user">
                     <option value="{{ barbers.barber }}" selected="">{{ user }}</option>
@@ -125,7 +167,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Crop the photo</h4>
+        <h4 class="modal-title">Close</h4>
       </div>
       <div class="modal-body">
         <img src="" id="image" style="max-width: 100%;">
@@ -153,22 +195,34 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="min-vh-100">
         <div class="container">
             <div class="row d-flex justify-content-center card-margin">
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4">
                   <div class="card shadow">
                     <h5 class="card-header">Barber Info</h5>
                     <div class="card-body">
+                      
+                      {% if hire.day == todays_date.day and hire.month == todays_date.month %}
+                      <div class="aniversary p-2 rounded text-light mb-3">
+                      <h4 class="text-center">{{ happy_hire_day }}</h4>
+                      <p class="text-center mb-2"><small>{{ happy_hire_greeting }}</small></p>
+                    </div>
+                    {% endif %}
                         <h5>Name: <span class='pro-info'>{{ barbers.barber }}</span></h5>
-                        <h5>Phone #: <span class='pro-info'>({{ area_code }}) {{ first_3_number }}-{{ last_4_number }}</span></h5>
-                        <h5>License #: <span class='pro-info'>{{ barbers.license_num }}</span></h5>
                         {% if barbers.available == False %}
                         <h5>Available: <span class='pro-info no font-weight-bold'>No</span></h5>
                         {% else %}
                         <h5>Available: <span class='pro-info yes font-weight-bold'>Yes</span></h5>
                         {% endif %}
+                        <h5>Phone #: <span class='pro-info'>({{ area_code }}) {{ first_3_number }}-{{ last_4_number }}</span></h5>
+                        <h5>License #: <span class='pro-info'>{{ barbers.license_num }}</span></h5>
                         <h5>Hire Date: <span class='pro-info'>{{ barbers.hire_date }}</span></h5>
+                        {% if not years_in_shop %}
+                        <h5>Years in the Shop: <span class='pro-info'>0 Years</span></h5>
+                        {% else %}
+                        <h5>Years in the Shop: <span class='pro-info'>{{ years_in_shop }} Years</span></h5>
+                        {% endif %}
                         <form action="{% url 'barber_status' barbers.id %}">
                           {% csrf_token %}
                           <button class="btn btn-primary" type="submit">Update Status</button>
@@ -210,36 +264,7 @@
             </div>
         </div>
     </div>
-    <div class="footer-dark">
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>Services</h3>
-                        <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 col-md-3 item">
-                        <h3>About</h3>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 item text">
-                        <h3>Company Name</h3>
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
-                    </div>
-                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
-                </div>
-                <p class="copyright">The Barbershop Kiosk © 2020</p>
-            </div>
-        </footer>
-    </div>
+    
 
     
 {% endblock %}

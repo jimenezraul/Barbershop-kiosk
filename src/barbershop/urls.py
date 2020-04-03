@@ -4,9 +4,10 @@ from django.conf.urls import url, include
 
 
 urlpatterns = [
+    path('', views.home_page, name='barbershop-home'),
     path('waitinglist/', views.waitinglist, name='barbershop-waitinglist'),
     path('waiting/', views.waiting, name='barbershop-waiting'),
-    path('', views.signup, name='barbershop-signup'),
+    path('signup/', views.signup, name='barbershop-signup'),
     path('<id>/delete/<barber_id>', views.delete_client2, name='barbershop-delete2'),
     path('<id>/delete/', views.delete_client, name='barbershop-delete'),
     path('<id>/update', views.update, name='barbershop-update'),

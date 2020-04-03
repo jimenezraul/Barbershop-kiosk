@@ -10,7 +10,8 @@ from django.contrib import messages
 from .forms import UserUpdateForm
 from barbershop.forms import NewBarber, BarberPhoto
 from django.db.models import Q
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
+import json
 
 
 
@@ -95,6 +96,29 @@ def update_user_info(request, id):
 @login_required(login_url='register')
 def barber_profile(request, id):
     barber = Barbers.objects.get(pk=id)
+    today_month = datetime.now().date()
+    anniversary = Barbers.objects.filter(user=request.user, hire_date__month=datetime.now().date().month,
+                                        hire_date__day=datetime.now().date().day,).exclude(barber=barber)
+    # anniversary_reminder = today_month - timedelta(days=-7)  <-- reminder a week before
+    if not barber.hire_date:
+        hire = 0
+        years = 0
+        happy_hire_day = ""
+        happy_hire_greeting = ""
+        hire = barber.hire_date
+        todays_date = datetime.now().date()
+        years_in_shop = ''
+    else:
+        hire = barber.hire_date
+        todays_date = datetime.now().date()
+        years_in_shop = barber.years_in_shop()
+        if hire.day == todays_date.day and hire.month == todays_date.month:
+            happy_hire_day = f"🎂 Congratulations! 🎂"
+            happy_hire_greeting = f'🥳 Today you turn {years_in_shop} years in the 💈shop.'
+        else:
+            happy_hire_day = ""
+            happy_hire_greeting = ""
+            
     photoform = BarberPhoto()
     clients = Client.objects.filter(Q(user=request.user))
     clients = clients.filter(Q(barber=barber) | Q(barber='Any'))
@@ -114,6 +138,8 @@ def barber_profile(request, id):
     else:
         checkbox = "checked"
     context = {
+        "hire":hire,
+        "todays_date": todays_date,
         "barbers":barber,
         "photoform":photoform,
         "clients":clients,
@@ -123,6 +149,11 @@ def barber_profile(request, id):
         "area_code": area_code,
         "first_3_number":first_3_number,
         "last_4_number":last_4_number,
+        "years_in_shop": years_in_shop,
+        "happy_hire_day": happy_hire_day,
+        'happy_hire_greeting':happy_hire_greeting,
+        "anniversary":anniversary,
+        "title":"Barber Profile"
     }
     return render(request, "user_profile/barber_profile.html", context)
 

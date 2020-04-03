@@ -654,12 +654,7 @@ def barber_pro_list(request):
     }
     return render(request, "barbershop/barber_pro_list.html", context)
 
+
 @login_required(login_url='register')
-def barber_profile(request, id):
-    barbers = Barbers.objects.filter(user=request.user)
-    image = [barber.file for barber in barbers]
-    context = {
-        "barbers":barbers,
-        "image":image,
-    }
-    return render(request, "barbershop/barber_profile.html", context)
+def home_page(request):
+    return render(request, "barbershop/home.html")

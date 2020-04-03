@@ -9,7 +9,7 @@
                     <div class="col-auto position-absolute arrow text-center">
                         <a href="{% url 'barbershop-waitinglist' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
                     </div>
-                        <h2 class="text-center text-dark" id="welcome"> Barber Profiles</h2>
+                        <h2 class="text-center text-dark" id="welcome">Profiles</h2>
                         
                         <div class="col-auto log-out position-absolute text-center">
                             <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
@@ -87,7 +87,7 @@
         </div>
    </div>
    {% else %}
-<div class="container">
+<div class="container min-vh-100">
     <div class="row d-flex justify-content-center">
         {% for barber in barbers %}
             <div class="col-11 col-sm-10 col-md-6 col-lg-4">
@@ -116,14 +116,18 @@
                     <h4 class="card-title text-center">{{ barber.barber }}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p>Phone #: {{ barber.phone }}</p>
+                    {% if not barber.phone %}
+                    <p>Phone #: (000) 000-0000</p>
+                    {% else %}
+                    <p>Phone #: ({{ barber.phone.0}}{{ barber.phone.1}}{{ barber.phone.2}}) {{ barber.phone.3}}{{ barber.phone.4}}{{ barber.phone.5}}-{{ barber.phone.6}}{{ barber.phone.7}}{{ barber.phone.8}}{{ barber.phone.9}}</p>
+                    {% endif %}
                     <p>License #: {{ barber.license_num }}</p>
+                    <p>Hire Date: {{ barber.hire_date }}</p>
                     {% if barber.available == False %}
                     <p>Available: <span class='pro-info no font-weight-bold'>No</span></p>
                     {% else %}
                     <p>Available: <span class='pro-info yes font-weight-bold'>Yes</span></p>
                     {% endif %}
-                    <p>Hire Date: {{ barber.hire_date }}</p>
                     <hr>
                     <div class="col-12 d-flex justify-content-end p-0"> 
                         <form action="{% url 'barberprofile' barber.id %}" method="POST">

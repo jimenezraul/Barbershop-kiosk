@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.conf import settings
 from phone_field import PhoneField
+from datetime import datetime, date, timedelta
 
 class Client(models.Model):
     
@@ -26,6 +27,11 @@ class Barbers(models.Model):
 
     def __str__(self):
         return self.barber
+
+    def years_in_shop(self):
+        hire = self.hire_date
+        todays_date = datetime.now().date()
+        return todays_date.year - hire.year - ((todays_date.month, todays_date.day) < (hire.month, hire.day))
 
 class ZipCode(models.Model):
     zip_code = models.CharField(max_length=5, default=10001)

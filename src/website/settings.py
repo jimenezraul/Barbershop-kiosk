@@ -1,3 +1,4 @@
+
 """
 Django settings for website project.
 
@@ -135,6 +136,7 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join('media')
 MEDIA_URL = '/media/'
+
 
 PWA_APP_NAME = 'Barbershop'
 PWA_APP_DESCRIPTION = "My Barbershop Kiosk"

@@ -277,7 +277,8 @@ label{
 }
 #id_name, #id_barber, #id_zip_code, 
 #id_first_name, #id_last_name, 
-#id_email, #id_barbershop,#id_hire_date,#id_phone,#id_license_num{
+#id_email, #id_barbershop,#id_hire_date,#id_phone,#id_license_num,#id_street,
+#id_city,#id_state{
   display:block;
   width:80%;
   font-weight: 500;
@@ -287,7 +288,7 @@ label{
   padding: 7px;
   text-indent: 15px;
   height: 42px;
- 
+  opacity: .4;
 }
 .sign-up-button{
   display:block;
@@ -330,7 +331,7 @@ h3{
   min-height: 20px;
 }
 .list-table{
-  min-height: 100vh;
+  min-height: 86vh;
 }
 .div-border{
   border-bottom: 1px solid black;
@@ -654,13 +655,13 @@ margin-top: 20px;
   display:block;
   width:95%;
   font-weight: 500;
-  margin: 20px auto;
-  padding: 7px;
+  margin: 10px auto;
+  padding: 5px;
   border-radius: 5px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #777676;
   text-indent: 15px;
   height: 42px;
-  
+  opacity: .4;
 }
 
 .services, .weather-link{
@@ -678,9 +679,7 @@ margin-top: 20px;
 
 .logo-bg{
   border-radius: 5px;
-  background-color: #495c85
-  ;
-  border: 2px solid white;
+  background-color: #495c85;
   width: 100%;
 }
 
@@ -817,5 +816,5 @@ margin-top: 20px;
 }
 
 .barber-avail{
-  font-size: 28px;
+  font-size: 29px;
 }

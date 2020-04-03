@@ -1,57 +1,7 @@
+{% extends 'barbershop/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        {% if title %}
-            <title>Barbershop | {{ title }}</title>
-        {% else %}
-            <title>Barbershop</title>
-        {% endif %}
-        <link rel="icon" type="image/jpeg" sizes="16x16" href="{% static 'barbershop/assets/img/16x16.jpg' %}">
-        <link rel="icon" type="image/jpeg" sizes="32x32" href="{% static 'barbershop/assets/img/32x32.jpg' %}">
-        <link rel="icon" type="image/jpeg" sizes="180x180" href="{% static 'barbershop/assets/img/180x180.jpg' %}">
-        <link rel="icon" type="image/jpeg" sizes="192x192" href="{% static 'barbershop/assets/img/192x192.jpg' %}">
-        <link rel="icon" type="image/jpeg" sizes="512x512" href="{% static 'barbershop/assets/img/512x512.jpg' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/bootstrap/css/bootstrap.min.css' %}">
-        <link rel="manifest" href="{% static 'barbershop/manifest.json' %}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/fontawesome-all.min.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Lightbox-Gallery.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
-        <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
-        <link rel="stylesheet" href="{% static 'user_profile/assets/css/styles.css' %}">
-        <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
-    
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132458520-1"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'UA-132458520-1');
-        </script>
-    </head>
-    <body> 
-    {% block content %}
-   
-    
-
-        <section>
+{% block content %}
+<section>
                 <div class="container">
                     <div class="row d-flex justify-content-center align-items-center align-content-center">
                             <div class="form col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex justify-content-center align-items-center align-content-center">
@@ -70,18 +20,4 @@
                 </div>
                 
             </section>
-
-            <!-- Footer-->
-        <div class="footer-dark">
-            <footer>
-                <div class="container">
-                    <div class="row">
-                     </div>
-                    <p class="copyright">The Barbershop Kiosk© 2020</p>
-                </div>
-            </footer>
-           
-            </div>
-            
-            
-    {% endblock content %}
+{% endblock content %}

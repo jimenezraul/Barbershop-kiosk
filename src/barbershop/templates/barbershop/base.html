@@ -19,6 +19,7 @@
         <link rel="icon" type="image/jpeg" sizes="192x192" href="{% static 'barbershop/assets/img/192x192.jpg' %}">
         <link rel="icon" type="image/jpeg" sizes="512x512" href="{% static 'barbershop/assets/img/512x512.jpg' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="manifest" href="{% static 'barbershop/manifest.json' %}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
@@ -35,6 +36,15 @@
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
         <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script   src="https://code.jquery.com/jquery-3.4.1.js"   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+        $( function() {
+            $( "#id_hire_date" ).datepicker();
+        } );
+        </script>
     </head>
     <body>
         {% block content %}{% endblock %}
@@ -51,6 +61,26 @@
            
             </div>
             
+            
+                    <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                    <script src="{% static 'barbershop/assets/js/barber-avail.js' %}"></script>
+                    <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                    <script>
+                        // When the user clicks on div, open the popup
+                        function showFunction() {
+                            var popup = document.getElementById("myPopup");
+                            popup.classList.toggle("show");
+                            $('#btnviewdetails').text('Cancel').button("refresh")
+                        }
+                        function hideFunction() {
+                            var popup = document.getElementById("myPopup");
+                            popup.classList.toggle("hide");
+                        }
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+                    <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+                    <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
 
