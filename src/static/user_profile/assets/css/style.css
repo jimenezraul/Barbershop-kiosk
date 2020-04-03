@@ -372,7 +372,6 @@ select, label, input{
 }
 
 .close {
-  color: #969696;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -403,8 +402,8 @@ select, label, input{
   border-radius: 50%;
 }
 
-.beer{
-  font-size: 50px;
+.beer img{
+  width: 100%;
 }
 .gradient{
   background: linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237), rgb(246, 79, 89));
