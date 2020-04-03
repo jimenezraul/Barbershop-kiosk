@@ -196,21 +196,27 @@ def waiting(request):
 @login_required(login_url='register')
 def signup(request):
     logo = LogoImage.objects.filter(user=request.user)
-
+    client = Client.objects.filter(user=request.user)
     if logo.count() == 1:
         logo = logo[0]
     else:
         logo = None
 
     barberlist = Barbers.objects.filter(user=request.user)
+    
     if request.method == 'POST':
-        form = forms.CreateClient(request.POST,request.user)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            messages.success(request, "You has been added to the list. Thank You!")
-            return redirect('barbershop-signup')
+        if str(request.user) == "Demo":
+            if client.count() == 5:
+                messages.success(request, "You have reached the Client's limit of the Demo Account")
+                return redirect('barbershop-signup')
+        else:
+            form = forms.CreateClient(request.POST,request.user)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.user = request.user
+                instance.save()
+                messages.success(request, "You has been added to the list. Thank You!")
+                return redirect('barbershop-signup')
     else:
         form = forms.CreateClient()
         context = {
@@ -308,53 +314,6 @@ def update_client(request):
 
 @login_required(login_url='register')
 def settings(request):
-    this_year = date.today().year
-    last_year = this_year - 1
-
-    JAN = 1
-    FEB = 2
-    MAR = 3
-    APR = 4
-    MAY = 5
-    JUN = 6
-    JUL = 7
-    AUG = 8
-    SEP = 9
-    OCT = 10
-    NOV = 11
-    DIC = 12
-
-    JAN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JAN, date__year__lte=this_year, date__month__lte=JAN,user=request.user)
-    FEB = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=FEB, date__year__lte=this_year, date__month__lte=FEB,user=request.user)
-    MAR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAR, date__year__lte=this_year, date__month__lte=MAR,user=request.user)
-    APR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=APR, date__year__lte=this_year, date__month__lte=APR,user=request.user)
-    MAY = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAY, date__year__lte=this_year, date__month__lte=MAY,user=request.user)
-    JUN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUN, date__year__lte=this_year, date__month__lte=JUN,user=request.user)
-    JUL = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUL, date__year__lte=this_year, date__month__lte=JUL,user=request.user)
-    AUG = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=AUG, date__year__lte=this_year, date__month__lte=AUG,user=request.user)
-    SEP = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=SEP, date__year__lte=this_year, date__month__lte=SEP,user=request.user)
-    OCT = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=OCT, date__year__lte=this_year, date__month__lte=OCT,user=request.user)
-    NOV = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=NOV, date__year__lte=this_year, date__month__lte=NOV,user=request.user)
-    DIC = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC,user=request.user)
-
-    completed_clients = CompletedClients.objects.all()
-
-    if completed_clients.count() > 0:
-        completed_clients = CompletedClients.objects.filter(
-            date=datetime.now())
-
     # Database objects
     barbers = Barbers.objects.filter(user=request.user)
     zip_code = ZipCode.objects.filter(user=request.user)
@@ -363,6 +322,7 @@ def settings(request):
     otherservices = OtherServices.objects.filter(user=request.user)
     logo = LogoImage.objects.filter(user=request.user)
     photos = Photo.objects.filter(user=request.user)
+    client = Client.objects.filter(user=request.user)
     if photos.count() == 1:
         photos = photos[0]
     # Forms
@@ -371,7 +331,6 @@ def settings(request):
     other_form = forms2.OtherServiceForm()
     form = forms.NewBarber()
     add_zip = forms.ZipCodes()
-
     if zip_code.count() > 0:
         zip_form = forms.ZipCodes(instance=zip_code[0])
     else:
@@ -381,16 +340,20 @@ def settings(request):
         upload_image = forms.ImageUploadForm(instance=logo[0])
     else:
         upload_image = forms.ImageUploadForm()
-
     if request.method == 'POST':
-        form = forms.NewBarber(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['barber']
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            messages.success(request, f"{name} was successfully added!")
-            return redirect('barbershop-settings')
+        if str(request.user) == "Demo":
+            if barbers.count() == 5:
+                messages.success(request, "You have reached the Barber's limit of the Demo Account")
+                return redirect('barbershop-settings')
+            else:
+                form = forms.NewBarber(request.POST)
+                if form.is_valid():
+                    name = form.cleaned_data['barber']
+                    instance = form.save(commit=False)
+                    instance.user = request.user
+                    instance.save()
+                    messages.success(request, f"{name} was successfully added!")
+                    return redirect('barbershop-settings')
 
     context = {
         # forms
@@ -409,19 +372,6 @@ def settings(request):
         'barbers': barbers,
         'logo': logo,
         'title': 'Settings',
-        'JAN': JAN,
-        'FEB': FEB,
-        'MAR': MAR,
-        'APR': APR,
-        'MAY': MAY,
-        'JUN': JUN,
-        'JUL': JUL,
-        'AUG': AUG,
-        'SEP': SEP,
-        'OCT': OCT,
-        'NOV': NOV,
-        'DIC': DIC,
-        'todays_year': this_year,
         'photos':photos,
     }
 

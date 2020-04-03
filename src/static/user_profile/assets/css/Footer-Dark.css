@@ -1,8 +1,7 @@
 .footer-dark {
   padding: 50px 0;
-  color: #091e2c;
-  background-color: #ebecf2;
-  border-top: 2px solid #dc3546;
+  color: #f0f9ff;
+  background-color: #3b4a6b;
 }
 
 .footer-dark h3 {
@@ -71,28 +70,82 @@
   display: inline-block;
   text-align: center;
   border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.4);
   margin: 0 8px;
-  background-color: #495c85;
-  color: white;
+  color: #fff;
+  opacity: 0.75;
 }
 
 .footer-dark .item.social > a:hover {
-  background-color: #dc3546;
+  opacity: 0.9;
 }
 
 .footer-dark .copyright {
   text-align: center;
   padding-top: 24px;
-  opacity: 0.3;
+  opacity: 0.8;
   font-size: 13px;
   margin-bottom: 0;
 }
 
-.color-bg {
-  margin-top: -85px;
-  background-color: rgba(255,255,255,0.11);
-  height: 200px;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
+.fa-map-marker-alt {
+  font-size: x-large;
+}
+
+.footer-p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer-dark .fa-star {
+  padding-left: 4px;
+  color: rgb(246,249,94);
+}
+
+#table {
+  width: 95%;
+  margin: 0;
+  padding: 0;
+}
+
+.text-left.title-left {
+  padding: 12px;
+  padding-left: 0;
+  font-size: 30px;
+  border-top: 0;
+}
+
+.text-right.title-right {
+  padding-right: 0px;
+  font-size: 25px;
+  border-top: 0;
+}
+
+.text-left.left-cell {
+  padding-left: 0px;
+  font-size: 20px;
+}
+
+.text-right.right-cell {
+  padding-right: 1px;
+  font-size: 20px;
+}
+
+.text-white.setmore {
+  padding-top: 15px;
+}
+
+.embed-responsive.embed-responsive-1by1 {
+  height: 60rem;
+}
+
+.container {
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+.logo-face {
+  width: 60px;
+  display: none;
 }
 

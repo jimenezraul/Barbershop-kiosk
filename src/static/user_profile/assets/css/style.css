@@ -409,3 +409,10 @@ select, label, input{
 .gradient{
   background: linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237), rgb(246, 79, 89));
 }
+
+.profile-icon{
+  color: #dc3545;
+  background-color: #ffffff;
+  font-size: 200px;
+  border-radius: 50%;
+}
