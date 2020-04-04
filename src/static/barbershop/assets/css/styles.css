@@ -288,7 +288,7 @@ label{
   padding: 7px;
   text-indent: 15px;
   height: 42px;
-  opacity: .4;
+  opacity: .8;
 }
 .sign-up-button{
   display:block;
@@ -658,7 +658,7 @@ margin-top: 20px;
   border: 1px solid #777676;
   text-indent: 15px;
   height: 42px;
-  opacity: .4;
+  opacity: .8;
 }
 
 .services, .weather-link{
@@ -813,4 +813,8 @@ margin-top: 20px;
 
 .barber-avail{
   font-size: 29px;
+}
+
+.vh-auto{
+  height: 100vh;
 }

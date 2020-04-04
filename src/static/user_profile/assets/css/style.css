@@ -136,7 +136,7 @@ body {
   font-size: x-small;
   position: absolute;
   top: 10px;
-  right: 28px;
+  right: 68px;
 }
 
 .barber-notif p {
@@ -166,7 +166,7 @@ select, label, input{
   padding: 7px;
   text-indent: 15px;
   height: 42px;
-  opacity: .4;
+  opacity: .8;
 }
 .red{
   color: #dc3545;
@@ -407,4 +407,8 @@ select, label, input{
   background-color: #ffffff;
   font-size: 200px;
   border-radius: 50%;
+}
+
+.vh-auto{
+  height: 100vh;
 }
