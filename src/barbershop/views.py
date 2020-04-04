@@ -231,7 +231,6 @@ def signup(request):
 @login_required(login_url='register')
 def delete_client(request, id):
     instance = Client.objects.get(pk=id)
-
     form = forms.CompletedClients()
     if request.method == 'POST':
         form.name = instance.name

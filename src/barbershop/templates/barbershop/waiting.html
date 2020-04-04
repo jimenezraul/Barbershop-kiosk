@@ -25,19 +25,19 @@
 
     
 <section class="list-table">
-        
     <div class="container">
         
         <div class="row d-flex">
             
             <div class="col-9 mb-4">
-                <div class="container">
+                <div class="clients list-table">
+                    <div class="container">
                     <div class="row">
                     
                         <!--Grid column-->
                         <div class="col-md-12 text-left">
                     
-                            <div class="card">
+                            <div class="card mt-2">
                                 <div class="card-body p-0">
                     
                                     <!-- Client table -->
@@ -65,10 +65,10 @@
                                             <!-- /.Table head -->
                     
                                             <!-- Table body -->
-                                            <tbody class="client">
+                                            <tbody >
                                                 {% for client in clients %}
                                                 <!-- First row -->
-                                                <tr id='client' class="client">
+                                                <tr>
                                             
                                                     <td>
                                                         <h5 class="text-center">
@@ -86,44 +86,41 @@
                                                             <strong>{{ client.date }}</strong>
                                                         </p>
                                                     </td>
+                                                    
                                                 </tr>
                                                 <!-- /.First row -->
                                                 {% endfor %}
                                             </tbody>
                                             <!-- /.Table body -->
-                                            <script type="text/javascript"
-                                            src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-                                            <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
-                                            <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
                                             
                                         </table>
                                         <div class="container">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-6 d-flex justify-content-center">
-                                                    {% if users.has_other_pages %}
-                                                        <ul class="pagination mt-3">
-                                                            {% if users.has_previous %}
-                                                                <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
-                                                            {% else %}
-                                                                <li class="disabled"><a class="page-link">&laquo;</a></li>
-                                                            {% endif %}
-                                                            {% for i in users.paginator.page_range %}
-                                                            {% if users.number == i %}
-                                                                <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></a></span></li>
-                                                            {% else %}
-                                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                                                            {% endif %}
-                                                            {% endfor %}
-                                                            {% if users.has_next %}
-                                                                <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
-                                                            {% else %}
-                                                                <li class="disabled"><a class="page-link">&raquo;</a></li>
-                                                            {% endif %}
-                                                        </ul>
-                                                    {% endif %}
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-6 d-flex justify-content-center">
+                                                        {% if users.has_other_pages %}
+                                                            <ul class="pagination mt-3">
+                                                                {% if users.has_previous %}
+                                                                    <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                                                                {% else %}
+                                                                    <li class="disabled"><a class="page-link">&laquo;</a></li>
+                                                                {% endif %}
+                                                                {% for i in users.paginator.page_range %}
+                                                                {% if users.number == i %}
+                                                                    <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></a></span></li>
+                                                                {% else %}
+                                                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% if users.has_next %}
+                                                                    <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                                                                {% else %}
+                                                                    <li class="disabled"><a class="page-link">&raquo;</a></li>
+                                                                {% endif %}
+                                                            </ul>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div> 
+                                            </div> 
                                     </div>
                                     <!-- /.Shopping Cart table -->
                     
@@ -134,6 +131,7 @@
                         </div>
                         <!--Grid column-->
                     
+                    </div>
                     </div>
                     </div>
 
@@ -320,5 +318,6 @@
                 
         </div>
     </div>
+
 </section>          
 {% endblock content %}

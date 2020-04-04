@@ -255,6 +255,7 @@ a {
   color: white;
 }
 .site-form{
+  position: relative;
   display:block;
   border:1px solid rgb(160, 159, 159);
   max-width: 450px;
@@ -719,8 +720,9 @@ margin-top: 20px;
 
 .heading-col{
   position: absolute;
-  top: 2px;
+  top: 30px;
   left: 1px;
+  z-index: 1;
 }
 
 .bg-grey{

@@ -34,43 +34,16 @@
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
         <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
         <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
-    
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132458520-1"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'UA-132458520-1');
-        </script>
     </head>
     <body> 
-            
-        <section>
-            <div class="container">
-                <div class="row d-flex justify-content-center align-content-center">
-                    <div class="col-3 col-sm-4 col-md-3 col-lg-2 col-xl-2" id="logo"><img src="" /></div>
-                </div>
-            </div>
-        </section>
     {% block content %}
    
     
 
         <section>
                 <div class="container">
-                        {% for message in messages %}
-                    <div class="row d-flex justify-content-center align-items-center align-content-center">
-                        <div id="mydiv" class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
-                            {{ message }}
-                        </div>
-                    </div>
-                        <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                        {% endfor %}
-                    <div class="row d-flex justify-content-center align-items-center align-content-center">
+                        
+                    <div class="vh-100  row d-flex justify-content-center align-items-center align-content-center">
                             <div class="col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex justify-content-center align-items-center align-content-center">
                                     <form class="site-form shadow" method="post">
                                         {% csrf_token %}
@@ -90,3 +63,6 @@
             
             
     {% endblock content %}
+
+    </body>
+</html>
