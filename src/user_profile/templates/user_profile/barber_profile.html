@@ -96,7 +96,7 @@
                       {%if anni.id == barbers.id %}
                       
                       {% else %}
-                      <div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div>
+                      <span class="barber-count-noti badge badge-light">{{anniversary.count}}</span>
                       {% endif %}
                 {% endfor %}
                 <!--<div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div> -->
@@ -131,7 +131,7 @@
                 {% if completed.count == 0 %}
                 <div><p></p></div>
                 {% else %}
-                <div class="client-noti text-center"><p>{{ completed.count }}</p></div> 
+                <span class="client-noti badge badge-light">{{ completed.count }}</span>
                 {% endif %}
                 
                 

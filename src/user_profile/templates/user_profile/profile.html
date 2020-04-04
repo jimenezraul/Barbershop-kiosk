@@ -99,8 +99,7 @@
                 {% if clients.count == 0 %}
         
                 {% else %}
-                
-                  <div class="col-2 text-center barber-notif"><p>{{ clients.count }}</p></div>
+                  <span class="barber-notif badge badge-light">{{ clients.count }}</span>
                 {% endif %}
               </div>
               <script src="{% static 'barbershop/assets/js/notification.js' %}"></script>
