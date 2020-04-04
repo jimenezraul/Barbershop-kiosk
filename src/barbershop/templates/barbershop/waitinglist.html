@@ -10,12 +10,12 @@
                 id="wait-list">
                 <div class="col-12 col-md-3 d-flex justify-content-center">
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-1 mb-2 ml-3">
-                        <a class="chart" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-id-card"></i></a>
+                        <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-users"></i></a>
                     </div>
                     
                     {% if photos.count == 0 %}
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2">
-                        <a class="chart" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
+                        <a class="barbers-profiles" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
                     </div>
                     {% else %}
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2">
@@ -76,12 +76,12 @@
                     <p class="timename d-block d-md-none">{{ time_display }}</p>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
-                    <div class="col-2 col-sm-3 text-center mt-2 mb-2 ml-3">
-                        <a class="chart" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-id-card"></i></a>
+                    <div class="col-2 col-sm-3 text-center mt-1 mb-2 ml-3">
+                        <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-users"></i></a>
                     </div>
                     {% if photos.count == 0 %}
-                    <div class="col-2 col-sm-3 text-center mt-2">
-                        <a class="chart" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
+                    <div class="col-2 col-sm-3 text-center mt-1">
+                        <a class="barbers-profiles" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
                     </div>
                     {% else %}
                     <div class="col-2 col-sm-3 col-md-4 col-lg-4 text-center mt-2">

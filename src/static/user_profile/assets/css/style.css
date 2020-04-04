@@ -88,6 +88,8 @@ body {
   font-size: smaller;
   position: absolute;
   right: 15px;
+  border-radius: 25px;
+  border: 1px solid white;
 }
 
 .card-header {
@@ -97,26 +99,17 @@ body {
   background: #dc3545;
 }
 
-.btn.btn-primary {
-  background: #2e335f;
-  border-radius: 25px;
-  border: 1px solid white;
-}
 
-.btn.btn-primary:hover {
-  background: #ac2936;
-}
-
-.barber-icon-col {
+.bell-icon-col {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 60px;
 }
 .settings-icon-col {
   font-size: 28px;
   position: absolute;
-  top: 14px;
-  right: 60px;
+  top: 15px;
+  right: 20px;
 }
 
 .barber-icon:hover {

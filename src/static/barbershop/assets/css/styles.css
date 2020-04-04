@@ -621,12 +621,9 @@ margin-top: 20px;
   padding: 20px;
   border-radius: 5px;
 }
-.chart{
+.barbers-profiles{
   color: #ffffff;
   font-size: 32px;
-}
-.chart:hover{
-  color: #ffffff;
 }
 .red{
   color: #dc3545;
