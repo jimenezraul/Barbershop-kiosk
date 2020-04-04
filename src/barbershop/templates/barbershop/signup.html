@@ -59,7 +59,7 @@
                                 <div class="col-12 heading-col d-flex justify-content-center">
                                     {% for message in messages %}
                                     
-                                        <div id="alert-mobile" class="col-10 alert alert-danger fade show message text-center" id="success-alert" role="alert">
+                                        <div id="alert-mobile" class="mt-2 col-10 alert alert-{{message.tags}} fade show message text-center" id="success-alert" role="alert">
                                             {{ message }}
                                         </div>
                                     
