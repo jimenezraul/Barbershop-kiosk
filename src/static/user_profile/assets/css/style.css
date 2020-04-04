@@ -84,11 +84,13 @@ body {
   font-size: 17px;
 }
 
-.btn.btn-primary {
-  font-size: smaller;
+.btn-border{
   position: absolute;
   right: 15px;
   border-radius: 25px;
+  border: 1px solid white;
+}
+.btn-border:hover{
   border: 1px solid white;
 }
 
@@ -161,7 +163,7 @@ select, label, input{
   padding: 7px;
   text-indent: 15px;
   height: 42px;
-  opacity: .8;
+  opacity: .6;
 }
 .red{
   color: #dc3545;

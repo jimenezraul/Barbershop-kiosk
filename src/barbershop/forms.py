@@ -17,7 +17,7 @@ class CreateClient(forms.ModelForm):
         fields = ["name","barber"]
 
     name = forms.CharField(label='',
-                    widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'Please Enter Your Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only'}))
+                    widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'Enter Your Name', 'autocomplete': 'off','pattern':'[A-Za-z ]+', 'title':'Enter Characters Only'}))
 
     # def __init__(self, *args, **kwargs):
     #     super(CreateClient, self).__init__(*args, **kwargs)
@@ -39,7 +39,7 @@ class ZipCodes(forms.ModelForm):
         fields = ["zip_code"]
 
     zip_code = forms.CharField(max_length=5, min_length=5, label='',
-                    widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'Please Enter Zip Code', 'autocomplete': 'off','pattern':'[0-9 ]+', 'title':'Enter Numbers Only'}))
+                    widget=forms.TextInput(attrs={"class": 'client-name','placeholder': 'Enter Zip Code', 'autocomplete': 'off','pattern':'[0-9 ]+', 'title':'Enter Numbers Only'}))
 
 class NewBarber(forms.ModelForm):
     class Meta:

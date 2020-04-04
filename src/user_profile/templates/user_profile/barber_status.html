@@ -13,7 +13,7 @@
                                         <div class="d-none">{{ form.phone }}</div>
                                         <div class="d-none">{{ form.license_num }}</div>
                                         <div class="d-none">{{ form.hire_date }}</div>
-                                        <h5>Available: <input type="checkbox" name="available" {{ checkbox }} data-toggle="toggle" data-on="Yes" data-off="No" id="id_available"></h5>
+                                        <h5>Available: <input type="checkbox" name="available" {{ checkbox }} data-toggle="toggle" data-on="Yes" data-off="No" id="id_available" data-onstyle="primary" data-offstyle="danger"></h5>
                                         <input class="confirm-button" id="my-signup" type="submit" value="Save">
                                         <a href="{% url 'barberprofile' barbers.id %}" class="confirm-button">Cancel</a>
                                     </form> 

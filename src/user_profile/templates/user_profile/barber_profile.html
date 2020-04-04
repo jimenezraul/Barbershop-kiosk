@@ -115,7 +115,7 @@
                       {%if anni.id == barbers.id %}
                       {% else %}
                       <div class="d-flex justify-content-center align-content-center align-items-center">
-                        <div class="col-2 text-center p-0 beer"><img class="rounded-circle border" src="{{ anni.file.url }}" alt=""></div>
+                        <div class="col-2 text-center p-0 beer"><img class="rounded-circle" src="{{ anni.file.url }}" alt=""></div>
                     
                       <div class="col-10 mt-2 border-bottom">
                       <p class="font-weight-bold m-0 ">Congratulate {{ anni.barber }} for another year at the BarberShop!</p>
@@ -165,9 +165,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <h4 class="modal-title p-1">Close</h4>
         </button>
-        <h4 class="modal-title">Close</h4>
       </div>
       <div class="modal-body">
         <img src="" id="image" style="max-width: 100%;">
@@ -181,8 +180,8 @@
             <span class="glyphicon glyphicon-zoom-out"></span>
           </button>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+        <button type="button" class="btn btn-danger badge-pill" data-dismiss="modal">Nevermind</button>
+        <button type="button" class="btn btn-primary badge-pill js-crop-and-upload">Crop and upload</button>
       </div>
     </div>
   </div>
@@ -225,7 +224,7 @@
                         {% endif %}
                         <form action="{% url 'barber_status' barbers.id %}">
                           {% csrf_token %}
-                          <button class="btn btn-primary" type="submit">Update Status</button>
+                          <button class="btn btn-primary btn-border" type="submit">Update Status</button>
                         </form>
                     </div>
                   </div>

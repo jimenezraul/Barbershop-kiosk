@@ -83,7 +83,7 @@
                 <div class="col-12 text-center text-white">
                     <h1>You Don't have any Barber yet.</h1>
                     <p>Add a Barber in settings.</p>
-                    <a href="{% url 'barbershop-settings' %}"><button class="btn btn-primary border">Settings</button></a>
+                    <a href="{% url 'barbershop-settings' %}"><button class="btn btn-primary border badge-pill">Settings</button></a>
                 </div>
         </div>
    </div>
@@ -133,7 +133,7 @@
                     <div class="col-12 d-flex justify-content-end p-0"> 
                         <form action="{% url 'barberprofile' barber.id %}" method="POST">
                             {% csrf_token %}
-                            <button class="btn btn-primary mb-3" type="submit">View Profile</button>
+                            <button class="btn btn-primary mb-3 btn-border badge-pill" type="submit">View Profile</button>
                         </form>
                     </div>
                     </div>

@@ -141,9 +141,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <h4 aria-hidden="true" class="modal-title">Close</h4>
         </button>
-        <h4 class="modal-title">Close</h4>
       </div>
       <div class="modal-body">
         <img src="" id="image" style="max-width: 100%;">
@@ -157,8 +156,8 @@
             <span class="glyphicon glyphicon-zoom-out"></span>
           </button>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+        <button type="button" class="btn btn-danger badge-pill" data-dismiss="modal">Nevermind</button>
+        <button type="button" class="btn btn-primary badge-pill js-crop-and-upload">Crop and upload</button>
       </div>
     </div>
   </div>
@@ -182,7 +181,7 @@
       <h5>Email: <span class='pro-info'>{{ user.email }}</span></h5>
       <form action="{% url 'update_user_info' user.id %}" method="post">
         {% csrf_token %}
-        <button class="btn btn-primary" type="submit">Edit Info</button>
+        <button class="btn btn-primary btn-border" type="submit">Edit Info</button>
       </form>
   </div>
 </div></div>
@@ -196,7 +195,7 @@
       <h5>City: <span class='pro-info'>{{ address.city }}</span></h5>
       <h5>State: <span class='pro-info'>{{ address.state }}</span></h5>
       <h5>ZipCode: <span class='pro-info'>{{ address.zip_code }}</span></h5>
-        <button class="btn btn-primary" type="submit">Edit Info</button>
+        <button class="btn btn-primary btn-border" type="submit">Edit Info</button>
   </form>
   </div>
 </div></div>
