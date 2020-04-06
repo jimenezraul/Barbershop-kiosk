@@ -19,7 +19,11 @@
 *.rar
 *.tar
 *.zip
+
+# Pictures #
+######################
 *.jpg
+*.png
 
 # Logs and databases #
 ######################
