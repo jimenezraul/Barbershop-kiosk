@@ -12,8 +12,6 @@ VERSION_RE = re.compile('__version__ = \'([\d\.]+)\'')
 def read_version():
     with open('src/user_profile/__init__.py') as file:
         version_line = [line for line in file.readlines()
-                        if line.startswith('__version__')][0]
-        return VERSION_RE.match(version_line).groups()[0]
 
 
 def long_description():
@@ -25,7 +23,6 @@ def load_requirements():
 
 setup(
     name='barbershop-kiosk-app-django',
-    version=read_version(),
     author='Raul  Jimenez',
     author_email='jimenezraul1981@gmail.com',
     description='Python Barbershop, Django integration.',
