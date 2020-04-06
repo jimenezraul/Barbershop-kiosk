@@ -12,4 +12,4 @@ python:
 install: pip install -r requirements.txt
 install: pip install tox-travis
 script:
-  - python /src/manage.py
+  - python ./src/manage.py
