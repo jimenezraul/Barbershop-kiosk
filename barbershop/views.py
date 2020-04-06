@@ -209,6 +209,14 @@ def signup(request):
             if client.count() == 5:
                 messages.success(request, "You have reached the Client's limit of the Demo Account")
                 return redirect('barbershop-signup')
+            else:
+                form = forms.CreateClient(request.POST,request.user)
+                if form.is_valid():
+                    instance = form.save(commit=False)
+                    instance.user = request.user
+                    instance.save()
+                    messages.success(request, "You has been added to the list. Thank You!")
+                    return redirect('barbershop-signup')
         else:
             form = forms.CreateClient(request.POST,request.user)
             if form.is_valid():
@@ -353,6 +361,15 @@ def settings(request):
                     instance.save()
                     messages.success(request, f"{name} was successfully added!")
                     return redirect('barbershop-settings')
+        else:
+            form = forms.NewBarber(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data['barber']
+                instance = form.save(commit=False)
+                instance.user = request.user
+                instance.save()
+                messages.success(request, f"{name} was successfully added!")
+                return redirect('barbershop-settings')
 
     context = {
         # forms
