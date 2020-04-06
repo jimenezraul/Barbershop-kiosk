@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.jpg
 
 # Logs and databases #
 ######################
@@ -35,3 +36,5 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+find . -name '.DS_Store' -type f -delete
