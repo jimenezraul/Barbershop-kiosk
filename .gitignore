@@ -37,3 +37,8 @@
 .Trashes
 ehthumbs.db
 
+# Folders #
+######################
+bin/*
+include/*
+lib/*
