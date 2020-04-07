@@ -14,35 +14,40 @@
     <link rel="stylesheet" href="{% static 'home_page/assets/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'home_page/assets/fonts/fontawesome5-overrides.min.css' %}">
     <link rel="stylesheet" href="{% static 'home_page/assets/css/styles.css' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
 </head>
 
 <body style="background-color: rgb(73,92,133);">
     <div>
         <div class="container">
-            <div class="row d-flex align-items-center min-vh-100 mt-2 mb-2">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-2">
+            <div class="row d-flex justify-content-center align-items-center min-vh-100 mt-2 mb-2">
+                <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-2">
                     <a class="text-danger" href="{% url 'barbershop-waitinglist'%}">
                         <div class="card">
-                            <div class="card-body text-center"><i class="fas fa-user-tie barber-view"></i>
-                                <h4 class="card-title">Barber's View</h4>
+                            <div class="barber-view-card p-0 card-body text-center"><img
+                                    src="/static/barbershop/assets/img/barberview.jpg" alt="">
+                                <h4 class="card-title mt-2">Barber's View</h4>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-2">
+                <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-2">
                     <a class="text-danger" href="{% url 'barbershop-waiting'%}">
                         <div class="card">
-                            <div class="card-body text-center"><i class="fa fa-users barber-view"></i>
-                                <h4 class="card-title">Client's View</h4>
+                            <div class="barber-view-card p-0 card-body text-center"><img
+                                    src="/static/barbershop/assets/img/clientview.jpg" alt="">
+                                <h4 class="card-title mt-2">Client's View</h4>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-2">
+                <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-2">
                     <a class="text-danger" href="{% url 'barbershop-signup'%}">
                         <div class="card">
-                            <div class="card-body text-center"><i class="fas fa-user-plus barber-view"></i>
-                                <h4 class="card-title">Client's SignUp</h4>
+                            <div class="barber-view-card p-0 card-body text-center"><img
+                                    src="/static/barbershop/assets/img/signup.jpg" alt="">
+                                <h4 class="card-title mt-2">SignUp View</h4>
                             </div>
                         </div>
                     </a>

@@ -12,6 +12,21 @@ a {
 }
 
 .card-title {
-  padding: 30px;
+  padding: 10px;
 }
 
+.barber-view-card img{
+  width: 100%;
+  border-radius: 3px;
+  opacity: 0.8;
+}
+
+.barber-view-card img:hover{
+  opacity: 0.9;
+}
+
+.barber-view-card h4{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
