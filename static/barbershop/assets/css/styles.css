@@ -693,21 +693,24 @@ margin-top: 20px;
   height: 30%;
 }
 
-.logout{
+.logout a{
   font-size: 30px;
   
 }
 
-.logout:hover{
+.logout a:hover{
   font-size: 30px;
   
   color: #c4c4c4;
 }
 
 .login-pic{
-  margin-top: 2px;
+  margin-top: 6px;
   width: 40px;
   height: 40px;
+}
+.login-img p{
+  margin-top: 2px!important;
 }
 
 .messages{
@@ -825,4 +828,8 @@ margin-top: 20px;
 }
 .btn-border:hover{
   border: 1px solid white;
+}
+
+.fa-sign-out-alt-desktop{
+  margin-top: 10px;
 }

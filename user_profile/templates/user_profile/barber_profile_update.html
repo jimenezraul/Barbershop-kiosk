@@ -1,7 +1,13 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
     {% block content %}
-   
+    <script   src="https://code.jquery.com/jquery-3.4.1.js"   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        $( "#id_hire_date" ).datepicker();
+    } );
+    </script>
     
 
         <section>
