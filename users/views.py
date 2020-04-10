@@ -19,8 +19,9 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            form.save()
-            messages.success(request, f'Account created for {username}!')
+            messages.warning(request, f'Sorry {username}, we are not accepting new users right now.')
+            #form.save()
+            #messages.success(request, f'Account created for {username}!')
             return redirect("barbershop-waitinglist")
     else:
         form = UserRegisterForm()
