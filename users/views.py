@@ -8,8 +8,9 @@ from django.contrib.auth.models import User
 from barbershop.models import LogoImage
 from django.contrib.auth.decorators import login_required
 
-def register(request): 
-    """Register a new user.""" 
+
+def register(request):
+    """Register a new user."""
     logo = LogoImage.objects.all()
     if logo.count() == 1:
         logo = logo[0]
@@ -19,8 +20,9 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            messages.warning(request, f'Sorry {username}, we are not accepting new users right now.')
-            #form.save()
+            messages.warning(
+                request, f'Sorry {username}, we are not accepting new users right now.')
+            # form.save()
             #messages.success(request, f'Account created for {username}!')
             return redirect("barbershop-waitinglist")
     else:
@@ -31,6 +33,7 @@ def register(request):
         'title': "Login - Register",
     }
     return render(request, 'users/register.html', context)
+
 
 def login_view(request):
     logo = LogoImage.objects.all()
@@ -52,15 +55,16 @@ def login_view(request):
                     login(request, user)
                     return redirect('barbershop-waitinglist')
             else:
-                messages.error(request,'username or password is not correct')
+                messages.error(request, 'username or password is not correct')
                 return redirect(request.POST.get('next'))
         except:
             return redirect('barbershop-waitinglist')
-    context= {
+    context = {
         'logo': logo,
         'title': "Login - Register",
     }
     return render(request, "users/register.html", context)
+
 
 def logout_view(request):
     logout(request)

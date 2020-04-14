@@ -23,7 +23,7 @@
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
         viewMode: 1,
-        aspectRatio: 1/1,
+        aspectRatio: 1 / 1,
         minCropBoxWidth: 200,
         minCropBoxHeight: 200,
         ready: function () {
@@ -57,152 +57,161 @@
 
   });
 </script>
-  <script>
-    $(".fa-camera").click(function () {
+<script>
+  $(".fa-camera").click(function () {
     $("input[type='file']").trigger('click');
-    });
+  });
 
-    $('input[type="file"]').on('change', function() {
+  $('input[type="file"]').on('change', function () {
     var val = $(this).val();
     $(this).siblings('span').text(val);
-    })
+  })
 </script>
 {% endblock %}
 {% block content %}
-    <section>
-        <div class="container">
-          
-            <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
-                <div class="col-12 col-md-6 heading-col">
-                  <h4 class="d-none d-sm-block text-center text-dark" id="welcome">Hello {{ user.first_name}}!
-                  </h4>
-                    
-                </div>
-                {% if photo.count == 0 %}
-                <div class="col-12 text-center pic-col"><i class="profile-icon fas fa-user-circle pl-1 pr-1 shadow"></i></div>
-                {% else %}
-                <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ photo.file.url }}" height="200px" width="200px"></div>
-                {% endif %}
-              
-                  <a href="{% url 'barbershop-settings' %}">
-                    <div class="col-auto text-center text-white settings-icon-col">
-                      <i class="red fas fa-ellipsis-v"></i>
-                  </div>
-                </a>
-                  <a href="{% url 'barbershop-waitinglist' %}">
-                    <div class="col-auto text-center text-white bell-icon-col">
-                      <i class="fas fa-bell"></i>
-                    </div>
-                  </a>
-              <!--start notifications-->
-                <div id="notification">
-                {% if clients.count == 0 %}
-        
-                {% else %}
-                  <span class="barber-notif badge badge-light">{{ clients.count }}</span>
-                {% endif %}
-              </div>
-              <script src="{% static 'barbershop/assets/js/notification.js' %}"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-              <!--end notifications-->
-                <div class="col-auto back-col"><a href="{% url 'barbershop-waitinglist' %}"><i class="fas fa-arrow-circle-left"></i></a></div>
-                <div class="col-auto chart-col col-sm-3 col-md-4 col-lg-4 text-center mt-2 mb-2 ml-3">
-                  <a class="chart" href="{% url 'barbershop-completed'%}"><i class="red fas fa-chart-bar"></i></a>
-              </div>
-                <div class="col-auto heading-col">
-                  {% for message in messages %}
-                  <div class="row d-flex justify-content-center align-items-center align-content-center">
-                      <div id="mydiv" class="mt-2 col-12 alert alert-{{message.tags}} fade show message text-center" id="success-alert" role="alert">
-                          {{ message }}
-                      </div>
-                  </div>
-                      <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-                      {% endfor %}
-                </div>
-                <form action="{% url 'photo' %}" method="post" enctype="multipart/form-data" id="formUpload">
-                    {% csrf_token %}
-                    <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
-                <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
-                  <select name="user" id="id_user">
-                    <option value="{{ user.id }}" selected="">{{ user }}</option>
-                  </select>
-                </div>
-                </form> 
-                
-            </div>
-        </div>
-    </section>
-    <div>
+<section>
+  <div class="container">
 
-<!-- MODAL TO CROP THE IMAGE -->
-<div class="modal fade" id="modalCrop">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <h4 aria-hidden="true" class="modal-title">Close</h4>
-        </button>
+    <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
+      <div class="col-12 col-md-6 heading-col">
+        <h4 class="d-none d-sm-block text-center text-dark" id="welcome">Hello {{ user.first_name}}!
+        </h4>
+
       </div>
-      <div class="modal-body">
-        <img src="" id="image" style="max-width: 100%;">
+      {% if photo.count == 0 %}
+      <div class="col-12 text-center pic-col"><i class="profile-icon fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+      {% else %}
+      <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image"
+          src="{{ photo.file.url }}" height="200px" width="200px"></div>
+      {% endif %}
+
+      <a href="{% url 'barbershop-settings' %}">
+        <div class="col-auto text-center text-white settings-icon-col">
+          <i class="red fas fa-ellipsis-v"></i>
+        </div>
+      </a>
+      <a href="{% url 'barbershop-waitinglist' %}">
+        <div class="col-auto text-center text-white bell-icon-col">
+          <i class="fas fa-bell"></i>
+        </div>
+      </a>
+      <!--start notifications-->
+      <div id="notification">
+        {% if clients.count == 0 %}
+
+        {% else %}
+        <span class="barber-notif badge badge-light">{{ clients.count }}</span>
+        {% endif %}
       </div>
-      <div class="modal-footer">
-        <div class="btn-group pull-left" role="group">
-          <button type="button" class="btn btn-default js-zoom-in">
-            <span class="glyphicon glyphicon-zoom-in"></span>
-          </button>
-          <button type="button" class="btn btn-default js-zoom-out">
-            <span class="glyphicon glyphicon-zoom-out"></span>
+      <script src="{% static 'barbershop/assets/js/notification.js' %}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+      <!--end notifications-->
+      <div class="col-auto back-col"><a href="{% url 'barbershop-waitinglist' %}"><i
+            class="fas fa-arrow-circle-left"></i></a></div>
+      <div class="col-auto chart-col col-sm-3 col-md-4 col-lg-4 text-center mt-2 mb-2 ml-3">
+        <a class="chart" href="{% url 'barbershop-completed'%}"><i class="red fas fa-chart-bar"></i></a>
+      </div>
+      <div class="col-auto heading-col">
+        {% for message in messages %}
+        <div class="row d-flex justify-content-center align-items-center align-content-center">
+          <div id="mydiv" class="mt-2 col-12 alert alert-{{message.tags}} fade show message text-center"
+            id="success-alert" role="alert">
+            {{ message }}
+          </div>
+        </div>
+        <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+        {% endfor %}
+      </div>
+      <form action="{% url 'photo' %}" method="post" enctype="multipart/form-data" id="formUpload">
+        {% csrf_token %}
+        <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
+        <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
+          <select name="user" id="id_user">
+            <option value="{{ user.id }}" selected="">{{ user }}</option>
+          </select>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+<div>
+
+  <!-- MODAL TO CROP THE IMAGE -->
+  <div class="modal fade" id="modalCrop">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h4 aria-hidden="true" class="modal-title">Close</h4>
           </button>
         </div>
-        <button type="button" class="btn btn-danger badge-pill" data-dismiss="modal">Nevermind</button>
-        <button type="button" class="btn btn-primary badge-pill js-crop-and-upload">Crop and upload</button>
+        <div class="modal-body">
+          <img src="" id="image" style="max-width: 100%;">
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-danger badge-pill" data-dismiss="modal">Nevermind</button>
+          <button type="button" class="btn btn-primary badge-pill js-crop-and-upload">Crop and upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow">
+    <div class="row row-2">
+      <div class="col">
+        <div></div>
       </div>
     </div>
   </div>
 </div>
-        <div class="container-fluid shadow">
-            <div class="row row-2">
-                <div class="col">
-                    <div></div>
-                </div>
-            </div>
+<div>
+  <div class="container min-vh-100">
+    <div class="row d-flex justify-content-center card-margin">
+      <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">Owner Info</h5>
+          <div class="card-body">
+            <h5>Name: <span class='pro-info'>{{ user.first_name }}</span></h5>
+            <h5>Last Name: <span class='pro-info'>{{ user.last_name }}</span></h5>
+            <h5>Email: <span class='pro-info'>{{ user.email }}</span></h5>
+            <form action="{% url 'update_user_info' user.id %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-primary btn-border" type="submit">Edit Info</button>
+            </form>
+          </div>
         </div>
-    </div>
-    <div>
-        <div class="container min-vh-100">
-            <div class="row d-flex justify-content-center card-margin">
-                <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4"><div class="card shadow">
-  <h5 class="card-header">Owner Info</h5>
-  <div class="card-body">
-      <h5>Name: <span class='pro-info'>{{ user.first_name }}</span></h5>
-      <h5>Last Name: <span class='pro-info'>{{ user.last_name }}</span></h5>
-      <h5>Email: <span class='pro-info'>{{ user.email }}</span></h5>
-      <form action="{% url 'update_user_info' user.id %}" method="post">
-        {% csrf_token %}
-        <button class="btn btn-primary btn-border" type="submit">Edit Info</button>
-      </form>
-  </div>
-</div></div>
+      </div>
 
-                <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4"><div class="card shadow">
-  <h5 class="card-header">Business Address Info</h5>
-  <div class="card-body">
-    <form action="{% url 'user-address' %}">
-      {% csrf_token %}
-      <h5>Address: <span class='pro-info'>{{ address.street }}</span></h5>
-      <h5>City: <span class='pro-info'>{{ address.city }}</span></h5>
-      <h5>State: <span class='pro-info'>{{ address.state }}</span></h5>
-      <h5>ZipCode: <span class='pro-info'>{{ address.zip_code }}</span></h5>
-        <button class="btn btn-primary btn-border" type="submit">Edit Info</button>
-  </form>
-  </div>
-</div></div>
-            </div>
+      <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">Business Address Info</h5>
+          <div class="card-body">
+            <form action="{% url 'user-address' %}">
+              {% csrf_token %}
+              <h5>Address: <span class='pro-info'>{{ address.street }}</span></h5>
+              <h5>City: <span class='pro-info'>{{ address.city }}</span></h5>
+              <h5>State: <span class='pro-info'>{{ address.state }}</span></h5>
+              <h5>ZipCode: <span class='pro-info'>{{ address.zip_code }}</span></h5>
+              <button class="btn btn-primary btn-border" type="submit">Edit Info</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-  
+  </div>
+</div>
 
-    
+
+
 {% endblock %}

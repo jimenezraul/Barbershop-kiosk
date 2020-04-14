@@ -2,7 +2,7 @@ import requests
 from photocrop.models import Photo
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Client, Barbers, ZipCode, CompletedClients, LogoImage
+from .models import Client, Barbers, ZipCode, LogoImage
 from services.models import MenServices, KidServices, OtherServices
 from . import forms
 from services import forms as forms2
@@ -20,7 +20,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from photocrop.models import Photo
 
 
-
 _LOGGER = logging.getLogger()
 
 
@@ -30,8 +29,8 @@ def waitinglist(request):
     barbers = Barbers.objects.filter(user=request.user)
     if photos.count() == 1:
         photos = photos[0]
-        
-    clients = Client.objects.filter(user=request.user)
+
+    clients = Client.objects.filter(user=request.user, completed=False)
     date_now = [(client.date) for client in clients]
     fmt = '%H:%M'
     wel_message = ''
@@ -46,12 +45,12 @@ def waitinglist(request):
             estimate_time = datetime.strptime(
                 str(total_time), "%H:%M:%S.%f").strftime(fmt)
             eta = estimate_time
-            my_list = list(eta)
-            my_list[0] = ""
-            final_list = "".join(my_list)
+            time_list = list(eta)
+            time_list[0] = ""
+            final_list = "".join(time_list)
             client_name = client.name
             #wel_message = f'Hi {client_name}, be ready... We will call you soon!'
-            if my_list[1] != '0':
+            if time_list[1] != '0':
                 time_display = "Hour"
             else:
                 time_display = "Minutes"
@@ -77,8 +76,8 @@ def waitinglist(request):
         'time_display': time_display,
         'title': "BarberView",
         'users': users,
-        'photos':photos,
-        "barbers":barbers,
+        'photos': photos,
+        "barbers": barbers,
     }
     return render(request, "barbershop/waitinglist.html", context)
 
@@ -138,7 +137,7 @@ def waiting(request):
             'description': r['weather'][0]['description'],
             'icon': r['weather'][0]['icon'],
         }
-    clients = Client.objects.filter(user=request.user)
+    clients = Client.objects.filter(user=request.user, completed=False)
     fmt = '%H:%M'
     wel_message = ''
     try:
@@ -203,27 +202,30 @@ def signup(request):
         logo = None
 
     barberlist = Barbers.objects.filter(user=request.user)
-    
+
     if request.method == 'POST':
         if str(request.user) == "Demo":
             if client.count() == 5:
-                messages.success(request, "You have reached the Client's limit of the Demo Account")
+                messages.success(
+                    request, "You have reached the Client's limit of the Demo Account")
                 return redirect('barbershop-signup')
             else:
-                form = forms.CreateClient(request.POST,request.user)
+                form = forms.CreateClient(request.POST, request.user)
                 if form.is_valid():
                     instance = form.save(commit=False)
                     instance.user = request.user
                     instance.save()
-                    messages.success(request, "You has been added to the list. Thank You!")
+                    messages.success(
+                        request, "You has been added to the list. Thank You!")
                     return redirect('barbershop-signup')
         else:
-            form = forms.CreateClient(request.POST,request.user)
+            form = forms.CreateClient(request.POST, request.user)
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.user = request.user
                 instance.save()
-                messages.success(request, "You has been added to the list. Thank You!")
+                messages.success(
+                    request, "You has been added to the list. Thank You!")
                 return redirect('barbershop-signup')
     else:
         form = forms.CreateClient()
@@ -237,41 +239,15 @@ def signup(request):
 
 
 @login_required(login_url='register')
-def delete_client(request, id):
-    instance = Client.objects.get(pk=id)
-    form = forms.CompletedClients()
-    if request.method == 'POST':
-        form.name = instance.name
-        form.barber = instance.barber
-        form.date = date.today()
-        form.user = instance.user
-        form.save()
-        instance.delete()
-        messages.success(request, f"{form.name} is Completed!")
-        return redirect('barbershop-waitinglist')
-    else:
-        form = instance
-        context = {
-            'form': form,
-            'title': 'Delete'
-        }
-        return render(request, 'barbershop/delete.html', context)
-
-@login_required(login_url='register')
-def delete_client2(request, id, barber_id):
+def delete_client(request, id, barber_id):
     instance = Client.objects.get(pk=id)
     barber = Barbers.objects.get(pk=barber_id)
-
-    form = forms.CompletedClients()
     if request.method == 'POST':
-        form.name = instance.name
-        form.barber = instance.barber
-        form.date = date.today()
-        form.user = instance.user
-        form.completed_by = barber
-        form.save()
-        instance.delete()
-        messages.success(request, f"{form.name} is Completed!")
+        instance.completed = True
+        instance.completed_by = barber
+        instance.date_completed = date.today()
+        instance.save()
+        messages.success(request, f"{instance.name} is Completed!")
         try:
             return redirect('barberprofile', barber.id)
         except:
@@ -287,11 +263,6 @@ def delete_client2(request, id, barber_id):
 
 @login_required(login_url='register')
 def update(request, id):
-    logo = LogoImage.objects.all()
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
     instance = Client.objects.get(pk=id)
     if request.method == 'POST':
         form = forms.UpdateForm(request.POST or None, instance=instance)
@@ -304,7 +275,6 @@ def update(request, id):
         context = {
             'form': form,
             'title': 'Update Info',
-            'logo': logo,
         }
         return render(request, 'barbershop/update.html', context)
 
@@ -350,7 +320,8 @@ def settings(request):
     if request.method == 'POST':
         if str(request.user) == "Demo":
             if barbers.count() == 5:
-                messages.success(request, "You have reached the Barber's limit of the Demo Account")
+                messages.success(
+                    request, "You have reached the Barber's limit of the Demo Account")
                 return redirect('barbershop-settings')
             else:
                 form = forms.NewBarber(request.POST)
@@ -359,7 +330,8 @@ def settings(request):
                     instance = form.save(commit=False)
                     instance.user = request.user
                     instance.save()
-                    messages.success(request, f"{name} was successfully added!")
+                    messages.success(
+                        request, f"{name} was successfully added!")
                     return redirect('barbershop-settings')
         else:
             form = forms.NewBarber(request.POST)
@@ -388,7 +360,7 @@ def settings(request):
         'barbers': barbers,
         'logo': logo,
         'title': 'Settings',
-        'photos':photos,
+        'photos': photos,
     }
 
     return render(request, 'barbershop/settings.html', context)
@@ -402,6 +374,7 @@ def delete_barber(request, id):
         messages.success(
             request, f"{instance} was successfully deleted from list!")
         return redirect('barbershop-settings')
+
 
 @login_required(login_url='register')
 def zipcode(request, id):
@@ -447,35 +420,36 @@ def completed(request):
     NOV = 11
     DIC = 12
 
-    JAN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JAN, date__year__lte=this_year, date__month__lte=JAN,user=request.user)
-    FEB = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=FEB, date__year__lte=this_year, date__month__lte=FEB,user=request.user)
-    MAR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAR, date__year__lte=this_year, date__month__lte=MAR,user=request.user)
-    APR = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=APR, date__year__lte=this_year, date__month__lte=APR,user=request.user)
-    MAY = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=MAY, date__year__lte=this_year, date__month__lte=MAY,user=request.user)
-    JUN = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUN, date__year__lte=this_year, date__month__lte=JUN,user=request.user)
-    JUL = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=JUL, date__year__lte=this_year, date__month__lte=JUL,user=request.user)
-    AUG = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=AUG, date__year__lte=this_year, date__month__lte=AUG,user=request.user)
-    SEP = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=SEP, date__year__lte=this_year, date__month__lte=SEP,user=request.user)
-    OCT = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=OCT, date__year__lte=this_year, date__month__lte=OCT,user=request.user)
-    NOV = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=NOV, date__year__lte=this_year, date__month__lte=NOV,user=request.user)
-    DIC = CompletedClients.objects.filter(
-        date__year__gte=this_year, date__month__gte=DIC, date__year__lte=this_year, date__month__lte=DIC,user=request.user)
+    JAN = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=JAN, date_completed__year__lte=this_year, date_completed__month__lte=JAN, user=request.user, completed=True)
+    FEB = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=FEB, date_completed__year__lte=this_year, date_completed__month__lte=FEB, user=request.user, completed=True)
+    MAR = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=MAR, date_completed__year__lte=this_year, date_completed__month__lte=MAR, user=request.user, completed=True)
+    APR = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=APR, date_completed__year__lte=this_year, date_completed__month__lte=APR, user=request.user, completed=True)
+    MAY = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=MAY, date_completed__year__lte=this_year, date_completed__month__lte=MAY, user=request.user, completed=True)
+    JUN = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=JUN, date_completed__year__lte=this_year, date_completed__month__lte=JUN, user=request.user, completed=True)
+    JUL = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=JUL, date_completed__year__lte=this_year, date_completed__month__lte=JUL, user=request.user, completed=True)
+    AUG = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=AUG, date_completed__year__lte=this_year, date_completed__month__lte=AUG, user=request.user, completed=True)
+    SEP = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=SEP, date_completed__year__lte=this_year, date_completed__month__lte=SEP, user=request.user, completed=True)
+    OCT = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=OCT, date_completed__year__lte=this_year, date_completed__month__lte=OCT, user=request.user, completed=True)
+    NOV = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=NOV, date_completed__year__lte=this_year, date_completed__month__lte=NOV, user=request.user, completed=True)
+    DIC = Client.objects.filter(
+        date_completed__year__gte=this_year, date_completed__month__gte=DIC, date_completed__year__lte=this_year, date_completed__month__lte=DIC, user=request.user, completed=True)
 
-    completed_clients = CompletedClients.objects.filter(user=request.user)
+    completed_clients = Client.objects.filter(
+        user=request.user, completed=True)
     if completed_clients.count() > 0:
-        completed_clients = CompletedClients.objects.filter(user=request.user,
-            date=datetime.now())
+        completed_clients = Client.objects.filter(user=request.user,
+                                                  date=datetime.now())
 
     page = request.GET.get('page', 1)
     paginator = Paginator(completed_clients, 10)
@@ -526,36 +500,36 @@ def completed_last_year(request):
     NOV = 11
     DIC = 12
 
-    JAN = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=JAN, date__year__lte=last_year, date__month__lte=JAN,user=request.user)
-    FEB = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=FEB, date__year__lte=last_year, date__month__lte=FEB,user=request.user)
-    MAR = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=MAR, date__year__lte=last_year, date__month__lte=MAR,user=request.user)
-    APR = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=APR, date__year__lte=last_year, date__month__lte=APR,user=request.user)
-    MAY = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=MAY, date__year__lte=last_year, date__month__lte=MAY,user=request.user)
-    JUN = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=JUN, date__year__lte=last_year, date__month__lte=JUN,user=request.user)
-    JUL = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=JUL, date__year__lte=last_year, date__month__lte=JUL,user=request.user)
-    AUG = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=AUG, date__year__lte=last_year, date__month__lte=AUG,user=request.user)
-    SEP = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=SEP, date__year__lte=last_year, date__month__lte=SEP,user=request.user)
-    OCT = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=OCT, date__year__lte=last_year, date__month__lte=OCT,user=request.user)
-    NOV = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=NOV, date__year__lte=last_year, date__month__lte=NOV,user=request.user)
-    DIC = CompletedClients.objects.filter(
-        date__year__gte=last_year, date__month__gte=DIC, date__year__lte=last_year, date__month__lte=DIC,user=request.user)
+    JAN = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=JAN, date_completed__year__lte=last_year, date_completed__month__lte=JAN, user=request.user)
+    FEB = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=FEB, date_completed__year__lte=last_year, date_completed__month__lte=FEB, user=request.user)
+    MAR = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=MAR, date_completed__year__lte=last_year, date_completed__month__lte=MAR, user=request.user)
+    APR = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=APR, date_completed__year__lte=last_year, date_completed__month__lte=APR, user=request.user)
+    MAY = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=MAY, date_completed__year__lte=last_year, date_completed__month__lte=MAY, user=request.user)
+    JUN = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=JUN, date_completed__year__lte=last_year, date_completed__month__lte=JUN, user=request.user)
+    JUL = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=JUL, date_completed__year__lte=last_year, date_completed__month__lte=JUL, user=request.user)
+    AUG = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=AUG, date_completed__year__lte=last_year, date_completed__month__lte=AUG, user=request.user)
+    SEP = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=SEP, date_completed__year__lte=last_year, date_completed__month__lte=SEP, user=request.user)
+    OCT = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=OCT, date_completed__year__lte=last_year, date_completed__month__lte=OCT, user=request.user)
+    NOV = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=NOV, date_completed__year__lte=last_year, date_completed__month__lte=NOV, user=request.user)
+    DIC = Client.objects.filter(
+        date_completed__year__gte=last_year, date_completed__month__gte=DIC, date_completed__year__lte=last_year, date_completed__month__lte=DIC, user=request.user)
 
-    completed_clients = CompletedClients.objects.filter(user=request.user)
+    completed_clients = Client.objects.filter(user=request.user)
 
     if completed_clients.count() > 0:
-        completed_clients = CompletedClients.objects.filter(user=request.user,
-            date=datetime.now())
+        completed_clients = Client.objects.filter(user=request.user,
+                                                  date=datetime.now())
 
     context = {
         'todays_year': this_year,
@@ -601,6 +575,7 @@ def image_update(request, id):
             messages.success(request, "Your Logo was Updated!")
             return redirect('barbershop-settings')
 
+
 @login_required(login_url='register')
 def barber_pro_list(request):
     barbers = Barbers.objects.filter(user=request.user)
@@ -615,8 +590,8 @@ def barber_pro_list(request):
             messages.success(request, f"{name} was successfully added!")
             return redirect('barbershop-barberprolist')
     context = {
-        "barbers":barbers,
-        "form":form,
+        "barbers": barbers,
+        "form": form,
     }
     return render(request, "barbershop/barber_pro_list.html", context)
 

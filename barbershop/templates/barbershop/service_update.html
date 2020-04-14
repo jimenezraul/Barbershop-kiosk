@@ -1,38 +1,109 @@
-{% extends 'barbershop/base.html' %}
 {% load static %}
-            
-        
-    {% block content %}
-        <section>
-                <div class="container">
-                    <div class="row d-flex justify-content-center align-items-center align-content-center">
-                            <div class="form col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                    <form class="site-form shadow" method="post">
-                                        {% csrf_token %}
-                                            <h1>Update Service</h1>
-                                            <div class="row justify-content-center">
-                                                <div class="col-8 p-0">
-                                                    {{ form.service }}
-                                                </div>
-                                            <div class="col-3 p-0">
-                                                {{ form.price }}
-                                            </div>
-                                            </div>
-                                            
-                                    
-                                        
-                                        <input class="confirm-button" id="my-signup" type="submit" value="Update">
-                                        <a href="{% url 'barbershop-settings' %}" class="confirm-button">Cancel</a>
-                                </form> 
-                                
-                            </div>
-                            
-                    </div>
-                </div>
-                
-            </section>
 
-            
-            
-            
-    {% endblock content %}
+{% load pwa %}
+<!DOCTYPE html>
+<div lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        {% progressive_web_app_meta %}
+
+        {% if title %}
+        <title>Barbershop | {{ title }}</title>
+        {% else %}
+        <title>Barbershop</title>
+        {% endif %}
+        <link rel="icon" type="image/jpeg" sizes="16x16" href="{% static 'barbershop/assets/img/16x16.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="{% static 'barbershop/assets/img/32x32.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="180x180" href="{% static 'barbershop/assets/img/180x180.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="192x192" href="{% static 'barbershop/assets/img/192x192.jpg' %}">
+        <link rel="icon" type="image/jpeg" sizes="512x512" href="{% static 'barbershop/assets/img/512x512.jpg' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="manifest" href="{% static 'barbershop/manifest.json' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/ionicons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/better-nav.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Contact-Form-Clean.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Footer-Dark.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Lightbox-Gallery.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
+        <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
+        <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#id_hire_date").datepicker();
+            });
+        </script>
+    </head>
+
+    <body>
+        <section>
+            <div class="container">
+                <div class="row d-flex justify-content-center align-items-center align-content-center vh-100">
+                    <div
+                        class="form col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                        <form class="site-form shadow" method="post">
+                            {% csrf_token %}
+                            <h1>Update Service</h1>
+                            <div class="row justify-content-center">
+                                <div class="col-8 p-0">
+                                    {{ form.service }}
+                                </div>
+                                <div class="col-3 p-0">
+                                    {{ form.price }}
+                                </div>
+                            </div>
+
+
+
+                            <input class="confirm-button" id="my-signup" type="submit" value="Update">
+                            <a href="{% url 'barbershop-settings' %}" class="confirm-button">Cancel</a>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+        <script src="{% static 'barbershop/assets/js/barber-avail.js' %}"></script>
+        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+        <script>
+            // When the user clicks on div, open the popup
+            function showFunction() {
+                var popup = document.getElementById("myPopup");
+                popup.classList.toggle("show");
+                $('#btnviewdetails').text('Cancel').button("refresh")
+            }
+            function hideFunction() {
+                var popup = document.getElementById("myPopup");
+                popup.classList.toggle("hide");
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+        <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    </body>
+
+    </html>

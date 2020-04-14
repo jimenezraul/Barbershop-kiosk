@@ -1,114 +1,124 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
 {% load pwa %}
-    {% block content %}
-    
-    <section>
-        <div class="container">
-            <!--Display Desktop Bar-->
-            <div class="d-none d-md-flex row justify-content-center align-content-center align-items-center shadow bg-light"
-                id="wait-list">
-                <div class="col-12 col-md-3 d-flex justify-content-center align-middle">
-                    <div class="col-4 text-center p-0">
-                        <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-users"></i></a>
-                        <p class="m-0"><small>Barbers</small></p>
-                    </div>
-                    
-                    {% if photos.count == 0 %}
-                    <div class="col-4 text-center p-0">
-                        <a class="barbers-profiles" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
-                        <p class="m-0"><small>Owner</small></p>
-                    </div>
-                    {% else %}
-                    <div class="col-4 text-center p-0 login-img">
-                        <a href="{% url 'user-profile'%}"><img class="rounded-circle login-pic" src="{{ photos.file.url }}"/></a>
-                        <p class="m-0"><small>Owner</small></p>
-                    </div>
-                    {% endif %}
-                    <div class="col-4 text-center p-0 logout">
-                        <a href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt fa-sign-out-alt-desktop"></i></a>
-                        <p class="m-0"><small>Logout</small></p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 title-bar">
-                    <h2 class="text-center text-dark" id="welcome">Main View
-                    </h2>
-                    <div class="col-12 heading-col d-flex justify-content-center">
-                        {% for message in messages %}
-                        
-                            <div id="mydiv" class="col-12 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
-                                {{ message }}
-                            </div>
-                        
-                            
-                            {% endfor %}
-                        
-                    </div>
-                </div>
-                <div class="col-12 col-md-3 text-center">
-                    <h5 class="ewt text-g">Estimated Wait Time</h5>
+{% block content %}
 
-                    <div class="col-3 col-sm-3 col-md-8 col-lg-5 d-none d-md-flex time justify-content-center">{{ eta }}
-                    </div>
-                    <p class="timename d-none d-md-block text-g">{{ time_display }}</p>
+<section>
+    <div class="container">
+        <!--Display Desktop Bar-->
+        <div class="d-none d-md-flex row justify-content-center align-content-center align-items-center shadow bg-light"
+            id="wait-list">
+            <div class="col-12 col-md-3 d-flex justify-content-center align-middle">
+                <div class="col-4 text-center p-0">
+                    <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i
+                            class="red fas fa-users"></i></a>
+                    <p class="m-0"><small>Barbers</small></p>
+                </div>
 
+                {% if photos.count == 0 %}
+                <div class="col-4 text-center p-0">
+                    <a class="barbers-profiles" href="{% url 'user-profile'%}"><i
+                            class="red fas fa-user-circle"></i></a>
+                    <p class="m-0"><small>Owner</small></p>
+                </div>
+                {% else %}
+                <div class="col-4 text-center p-0 login-img">
+                    <a href="{% url 'user-profile'%}"><img class="rounded-circle login-pic"
+                            src="{{ photos.file.url }}" /></a>
+                    <p class="m-0"><small>Owner</small></p>
+                </div>
+                {% endif %}
+                <div class="col-4 text-center p-0 logout">
+                    <a href="{% url 'logout_view' %}"><i
+                            class="red fas fa-sign-out-alt fa-sign-out-alt-desktop"></i></a>
+                    <p class="m-0"><small>Logout</small></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 title-bar">
+                <h2 class="text-center text-dark" id="welcome">Main View
+                </h2>
+                <div class="col-12 heading-col d-flex justify-content-center">
+                    {% for message in messages %}
+
+                    <div id="mydiv" class="col-auto alert alert-{{message.tags}} fade show message text-center"
+                        id="success-alert" role="alert">
+                        {{ message }}
+                    </div>
+
+
+                    {% endfor %}
 
                 </div>
             </div>
-            <!--display Mobile Bar-->
-            <div class="d-flex d-md-none row justify-content-center align-content-center align-items-center shadow bg-light"
-                id="wait-list">
-                <div class="col-12 col-md-6 title-bar">
-                    <h2 class="text-center text-dark" id="welcome"></i> Barber View
-                    </h2>
-                    <div class="col-12 heading-col d-flex justify-content-center">
-                        {% for message in messages %}
-                        
-                            <div id="alert-mobile" class="col-10 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
-                                {{ message }}
-                            </div>
-                        
-                            
-                            {% endfor %}
-                    </div>
-                </div>
-                <div class="col-12 col-md-3 text-center">
-                    <h5 class="ewt">Estimated Wait Time</h5>
+            <div class="col-12 col-md-3 text-center">
+                <h5 class="ewt text-g">Estimated Wait Time</h5>
 
-                    <div class="col-3 col-sm-3 col-md-8 col-lg-5 time justify-content-center d-flex d-md-none">{{ eta }}
-                    </div>
-                    <p class="timename d-block d-md-none">{{ time_display }}</p>
+                <div class="col-3 col-sm-3 col-md-8 col-lg-5 d-none d-md-flex time justify-content-center">{{ eta }}
                 </div>
-                <div class="col-12 d-flex justify-content-center align-items-center align-content-center">
-                    <div class="col-4 text-center">
-                        <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i class="red fas fa-users"></i></a>
-                        <p class="m-0"><small>Barbers</small></p>
+                <p class="timename d-none d-md-block text-g">{{ time_display }}</p>
+
+
+            </div>
+        </div>
+        <!--display Mobile Bar-->
+        <div class="d-flex d-md-none row justify-content-center align-content-center align-items-center shadow bg-light"
+            id="wait-list">
+            <div class="col-12 col-md-6 title-bar">
+                <h2 class="text-center text-dark" id="welcome"></i> Barber View
+                </h2>
+                <div class="col-12 heading-col d-flex justify-content-center">
+                    {% for message in messages %}
+
+                    <div id="alert-mobile"
+                        class="col-10 alert alert-danger alert-dismissible fade show message text-center"
+                        id="success-alert" role="alert">
+                        {{ message }}
                     </div>
-                    {% if photos.count == 0 %}
-                    <div class="col-4 text-center">
-                        <a class="barbers-profiles" href="{% url 'user-profile'%}"><i class="red fas fa-user-circle"></i></a>
-                        <p class="m-0"><small>Owner</small></p>
-                    </div>
-                    {% else %}
-                    <div class="col-4 col-md-4 col-lg-4 text-center">
-                        <a href="{% url 'user-profile'%}"><img class="rounded-circle login-pic" src="{{ photos.file.url }}"/></a>
-                        <p class="m-0"><small>Owner</small></p>
-                    </div>
-                    {% endif %}
-                    <div class="col-4 text-center logout">
-                        <a href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
-                        <p class="m-0"><small>Logout</small></p>
-                    </div>
+
+
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 col-md-3 text-center">
+                <h5 class="ewt">Estimated Wait Time</h5>
+
+                <div class="col-3 col-sm-3 col-md-8 col-lg-5 time justify-content-center d-flex d-md-none">{{ eta }}
+                </div>
+                <p class="timename d-block d-md-none">{{ time_display }}</p>
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center align-content-center">
+                <div class="col-4 text-center">
+                    <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i
+                            class="red fas fa-users"></i></a>
+                    <p class="m-0"><small>Barbers</small></p>
+                </div>
+                {% if photos.count == 0 %}
+                <div class="col-4 text-center">
+                    <a class="barbers-profiles" href="{% url 'user-profile'%}"><i
+                            class="red fas fa-user-circle"></i></a>
+                    <p class="m-0"><small>Owner</small></p>
+                </div>
+                {% else %}
+                <div class="col-4 col-md-4 col-lg-4 text-center">
+                    <a href="{% url 'user-profile'%}"><img class="rounded-circle login-pic"
+                            src="{{ photos.file.url }}" /></a>
+                    <p class="m-0"><small>Owner</small></p>
+                </div>
+                {% endif %}
+                <div class="col-4 text-center logout">
+                    <a href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
+                    <p class="m-0"><small>Logout</small></p>
                 </div>
             </div>
         </div>
-    </section>
-    <!--Available Barbers-->
-    <div id="barber-avail">
+    </div>
+</section>
+<!--Available Barbers-->
+<div id="barber-avail">
     <div class="container">
         <div class="row d-flex justify-content-center mt-2 bg-light rounded">
             {% for barber in barbers %}
-                {% if barber.available == True %}
+            {% if barber.available == True %}
             <div class="col-2 mt-2 mb-2 text-center p-0">
                 {% if not barber.file %}
                 <i class="barber-avail red fas fa-user-circle pl-1 pr-1"></i>
@@ -119,124 +129,128 @@
                 {% endif %}
             </div>
             {% endif %}
-                {% endfor %}
+            {% endfor %}
         </div>
     </div>
-    </div>  
-    <!--End Available Barbers-->
+</div>
+<!--End Available Barbers-->
 <div class="clients list-table">
-<div class="container">
-<div class="row">
+    <div class="container">
+        <div class="row">
 
-    <!--Grid column-->
-    <div class="col-md-12 text-left">
+            <!--Grid column-->
+            <div class="col-md-12 text-left">
 
-        <div class="card mt-2">
-            <div class="card-body p-0">
+                <div class="card mt-2">
+                    <div class="card-body p-0">
 
-                <!-- Client table -->
-                <div class="table-responsive rounded-lg">
+                        <!-- Client table -->
+                        <div class="table-responsive rounded-lg">
 
-                    <table class="table product-table">
+                            <table class="table product-table">
 
-                        <!-- Table head -->
-                        <thead class="bg-grey lighten-5">
-                            <tr>
-                                
-                                <th class="font-weight-bold text-center">
-                                    <strong>Client</strong>
-                                </th>
-                                <th class="font-weight-bold text-center">
-                                    <strong>Barber</strong>
-                                </th>
-                                
-                                <th class="font-weight-bold text-center">
-                                    <strong>Time</strong>
-                                </th>
-                                <th class="font-weight-bold text-center">
-                                    <strong>Edit</strong>
-                                </th>
-                                
-                            </tr>
-                        </thead>
-                        <!-- /.Table head -->
+                                <!-- Table head -->
+                                <thead class="bg-grey lighten-5">
+                                    <tr>
 
-                        <!-- Table body -->
-                        <tbody >
-                            {% for client in clients %}
-                            <!-- First row -->
-                            <tr>
-                        
-                                <td>
-                                    <h5 class="text-center">
-                                        <strong>{{ client.name }}</strong>
-                                    </h5>
-                                </td>
-                                <td>
-                                    <h5 class="text-center">
-                                        <strong>{{ client.barber }}</strong>
-                                    </h5>
-                                </td>
-                                
-                                <td>
-                                    <p class="text-center">
-                                        <strong>{{ client.date }}</strong>
-                                    </p>
-                                </td>
-                                <td class="font-weight-bold text-center">
-                                    <form action="{% url 'barbershop-update' client.id %}">
-                                        {% csrf_token %}
-                                        <button class="completed-btn red" type="submit"><i
-                                                class="fas fa-pencil-alt"></i></button>
-                                    </form>
-                                </td>
-                                
-                            </tr>
-                            <!-- /.First row -->
-                            {% endfor %}
-                        </tbody>
-                        <!-- /.Table body -->
-                        
-                    </table>
-                    <div class="container">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-6 d-flex justify-content-center">
-                                    {% if users.has_other_pages %}
+                                        <th class="font-weight-bold text-center">
+                                            <strong>Client</strong>
+                                        </th>
+                                        <th class="font-weight-bold text-center">
+                                            <strong>Barber</strong>
+                                        </th>
+
+                                        <th class="font-weight-bold text-center">
+                                            <strong>Time</strong>
+                                        </th>
+                                        <th class="font-weight-bold text-center">
+                                            <strong>Edit</strong>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <!-- /.Table head -->
+
+                                <!-- Table body -->
+                                <tbody>
+                                    {% for client in clients %}
+                                    <!-- First row -->
+                                    <tr>
+
+                                        <td>
+                                            <h5 class="text-center">
+                                                <strong>{{ client.name }}</strong>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5 class="text-center">
+                                                <strong>{{ client.barber }}</strong>
+                                            </h5>
+                                        </td>
+
+                                        <td>
+                                            <p class="text-center">
+                                                <strong>{{ client.date }}</strong>
+                                            </p>
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            <form action="{% url 'barbershop-update' client.id %}">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-pencil-alt"></i></button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    <!-- /.First row -->
+                                    {% endfor %}
+                                </tbody>
+                                <!-- /.Table body -->
+
+                            </table>
+                            <div class="container">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-6 d-flex justify-content-center">
+                                        {% if users.has_other_pages %}
                                         <ul class="pagination mt-3">
                                             {% if users.has_previous %}
-                                                <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                                            <li class="page-item"><a class="page-link"
+                                                    href="?page={{ users.previous_page_number }}">&laquo;</a></li>
                                             {% else %}
-                                                <li class="disabled"><a class="page-link">&laquo;</a></li>
+                                            <li class="disabled"><a class="page-link">&laquo;</a></li>
                                             {% endif %}
                                             {% for i in users.paginator.page_range %}
                                             {% if users.number == i %}
-                                                <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></a></span></li>
+                                            <li class="page-item active"><a class="page-link"><span>{{ i }} <span
+                                                            class="sr-only">(current)</span></a></span></li>
                                             {% else %}
-                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                            </li>
                                             {% endif %}
                                             {% endfor %}
                                             {% if users.has_next %}
-                                                <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                                            <li class="page-item"><a class="page-link"
+                                                    href="?page={{ users.next_page_number }}">&raquo;</a></li>
                                             {% else %}
-                                                <li class="disabled"><a class="page-link">&raquo;</a></li>
+                                            <li class="disabled"><a class="page-link">&raquo;</a></li>
                                             {% endif %}
                                         </ul>
-                                    {% endif %}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
+                        <!-- /.Shopping Cart table -->
+
+                    </div>
+
                 </div>
-                <!-- /.Shopping Cart table -->
 
             </div>
+            <!--Grid column-->
 
         </div>
-
     </div>
-    <!--Grid column-->
-
-</div>
-</div>
 </div>
 
 {% endblock content %}

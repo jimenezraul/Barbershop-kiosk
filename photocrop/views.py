@@ -25,6 +25,7 @@ def photo_list(request, id=None):
                 form.save()
                 return redirect('user-profile')
 
+
 def barber_photo(request, id):
     photos = Barbers.objects.filter(pk=id)
     if photos.count() > 0:
@@ -41,4 +42,3 @@ def barber_photo(request, id):
             if form.is_valid():
                 form.save()
                 return redirect('barberprofile', id)
-    

@@ -7,9 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from barbershop.models import LogoImage
 
-
-
-def new_men_service(request): 
+def new_men_service(request):
     if request.method == 'POST':
         form = forms.MenServiceForm(request.POST, request.user)
         if form.is_valid():
@@ -22,7 +20,8 @@ def new_men_service(request):
     else:
         return redirect('barbershop-settings')
 
-def new_kid_service(request): 
+
+def new_kid_service(request):
     if request.method == 'POST':
         form = forms.KidServiceForm(request.POST)
         if form.is_valid():
@@ -35,7 +34,8 @@ def new_kid_service(request):
     else:
         return redirect('barbershop-settings')
 
-def new_other_service(request): 
+
+def new_other_service(request):
     if request.method == 'POST':
         form = forms.OtherServiceForm(request.POST)
         if form.is_valid():
@@ -47,8 +47,9 @@ def new_other_service(request):
             return redirect('barbershop-settings')
     else:
         return redirect('barbershop-settings')
-        
-def update_menservices(request, id): 
+
+
+def update_menservices(request, id):
     logo = LogoImage.objects.filter(user=request.user)
 
     if logo.count() == 1:
@@ -65,14 +66,15 @@ def update_menservices(request, id):
             return redirect('barbershop-settings')
     else:
         form = forms.MenServiceForm(instance=instance)
-        context= {
-        'form': form,
-        'title': 'Update',
-        'logo': logo,
-    }
+        context = {
+            'form': form,
+            'title': 'Update',
+            'logo': logo,
+        }
         return render(request, 'barbershop/service_update.html', context)
 
-def update_kidservices(request, id): 
+
+def update_kidservices(request, id):
     logo = LogoImage.objects.filter(user=request.user)
 
     if logo.count() == 1:
@@ -89,21 +91,22 @@ def update_kidservices(request, id):
             return redirect('barbershop-settings')
     else:
         form = forms.KidServiceForm(instance=instance)
-        context= {
-        'form': form,
-        'title': 'Update',
-        'logo': logo,
-    }
+        context = {
+            'form': form,
+            'title': 'Update',
+            'logo': logo,
+        }
         return render(request, 'barbershop/service_update.html', context)
 
-def update_otherservices(request, id): 
+
+def update_otherservices(request, id):
     logo = LogoImage.objects.filter(user=request.user)
-    
+
     if logo.count() == 1:
         logo = logo[0]
     else:
         logo = None
-        
+
     instance = OtherServices.objects.get(pk=id)
     if request.method == 'POST':
         form = forms.OtherServiceForm(request.POST or None, instance=instance)
@@ -113,28 +116,31 @@ def update_otherservices(request, id):
             return redirect('barbershop-settings')
     else:
         form = forms.OtherServiceForm(instance=instance)
-        context= {
-        'form': form,
-        'title': 'Update',
-        'logo': logo,
-    }
+        context = {
+            'form': form,
+            'title': 'Update',
+            'logo': logo,
+        }
         return render(request, 'barbershop/service_update.html', context)
 
-def delete_menservice(request, id): 
+
+def delete_menservice(request, id):
     instance = MenServices.objects.get(pk=id)
     if request.method == 'POST':
         instance.delete()
         messages.success(request, f"{instance.service} was deleted.")
         return redirect('barbershop-settings')
 
-def delete_kidservice(request, id): 
+
+def delete_kidservice(request, id):
     instance = KidServices.objects.get(pk=id)
     if request.method == 'POST':
         instance.delete()
         messages.success(request, f"{instance.service} was deleted.")
         return redirect('barbershop-settings')
 
-def delete_otherservice(request, id): 
+
+def delete_otherservice(request, id):
     instance = OtherServices.objects.get(pk=id)
     if request.method == 'POST':
         instance.delete()

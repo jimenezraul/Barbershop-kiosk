@@ -1,40 +1,45 @@
 {% extends 'barbershop/base.html' %}
-{% load static %}     
+{% load static %}
 {% block content %}
 
-    <section>
-        <div class="container">
+<section>
+    <div class="container">
         <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
-            
+
             <div class="col-12 position-relative">
                 <div class="col-auto position-absolute arrow text-center">
                     <a href="{% url 'user-profile' %}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
                 </div>
-                    <h2 class="text-center text-dark" id="welcome">Completed</h2>
-                    <div class="col-auto position-absolute year text-center">
-                        {% if title == "Last_Year" %}
-                        <a href="{% url 'barbershop-completed' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
-                        <p class="b-list">{{ todays_year }}</p>
-                        {% else %}
-                        <a href="{% url 'barbershop-completed_last_year' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
-                        <p class="b-list">{{ last_year }}</p>
-                        {% endif %}
-                    </div>  
+                <h2 class="text-center text-dark" id="welcome">Completed</h2>
+                <div class="col-auto position-absolute year text-center">
+                    {% if title == "Last_Year" %}
+                    <a href="{% url 'barbershop-completed' %}"><i class="red fas fa-calendar-alt mt-3"></i></a>
+                    <p class="b-list">{{ todays_year }}</p>
+                    {% else %}
+                    <a href="{% url 'barbershop-completed_last_year' %}"><i
+                            class="red fas fa-calendar-alt mt-3"></i></a>
+                    <p class="b-list">{{ last_year }}</p>
+                    {% endif %}
+                </div>
             </div>
-                
+
         </div>
     </div>
-    </section>
-    {% for message in messages %}
-        <div class="row d-flex justify-content-center align-items-center align-content-center">
-            <div id="mydiv" class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center" id="success-alert" role="alert">
-                {{ message }}
-            </div>
-        </div>
-            <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    {% endfor %}
+</section>
+{% for message in messages %}
+<div class="row d-flex justify-content-center align-items-center align-content-center">
+    <div id="mydiv"
+        class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 alert alert-danger alert-dismissible fade show message text-center"
+        id="success-alert" role="alert">
+        {{ message }}
+    </div>
+</div>
+<script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+{% endfor %}
 <section class="list-table vh-auto">
     <div class="row my-5 justify-content-center">
         <div class="col-11 col-sm-10 col-lg-8 col-xl-7 chart-bg shadow position-relative">
@@ -49,18 +54,18 @@
             </div>
             </th>
             {% endif %}
-          <canvas data-bs-chart="{&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dic&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Walking Clients&quot;,&quot;backgroundColor&quot;:&quot;#c32e2e&quot;,&quot;borderColor&quot;:&quot;#dd2525&quot;,&quot;data&quot;:[&quot;{{ JAN.count }}&quot;,&quot;{{ FEB.count }}&quot;,&quot;{{ MAR.count }}&quot;,&quot;{{ APR.count }}&quot;,&quot;{{ MAY.count }}&quot;,&quot;{{ JUN.count }}&quot;,&quot;{{ JULY.count }}&quot;,&quot;{{ AUG.count }}&quot;,&quot;{{ SEP.count }}&quot;,&quot;{{ OCT.count }}&quot;,&quot;{{ NOV.count }}&quot;,&quot;{{ DIC.count }}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}">
-          </canvas>
+            <canvas
+                data-bs-chart="{&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dic&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Walking Clients&quot;,&quot;backgroundColor&quot;:&quot;#c32e2e&quot;,&quot;borderColor&quot;:&quot;#dd2525&quot;,&quot;data&quot;:[&quot;{{ JAN.count }}&quot;,&quot;{{ FEB.count }}&quot;,&quot;{{ MAR.count }}&quot;,&quot;{{ APR.count }}&quot;,&quot;{{ MAY.count }}&quot;,&quot;{{ JUN.count }}&quot;,&quot;{{ JULY.count }}&quot;,&quot;{{ AUG.count }}&quot;,&quot;{{ SEP.count }}&quot;,&quot;{{ OCT.count }}&quot;,&quot;{{ NOV.count }}&quot;,&quot;{{ DIC.count }}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}">
+            </canvas>
         </div>
-      </div>
-    
-    
-        <script
-            src="{% static 'barbershop/assets/js/jquery.min2.js' %}"></script>
-            <script src="{% static 'barbershop/assets/js/bootstrap.min.js' %}"></script>
-            <script src="{% static 'barbershop/assets/js/chart.min.js' %}"></script>
-            <script src="{% static 'barbershop/assets/js/bs-init.js' %}"></script>
-            {% if title == "Last_Year" %}
-            {% endif %} 
-</section> 
+    </div>
+
+
+    <script src="{% static 'barbershop/assets/js/jquery.min2.js' %}"></script>
+    <script src="{% static 'barbershop/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'barbershop/assets/js/chart.min.js' %}"></script>
+    <script src="{% static 'barbershop/assets/js/bs-init.js' %}"></script>
+    {% if title == "Last_Year" %}
+    {% endif %}
+</section>
 {% endblock content %}

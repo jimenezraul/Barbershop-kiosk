@@ -75,7 +75,7 @@ html, body {
   padding: 2px 55px;
   margin-top: 15px;
   border-radius: 30px;
-  border: 2px solid rgb(255,255,255);
+  border: 2px solid rgb(255, 255, 255);
   text-decoration: none;
 }
 
@@ -96,7 +96,7 @@ html, body {
 
 a {
   color: white;
-  background-color: rgba(0,98,204,0);
+  background-color: rgba(0, 98, 204, 0);
 }
 
 .permanent-marker {
@@ -184,8 +184,8 @@ a {
 }
 
 .permanent-marker.phone a:hover {
-  color: rgb(255,255,255);
-  background-color: rgba(255,255,255,0);
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
   padding: 1px 41px;
   border-radius: 25px;
   border: 2px solid white;
@@ -210,8 +210,8 @@ a {
 }
 
 .permanent-marker.location a:hover {
-  color: rgb(255,255,255);
-  background-color: rgba(255,255,255,0);
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
   padding: 8px 18px;
   border-radius: 25px;
   border: 2px solid white;
@@ -224,18 +224,20 @@ a {
   border-bottom: 1px solid red;
   border-top: 1px solid red;
 }
+
 #wait-list {
   height: 100%;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   padding-bottom: 10px;
 }
+
 .b-border {
   border-bottom: 2px solid white;
   margin-bottom: 10px;
   padding-bottom: 10px;
   margin-top: 20px;
-} 
+}
 
 @media (min-width: 300px) {
   .fas.fa-user-tie {
@@ -251,13 +253,15 @@ a {
     padding-left: 10px;
   }
 }
-.article{
+
+.article {
   color: white;
 }
-.site-form{
+
+.site-form {
   position: relative;
-  display:block;
-  border:1px solid rgb(160, 159, 159);
+  display: block;
+  border: 1px solid rgb(160, 159, 159);
   max-width: 450px;
   width: 100%;
   background-color: white;
@@ -265,7 +269,8 @@ a {
   border-radius: 8px;
   color: #505e6c;
 }
-.site-form h1{
+
+.site-form h1 {
   font-size: 40px;
   padding-top: 20px;
   padding-bottom: 15px;
@@ -273,15 +278,14 @@ a {
   font-weight: 800;
   font-style: italic;
 }
-label{
-  display:none;
+
+label {
+  display: none;
 }
-#id_name, #id_barber, #id_zip_code, 
-#id_first_name, #id_last_name, 
-#id_email, #id_barbershop,#id_hire_date,#id_phone,#id_license_num,#id_street,
-#id_city,#id_state{
-  display:block;
-  width:80%;
+
+#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email, #id_barbershop, #id_hire_date, #id_phone, #id_license_num, #id_street, #id_city, #id_state {
+  display: block;
+  width: 80%;
   font-weight: 500;
   margin: 10px auto;
   border-radius: 5px;
@@ -291,90 +295,104 @@ label{
   height: 42px;
   opacity: .6;
 }
-.sign-up-button{
-  display:block;
-  width:80%;
+
+.sign-up-button {
+  display: block;
+  width: 80%;
   margin: auto;
   border-radius: 25px;
   border: 1px solid #c4c4c4;
   padding: 7px;
   text-indent: 15px;
   height: 42px;
-  color:white;
+  color: white;
   height: 42px;
   border: 1px solid rgb(173, 173, 173);
-  
 }
-.sign-up-button:hover{
+
+.sign-up-button:hover {
   color: #000000;
   text-shadow: 2px solid #ffffff;
 }
 
-.site-form p{
+.site-form p {
   font-size: medium;
   color: #000000;
   font-weight: 600;
 }
+
 ::placeholder {
-  color:rgb(80,94,108);
-   opacity: 1; /* Firefox */
- }
-h3{
-  padding:0;
+  color: rgb(80, 94, 108);
+  opacity: 1;
+  /* Firefox */
+}
+
+h3 {
+  padding: 0;
   color: #212529;
   margin: 10px 0;
 }
-.panel{
+
+.panel {
   background: #ecf4fb;
-  border-radius:4px;
+  border-radius: 4px;
   margin-bottom: 2px;
   padding-right: 10px;
   min-height: 20px;
 }
-.list-table{
+
+.list-table {
   min-height: 86vh;
 }
-.div-border{
+
+.div-border {
   border-bottom: 1px solid black;
 }
-.table-btn{
+
+.table-btn {
   height: 100%;
 }
-.barber-btn{
+
+.barber-btn {
   font-weight: 600;
   padding: 0;
   margin: 0;
 }
-.client-btn{
+
+.client-btn {
   font-weight: 600;
   padding: 0;
   margin: 0;
 }
-.delete-btn{
+
+.delete-btn {
   font-size: 20px;
   border: none;
   color: #ffffff;
-  color:white;
+  color: white;
   background-color: #dc3545;
   border-radius: 25px;
-  padding:2px 20px;
-  
+  padding: 2px 20px;
 }
-.delete-btn:hover{
+
+.delete-btn:hover {
   background-color: #c02f3e;
 }
-.client-bar{
+
+.client-bar {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.separator{
+
+.separator {
   border-right: 2px solid #cacaca;
 }
-.card{
-margin-top: 20px;
+
+.card {
+  margin-top: 20px;
 }
 
-.time{
+.time {
   display: flex;
   color: #ffffff;
   background-color: #dc3545;
@@ -384,46 +402,50 @@ margin-top: 20px;
   padding: 0;
 }
 
-.video-stream{
+.video-stream {
   width: 100%;
   height: 250px;
 }
 
-
-
-.minutes{
+.minutes {
   margin-top: 5px;
   font-weight: bold;
   font-size: large;
 }
-.ewt{
+
+.ewt {
   margin-top: 10px;
   font-weight: bold;
 }
-.card-body{
+
+.card-body {
   padding: 0 20px;
 }
 
-.select-barber{
+.select-barber {
   margin: 0!important;
   padding: 0!important;
   color: #000000;
   font-weight: bold;
 }
-.gold{
+
+.gold {
   background-color: #d4af37;
 }
-.timename{
+
+.timename {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
 }
-.wel{
+
+.wel {
   font-weight: bold!important;
   font-size: 25px;
 }
 
 /* Popup container - can be anything you want */
+
 .popup {
   position: relative;
   display: inline-block;
@@ -435,19 +457,21 @@ margin-top: 20px;
 }
 
 /* The actual popup */
+
 .popup .popuptext {
   visibility: hidden;
- margin-right: 15px;
+  margin-right: 15px;
 }
 
 /* Popup arrow */
+
 .popup .popuptext::after {
   content: "";
   position: absolute;
-  
 }
 
 /* Toggle this class - hide and show the popup */
+
 .popup .show {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
@@ -455,15 +479,25 @@ margin-top: 20px;
 }
 
 /* Add animation (fade in the popup) */
+
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
 .popup .hide {
   visibility: hidden;
   -webkit-animation: fadeOut 1s;
@@ -471,56 +505,70 @@ margin-top: 20px;
 }
 
 /* Add animation (fade in the popup) */
+
 @-webkit-keyframes fadeOut {
-  from {opacity: 1;} 
-  to {opacity: 0;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity:0 ;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
-.d-bottom{
+.d-bottom {
   margin-bottom: 30px!important;
 }
-.sky{
+
+.sky {
   margin: 0;
 }
-.font-l{
+
+.font-l {
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-style: italic;
 }
 
-.city{
+.city {
   font-size: 25px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-style: italic;
 }
 
-.temp{
+.temp {
   font-size: 25px;
   border-radius: 25px;
   width: 50%!important;
   padding: 0px 0;
 }
-.description{
+
+.description {
   font-size: 15px;
 }
 
-.font-b{
+.font-b {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-style: italic;
 }
-.sky img{
+
+.sky img {
   height: 100px;
   width: 100px;
 }
-.r-client-info{
+
+.r-client-info {
   width: 80%;
   padding: 2px 15px;
   border-radius: 5px;
@@ -528,32 +576,36 @@ margin-top: 20px;
   opacity: .4;
 }
 
-.edit{
+.edit {
   font-size: 30px;
   border: none;
   border-radius: 25px;
   text-decoration: none;
 }
-.edit:hover{
+
+.edit:hover {
   color: rgb(204, 204, 204);
   border: none;
   border-radius: 25px;
   text-decoration: none;
 }
-.fa-arrow-circle-left{
+
+.fa-arrow-circle-left {
   font-size: 35px;
 }
-.fa-arrow-circle-left:hover{
+
+.fa-arrow-circle-left:hover {
   color: rgb(204, 204, 204);
 }
-.b-list{
+
+.b-list {
   padding: 0;
   margin: 0;
 }
 
-.confirm-button{
-  display:block;
-  width:80%;
+.confirm-button {
+  display: block;
+  width: 80%;
   margin: auto;
   border-radius: 25px;
   border: 1px solid #dc3545;
@@ -565,83 +617,91 @@ margin-top: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.confirm-button:hover{
+
+.confirm-button:hover {
   color: #ffffff;
   background-color: #dc3545;
   text-shadow: 2px solid #ffffff;
   text-decoration: none;
 }
-.form-name{
+
+.form-name {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: bold;
 }
 
-.content{
+.content {
   height: 100vh;
 }
 
-.fa-user-cog{
+.fa-user-cog {
   font-size: 30px;
 }
 
-.fa-plus-circle{
+.fa-plus-circle {
   font-size: 25px;
   color: #dc3545;
 }
 
-.barber-plus{
+.barber-plus {
   margin-bottom: 10px!important;
   background-color: #dc3545;
   border-radius: 20px;
   text-decoration: none!important;
   padding: 5px 15px;
 }
-.barber-plus:hover{
+
+.barber-plus:hover {
   background-color: #c02f3e;
 }
 
-.refresh{
+.refresh {
   color: white;
   background-color: #dc3545;
   padding: 10px;
   border-radius: 25px;
-  
 }
-.count{
+
+.count {
   margin: 0;
   padding: 0;
 }
-.count-num{
+
+.count-num {
   top: 10px;
   right: 10px;
 }
 
-.chart-bg{
+.chart-bg {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 5px;
 }
-.barbers-profiles{
+
+.barbers-profiles {
   color: #ffffff;
   font-size: 32px;
 }
-.red{
+
+.red {
   color: #dc3545;
 }
-.red:hover{
+
+.red:hover {
   color: #c02f3e;
 }
 
-.admin{
+.admin {
   color: white;
   font-size: 25px;
 }
-.admin:hover{
+
+.admin:hover {
   color: #c4c4c4;
 }
 
-.completed-btn{
+.completed-btn {
   background-color: #ffffff;
   border: 0;
   font-size: 20px;
@@ -649,9 +709,9 @@ margin-top: 20px;
   margin: 0;
 }
 
-#id_service, #id_price{
-  display:block;
-  width:95%;
+#id_service, #id_price {
+  display: block;
+  width: 95%;
   font-weight: 500;
   margin: 10px auto;
   padding: 5px;
@@ -662,25 +722,25 @@ margin-top: 20px;
   opacity: .6;
 }
 
-.services, .weather-link{
+.services, .weather-link {
   margin: 0;
   padding: 0;
 }
 
-.fa-calendar-alt{
+.fa-calendar-alt {
   font-size: 35px;
 }
 
-.logo{
+.logo {
   width: 50%;
 }
 
-.logo-bg{
+.logo-bg {
   background-color: #495c85;
   width: 100%;
 }
 
-#id_image{
+#id_image {
   width: 100%;
   border: 2px solid grey;
   background-color: #dc3545;
@@ -688,76 +748,81 @@ margin-top: 20px;
   padding: 2px;
 }
 
-.img_logo{
+.img_logo {
   width: 30%;
   height: 30%;
 }
 
-.logout a{
+.logout a {
   font-size: 30px;
-  
 }
 
-.logout a:hover{
+.logout a:hover {
   font-size: 30px;
-  
   color: #c4c4c4;
 }
 
-.login-pic{
+.login-pic {
   margin-top: 6px;
   width: 40px;
   height: 40px;
 }
-.login-img p{
+
+.login-img p {
   margin-top: 2px!important;
 }
 
-.messages{
+.messages {
   position: absolute;
 }
 
-.title-bar{
- position: relative;
+.title-bar {
+  position: relative;
 }
 
-.heading-col{
+.heading-col {
   position: absolute;
   top: 20px;
   left: 1px;
   z-index: 1;
 }
 
-.bg-grey{
+.login-col {
+  position: absolute;
+  top: -20px;
+  left: 1px;
+  z-index: 1;
+}
+
+.bg-grey {
   background-color: #dc3545;
   color: #ffffff;
 }
 
-.table{
+.table {
   margin-bottom: 0;
 }
 
-
-
-.text-g{
+.text-g {
   color: #505e6c!important;
 }
 
-.year{
+.year {
   top: 5px;
   right: 30px;
 }
 
-.arrow{
+.arrow {
   top: 10px;
   left: 30px;
 }
-.log-out{
+
+.log-out {
   top: 20px;
   right: 30px;
 }
 
-.form{
+.form {
   height: 90vh;
 }
 
@@ -770,12 +835,12 @@ margin-top: 20px;
   border-radius: 3px;
 }
 
-.avatar{
+.avatar {
   width: 100%;
   height: 50px;
 }
 
-.avatar img{
+.avatar img {
   min-height: 100px;
   width: 100px;
   position: absolute;
@@ -783,7 +848,7 @@ margin-top: 20px;
   border: 2px solid white;
 }
 
-.avatar i{
+.avatar i {
   height: 100px;
   width: 100px;
   position: absolute;
@@ -794,42 +859,48 @@ margin-top: 20px;
   border-radius: 50%;
 }
 
-.yes{
+.yes {
   background-color: #2f89fc;
   color: white;
   padding: 5px 10px;
   border-radius: 25px;
 }
 
-.no{
+.no {
   background-color: #dc3545;
   color: white;
   padding: 5px 10px;
   border-radius: 25px;
 }
 
-.vh-80{
+.vh-80 {
   height: 80vh;
 }
 
-.fa-hand-point-up{
+.fa-hand-point-up {
   font-size: 60px;
 }
 
-.barber-avail{
+.barber-avail {
   font-size: 29px;
 }
 
-.vh-auto{
+.vh-auto {
   height: 100vh;
 }
-.btn-border{
-  border: 1px solid white;
-}
-.btn-border:hover{
+
+.btn-border {
   border: 1px solid white;
 }
 
-.fa-sign-out-alt-desktop{
+.btn-border:hover {
+  border: 1px solid white;
+}
+
+.fa-sign-out-alt-desktop {
   margin-top: 10px;
+}
+
+a.logout {
+  font-size: 30px;
 }

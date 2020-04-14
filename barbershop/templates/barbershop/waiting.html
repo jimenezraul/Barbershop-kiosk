@@ -1,141 +1,149 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
-    
+
 {% block content %}
-    <section>
-        <div class="container">
+<section>
+    <div class="container">
         <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
             <div class="col-3 d-flex justify-content-center">
-                
+
             </div>
             <div class="col-6">
-                    <h2 class="text-center text-dark" id="welcome">Waiting List</h2>
+                <h2 class="text-center text-dark" id="welcome">Waiting List</h2>
             </div>
-                <div class="col-3 text-center">
-                     <h5 class="ewt text-g">Estimated Wait Time</h5>
-                     <div class="col-11 col-sm-11 col-md-8 col-lg-5 time justify-content-center">{{ eta }}
-                     </div>
-                     <p class="timename text-g">{{ time_display }}</p>
-                              
+            <div class="col-3 text-center">
+                <h5 class="ewt text-g">Estimated Wait Time</h5>
+                <div class="col-11 col-sm-11 col-md-8 col-lg-5 time justify-content-center">{{ eta }}
+                </div>
+                <p class="timename text-g">{{ time_display }}</p>
 
-                </div>  
+
+            </div>
         </div>
     </div>
-    </section>
+</section>
 
-    
+
 <section class="list-table">
     <div class="container">
-        
+
         <div class="row d-flex">
-            
+
             <div class="col-9 mb-4">
                 <div class="clients list-table">
                     <div class="container">
-                    <div class="row">
-                    
-                        <!--Grid column-->
-                        <div class="col-md-12 text-left">
-                    
-                            <div class="card mt-2">
-                                <div class="card-body p-0">
-                    
-                                    <!-- Client table -->
-                                    <div class="table-responsive rounded-lg">
-                    
-                                        <table class="table product-table">
-                    
-                                            <!-- Table head -->
-                                            <thead class="bg-grey lighten-5">
-                                                <tr>
-                                                    
-                                                    <th class="font-weight-bold text-center">
-                                                        <strong>Client</strong>
-                                                    </th>
-                                                    <th class="font-weight-bold text-center">
-                                                        <strong>Barber</strong>
-                                                    </th>
-                                                    
-                                                    <th class="font-weight-bold text-center">
-                                                        <strong>Time</strong>
-                                                    </th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <!-- /.Table head -->
-                    
-                                            <!-- Table body -->
-                                            <tbody >
-                                                {% for client in clients %}
-                                                <!-- First row -->
-                                                <tr>
-                                            
-                                                    <td>
-                                                        <h5 class="text-center">
-                                                            <strong>{{ client.name }}</strong>
-                                                        </h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="text-center">
-                                                            <strong>{{ client.barber }}</strong>
-                                                        </h5>
-                                                    </td>
-                                                    
-                                                    <td>
-                                                        <p class="text-center">
-                                                            <strong>{{ client.date }}</strong>
-                                                        </p>
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <!-- /.First row -->
-                                                {% endfor %}
-                                            </tbody>
-                                            <!-- /.Table body -->
-                                            
-                                        </table>
-                                        <div class="container">
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-12 text-left">
+
+                                <div class="card mt-2">
+                                    <div class="card-body p-0">
+
+                                        <!-- Client table -->
+                                        <div class="table-responsive rounded-lg">
+
+                                            <table class="table product-table">
+
+                                                <!-- Table head -->
+                                                <thead class="bg-grey lighten-5">
+                                                    <tr>
+
+                                                        <th class="font-weight-bold text-center">
+                                                            <strong>Client</strong>
+                                                        </th>
+                                                        <th class="font-weight-bold text-center">
+                                                            <strong>Barber</strong>
+                                                        </th>
+
+                                                        <th class="font-weight-bold text-center">
+                                                            <strong>Time</strong>
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <!-- /.Table head -->
+
+                                                <!-- Table body -->
+                                                <tbody>
+                                                    {% for client in clients %}
+                                                    <!-- First row -->
+                                                    <tr>
+
+                                                        <td>
+                                                            <h5 class="text-center">
+                                                                <strong>{{ client.name }}</strong>
+                                                            </h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="text-center">
+                                                                <strong>{{ client.barber }}</strong>
+                                                            </h5>
+                                                        </td>
+
+                                                        <td>
+                                                            <p class="text-center">
+                                                                <strong>{{ client.date }}</strong>
+                                                            </p>
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- /.First row -->
+                                                    {% endfor %}
+                                                </tbody>
+                                                <!-- /.Table body -->
+
+                                            </table>
+                                            <div class="container">
                                                 <div class="row d-flex justify-content-center">
                                                     <div class="col-6 d-flex justify-content-center">
                                                         {% if users.has_other_pages %}
-                                                            <ul class="pagination mt-3">
-                                                                {% if users.has_previous %}
-                                                                    <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
-                                                                {% else %}
-                                                                    <li class="disabled"><a class="page-link">&laquo;</a></li>
-                                                                {% endif %}
-                                                                {% for i in users.paginator.page_range %}
-                                                                {% if users.number == i %}
-                                                                    <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></a></span></li>
-                                                                {% else %}
-                                                                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                                                                {% endif %}
-                                                                {% endfor %}
-                                                                {% if users.has_next %}
-                                                                    <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">&raquo;</a></li>
-                                                                {% else %}
-                                                                    <li class="disabled"><a class="page-link">&raquo;</a></li>
-                                                                {% endif %}
-                                                            </ul>
+                                                        <ul class="pagination mt-3">
+                                                            {% if users.has_previous %}
+                                                            <li class="page-item"><a class="page-link"
+                                                                    href="?page={{ users.previous_page_number }}">&laquo;</a>
+                                                            </li>
+                                                            {% else %}
+                                                            <li class="disabled"><a class="page-link">&laquo;</a></li>
+                                                            {% endif %}
+                                                            {% for i in users.paginator.page_range %}
+                                                            {% if users.number == i %}
+                                                            <li class="page-item active"><a
+                                                                    class="page-link"><span>{{ i }} <span
+                                                                            class="sr-only">(current)</span></a></span>
+                                                            </li>
+                                                            {% else %}
+                                                            <li class="page-item"><a class="page-link"
+                                                                    href="?page={{ i }}">{{ i }}</a></li>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                            {% if users.has_next %}
+                                                            <li class="page-item"><a class="page-link"
+                                                                    href="?page={{ users.next_page_number }}">&raquo;</a>
+                                                            </li>
+                                                            {% else %}
+                                                            <li class="disabled"><a class="page-link">&raquo;</a></li>
+                                                            {% endif %}
+                                                        </ul>
                                                         {% endif %}
                                                     </div>
                                                 </div>
-                                            </div> 
-                                    </div>
-                                    <!-- /.Shopping Cart table -->
-                    
-                                </div>
-                    
-                            </div>
-                    
-                        </div>
-                        <!--Grid column-->
-                    
-                    </div>
-                    </div>
-                    </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.Shopping Cart table -->
 
-               <!-- <div class="card shadow mb-4">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!--Grid column-->
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="card shadow mb-4">
                     <div class="card-header bg-danger">
                         <div class="row d-flex justify-content-center align-items-center align-content-center client-bar">
                                 <div class="col-4 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center separator">
@@ -222,85 +230,92 @@
 
             <div class="col-3">
                 {% if logo.count == 0 %}
-                
+
                 {% else %}
                 <div class="card border-0">
                     <img class="logo-bg" src="{{ logo.image.url }}" alt="Image">
                 </div>
                 {% endif %}
                 <div class="card">
-                    <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Weather</h4>
+                    <div class="card-header bg-danger text-center">
+                        <h4 class="font-l text-white">Weather</h4>
                     </div>
                     <div class="weather-link">
                         <div class="card-body text-center">
-                                <figure class="sky">
-                                        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
-                                    </figure>
+                            <figure class="sky">
+                                <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                            </figure>
                             <h4 class="card-title font-b city text-g">{{ city_weather.city }}</h4>
-                            <p class="card-text font-b bg-danger temp mx-auto text-white">{{ city_weather.temperature }}°F</p>
+                            <p class="card-text font-b bg-danger temp mx-auto text-white">
+                                {{ city_weather.temperature }}°F</p>
                             <p class="card-text d-bottom font-b description text-g">{{ city_weather.description }}</p>
 
                         </div>
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Prices</h4></div>
-                        <div class="services">
-                            <div class="card-body">
-                                <h4 class="card-title font-b city mt-3 text-g">Men's Haircut</h4>
-                                {% if not menservices %}
-                                <p class="font-weight-bold">No Service</p>
-                                <p>Add Services in settings.</p>
-                                <a href="{% url 'barbershop-settings' %}"><button class="btn btn-primary border">Settings</button></a>
-                                {% endif %}
-                                {% for service in menservices %}
-                                
-                                <div class="col-12 d-flex p-0 m-0">
+                    <div class="card-header bg-danger text-center">
+                        <h4 class="font-l text-white">Prices</h4>
+                    </div>
+                    <div class="services">
+                        <div class="card-body">
+                            <h4 class="card-title font-b city mt-3 text-g">Men's Haircut</h4>
+                            {% if not menservices %}
+                            <p class="font-weight-bold">No Service</p>
+                            <p>Add Services in settings.</p>
+                            <a href="{% url 'barbershop-settings' %}"><button
+                                    class="btn btn-primary border">Settings</button></a>
+                            {% endif %}
+                            {% for service in menservices %}
+
+                            <div class="col-12 d-flex p-0 m-0">
                                 <div class="col-8 p-0 ">
                                     <p class="font-weight-bold">{{ service.service }}</p>
                                 </div>
                                 <div class="col-4 p-0">
                                     <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
                                 </div>
-                                </div>
-                                {% endfor %}
-                                <h4 class="card-title font-b city mt-3 text-g">Kid's Haircut</h4>
-                                {% if not kidservices %}
-                                <p class="font-weight-bold">No Service</p>
-                                <p>Add Services in settings.</p>
-                                <a href="{% url 'barbershop-settings' %}"><button class="btn btn-primary border">Settings</button></a>
-                                {% endif %}
-                                {% for service in kidservices %}
-                                <div class="col-12 d-flex p-0 m-0">
-                                    <div class="col-8 p-0 ">
-                                        <p class="font-weight-bold">{{ service.service }}</p>
-                                    </div>
-                                    <div class="col-4 p-0">
-                                        <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
-                                    </div>
-                                    </div>
-                                {% endfor %}
-                                <h4 class="card-title font-b city mt-3 text-g">Other Services</h4>
-                                {% if not otherservices %}
-                                <p class="font-weight-bold">No Service</p>
-                                <p>Add Services in settings.</p>
-                                <a href="{% url 'barbershop-settings' %}"><button class="btn btn-primary border">Settings</button></a>
-                                {% endif %}
-                                {% for service in otherservices %}
-                                <div class="col-12 d-flex p-0 m-0">
-                                    <div class="col-8 p-0 ">
-                                        <p class="font-weight-bold">{{ service.service }}</p>
-                                    </div>
-                                    <div class="col-4 p-0">
-                                        <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
-                                    </div>
-                                    </div>
-                                {% endfor %}
-                                <p class="d-bottom"></p>
                             </div>
+                            {% endfor %}
+                            <h4 class="card-title font-b city mt-3 text-g">Kid's Haircut</h4>
+                            {% if not kidservices %}
+                            <p class="font-weight-bold">No Service</p>
+                            <p>Add Services in settings.</p>
+                            <a href="{% url 'barbershop-settings' %}"><button
+                                    class="btn btn-primary border">Settings</button></a>
+                            {% endif %}
+                            {% for service in kidservices %}
+                            <div class="col-12 d-flex p-0 m-0">
+                                <div class="col-8 p-0 ">
+                                    <p class="font-weight-bold">{{ service.service }}</p>
+                                </div>
+                                <div class="col-4 p-0">
+                                    <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <h4 class="card-title font-b city mt-3 text-g">Other Services</h4>
+                            {% if not otherservices %}
+                            <p class="font-weight-bold">No Service</p>
+                            <p>Add Services in settings.</p>
+                            <a href="{% url 'barbershop-settings' %}"><button
+                                    class="btn btn-primary border">Settings</button></a>
+                            {% endif %}
+                            {% for service in otherservices %}
+                            <div class="col-12 d-flex p-0 m-0">
+                                <div class="col-8 p-0 ">
+                                    <p class="font-weight-bold">{{ service.service }}</p>
+                                </div>
+                                <div class="col-4 p-0">
+                                    <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <p class="d-bottom"></p>
                         </div>
+                    </div>
                 </div>
-            <!-- 
+                <!-- 
             {% if user.is_authenticated %}
             <div class="card mb-4">
                 <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Users</h4></div>
@@ -315,9 +330,9 @@
             {% endif %}  
             -->
             </div>
-                
+
         </div>
     </div>
 
-</section>          
+</section>
 {% endblock content %}

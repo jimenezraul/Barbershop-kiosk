@@ -23,7 +23,7 @@
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
         viewMode: 1,
-        aspectRatio: 1/1,
+        aspectRatio: 1 / 1,
         minCropBoxWidth: 200,
         minCropBoxHeight: 200,
         ready: function () {
@@ -57,213 +57,221 @@
 
   });
 </script>
-  <script>
-    $(".fa-camera").click(function () {
+<script>
+  $(".fa-camera").click(function () {
     $("input[type='file']").trigger('click');
-    });
+  });
 
-    $('input[type="file"]').on('change', function() {
+  $('input[type="file"]').on('change', function () {
     var val = $(this).val();
     $(this).siblings('span').text(val);
-    })
+  })
 </script>
 {% endblock %}
 {% block content %}
-    <section>
-        <div class="container">
-          
-            <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
-                <div class="d-none d-md-block col-12 col-md-6 heading-col">
-                  <h4 class="text-center text-dark" id="welcome">Hello {{ barbers.barber}}!
-                  </h4>
-                    
-                </div>
-                {% if not barbers.file %}
-                <div class="col-12 text-center pic-col"><i class="icon-red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
-                {% else %}
-                <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image" src="{{ barbers.file.url }}" height="200px" width="200px"></div>
-                {% endif %}
-                
-              
-              <!--end notifications-->
-                <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i class="fas fa-arrow-circle-left"></i></a></div>
-                <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
-                <div id="myBtn" class="col-auto barber_noti"><i class="far fa-bell"></i></div>
-                {% if anniversary.count == 0 %}
-                 
-                {% endif %}
-                {% for anni in anniversary %}
-                      {%if anni.id == barbers.id %}
-                      
-                      {% else %}
-                      <span class="barber-count-noti badge badge-light">{{anniversary.count}}</span>
-                      {% endif %}
-                {% endfor %}
-                <!--<div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div> -->
-               
+<section>
+  <div class="container">
 
-                <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
-                  <div role="menu" class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
-                    <span class="close pr-2">&times;</span>
-                    <h6 class="text-white dropdown-header rounded">Notification Center</h6>
-                    <div class="col-12">
-                      {% if anniversary.count == 0 %}
-                      <p class="text-center mt-2">No Notification</p>
-                      {% endif %}
-                      {% if anniversary != 0 %} 
-                      {% for anni in anniversary %}
-                      {%if anni.id == barbers.id %}
-                      {% else %}
-                      <div class="d-flex justify-content-center align-content-center align-items-center">
-                        <div class="col-2 text-center p-0 beer"><img class="rounded-circle" src="{{ anni.file.url }}" alt=""></div>
-                    
-                      <div class="col-10 mt-2 border-bottom">
-                      <p class="font-weight-bold m-0 ">Congratulate {{ anni.barber }} for another year at the BarberShop!</p>
-                      <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>🎉Celebrating 🎈{{ anni.years_in_shop }} years today!🎉</small></p>
-                      </div>
-                    </div>
-                      {% endif %}
-                      {% endfor %}
-                      {% endif %}
-                    </div></div>
-                </div>
-                
-                {% if completed.count == 0 %}
-                <div><p></p></div>
-                {% else %}
-                <span class="client-noti badge badge-light">{{ completed.count }}</span>
-                {% endif %}
-                
-                
-                <div class="col-auto heading-col">
-                  {% for message in messages %}
-                  <div class="row d-flex justify-content-center align-items-center align-content-center">
-                      <div id="mydiv" class="mt-2 col-12 alert alert-{{ message.tags }} fade show message text-center" id="success-alert" role="alert">
-                          {{ message }}
-                      </div>
-                  </div>
-                      
-                      {% endfor %}
-                </div>
-                <form action="{% url 'barberphoto' barbers.id %}" method="post" enctype="multipart/form-data" id="formUpload">
-                    {% csrf_token %}
-                <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
-                  <select name="user" id="id_user">
-                    <option value="{{ barbers.barber }}" selected="">{{ user }}</option>
-                  </select>
-                </div>
-                </form> 
-                
+    <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
+      <div class="d-none d-md-block col-12 col-md-6 heading-col">
+        <h4 class="text-center text-dark" id="welcome">Hello {{ barbers.barber}}!
+        </h4>
+
+      </div>
+      {% if not barbers.file %}
+      <div class="col-12 text-center pic-col"><i class="icon-red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+      {% else %}
+      <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image"
+          src="{{ barbers.file.url }}" height="200px" width="200px"></div>
+      {% endif %}
+
+
+      <!--end notifications-->
+      <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i
+            class="fas fa-arrow-circle-left"></i></a></div>
+      <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
+      <div id="myBtn" class="col-auto barber_noti"><i class="far fa-bell"></i></div>
+      {% if anniversary.count == 0 %}
+
+      {% endif %}
+      {% for anni in anniversary %}
+      {%if anni.id == barbers.id %}
+
+      {% else %}
+      <span class="barber-count-noti badge badge-light">{{anniversary.count}}</span>
+      {% endif %}
+      {% endfor %}
+      <!--<div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div> -->
+
+
+      <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
+        <div role="menu"
+          class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
+          <span class="close pr-2">&times;</span>
+          <h6 class="text-white text-center dropdown-header rounded">Notifications</h6>
+          <div class="col-12">
+            {% if anniversary.count == 0 %}
+            <p class="text-center mt-2">No Notifications</p>
+            {% endif %}
+            {% if anniversary != 0 %}
+            {% for a in anniversary %}
+            {%if a.id == barbers.id %}
+            {% else %}
+            <div class="d-flex justify-content-center align-content-center align-items-center">
+              <div class="col-2 text-center p-0 beer"><img class="rounded-circle" src="{{ a.file.url }}" alt="">
+              </div>
+
+              <div class="col-10 mt-2 border-bottom">
+                <p class="font-weight-bold m-0 ">Congratulate {{ a.barber }} for another year at the BarberShop!</p>
+                <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>Celebrating
+                    {{ a.years_in_shop }} years today!</small></p>
+              </div>
             </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
         </div>
-    </section>
-    <div>
+      </div>
 
-<!-- MODAL TO CROP THE IMAGE -->
-<div class="modal fade" id="modalCrop">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <h4 class="modal-title p-1">Close</h4>
-        </button>
+      {% if completed.count == 0 %}
+      <div>
+        <p></p>
       </div>
-      <div class="modal-body">
-        <img src="" id="image" style="max-width: 100%;">
+      {% else %}
+      <span class="client-noti badge badge-light">{{ completed.count }}</span>
+      {% endif %}
+
+
+      <div class="col-auto heading-col">
+        {% for message in messages %}
+        <div class="row d-flex justify-content-center align-items-center align-content-center">
+          <div id="mydiv" class="mt-2 col-12 alert alert-{{ message.tags }} fade show message text-center"
+            id="success-alert" role="alert">
+            {{ message }}
+          </div>
+        </div>
+
+        {% endfor %}
       </div>
-      <div class="modal-footer">
-        <div class="btn-group pull-left" role="group">
-          <button type="button" class="btn btn-default js-zoom-in">
-            <span class="glyphicon glyphicon-zoom-in"></span>
-          </button>
-          <button type="button" class="btn btn-default js-zoom-out">
-            <span class="glyphicon glyphicon-zoom-out"></span>
+      <form action="{% url 'barberphoto' barbers.id %}" method="post" enctype="multipart/form-data" id="formUpload">
+        {% csrf_token %}
+        <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
+          <select name="user" id="id_user">
+            <option value="{{ barbers.barber }}" selected="">{{ user }}</option>
+          </select>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+<div>
+
+  <!-- MODAL TO CROP THE IMAGE -->
+  <div class="modal fade" id="modalCrop">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h4 class="modal-title p-1">Close</h4>
           </button>
         </div>
-        <button type="button" class="btn btn-danger badge-pill" data-dismiss="modal">Nevermind</button>
-        <button type="button" class="btn btn-primary badge-pill js-crop-and-upload">Crop and upload</button>
+        <div class="modal-body">
+          <img src="" id="image" style="max-width: 100%;">
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-danger badge-pill" data-dismiss="modal">Nevermind</button>
+          <button type="button" class="btn btn-primary badge-pill js-crop-and-upload">Crop and upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow">
+    <div class="row row-2">
+      <div class="col">
+        <div></div>
       </div>
     </div>
   </div>
 </div>
-        <div class="container-fluid shadow">
-            <div class="row row-2">
-                <div class="col">
-                    <div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="min-vh-100">
-        <div class="container">
-            <div class="row d-flex justify-content-center card-margin">
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-                  <div class="card shadow">
-                    <h5 class="card-header">Barber's Info</h5>
-                    <div class="card-body">
-                      
-                      {% if hire.day == todays_date.day and hire.month == todays_date.month %}
-                      <div class="aniversary p-2 rounded text-light mb-3">
-                      <h4 class="text-center">{{ happy_hire_day }}</h4>
-                      <p class="text-center mb-2"><small>{{ happy_hire_greeting }}</small></p>
-                    </div>
-                    {% endif %}
-                        <h5>Name: <span class='pro-info'>{{ barbers.barber }}</span></h5>
-                        {% if barbers.available == False %}
-                        <h5>Available: <span class='pro-info no font-weight-bold'>No</span></h5>
-                        {% else %}
-                        <h5>Available: <span class='pro-info yes font-weight-bold'>Yes</span></h5>
-                        {% endif %}
-                        <h5>Phone #: <span class='pro-info'>({{ area_code }}) {{ first_3_number }}-{{ last_4_number }}</span></h5>
-                        <h5>License #: <span class='pro-info'>{{ barbers.license_num }}</span></h5>
-                        <h5>Hire Date: <span class='pro-info'>{{ barbers.hire_date }}</span></h5>
-                        {% if not years_in_shop %}
-                        <h5>Years in the Shop: <span class='pro-info'>0 Years</span></h5>
-                        {% else %}
-                        <h5>Years in the Shop: <span class='pro-info'>{{ years_in_shop }} Years</span></h5>
-                        {% endif %}
-                        <form action="{% url 'barber_status' barbers.id %}">
-                          {% csrf_token %}
-                          <button class="btn btn-primary btn-border" type="submit">Update Status</button>
-                        </form>
-                    </div>
-                  </div>
-                
-                </div>
-                <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-4">
-                  <div class="card shadow">
-                    <div class="col-12 card-header d-flex">
-                      <h5 class="col-4 text-center">Client</h5>
-                      <h5 class="col-4 text-center">Barber</h5>
-                    </div>
-                    <div class="barber-clients">
-                    {% for client in clients %}
-                    <div class="p-2 border-bottom card-body d-flex text-center">
-                        <div class="col-4">
-                          <h5>{{ client.name }}</h5>
-                        </div>
-                        <div class="col-4">
-                          <h5>{{ client.barber }}</h5>
-                        </div>
-                          <div class="col-4">
-                            <form action="{% url 'barbershop-delete2' client.id barbers.id %}">
-                                {% csrf_token %}
-                                <button class="completed-btn red" type="submit"><i
-                                        class="fas fa-check"></i></button>
-                            </form>
-                          </div>
-                        </div>
-                        {% endfor %}
-                      </div>
-                    </div>
-                  </div>
-                
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    
+<div class="min-vh-100">
+  <div class="container">
+    <div class="row d-flex justify-content-center card-margin">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">Barber's Info</h5>
+          <div class="card-body">
 
-    
+            {% if hire.day == todays_date.day and hire.month == todays_date.month %}
+            <div class="aniversary p-2 rounded text-light mb-3">
+              <h4 class="text-center">{{ happy_hire_day }}</h4>
+              <p class="text-center mb-2"><small>{{ happy_hire_greeting }}</small></p>
+            </div>
+            {% endif %}
+            <h5>Name: <span class='pro-info'>{{ barbers.barber }}</span></h5>
+            {% if barbers.available == False %}
+            <h5>Available: <span class='pro-info no font-weight-bold'>No</span></h5>
+            {% else %}
+            <h5>Available: <span class='pro-info yes font-weight-bold'>Yes</span></h5>
+            {% endif %}
+            <h5>Phone #: <span class='pro-info'>({{ area_code }}) {{ first_3_number }}-{{ last_4_number }}</span></h5>
+            <h5>License #: <span class='pro-info'>{{ barbers.license_num }}</span></h5>
+            <h5>Hire Date: <span class='pro-info'>{{ barbers.hire_date }}</span></h5>
+            {% if not years_in_shop %}
+            <h5>Years in the Shop: <span class='pro-info'>0 Years</span></h5>
+            {% else %}
+            <h5>Years in the Shop: <span class='pro-info'>{{ years_in_shop }} Years</span></h5>
+            {% endif %}
+            <form action="{% url 'barber_status' barbers.id %}">
+              {% csrf_token %}
+              <button class="btn btn-primary btn-border" type="submit">Update Status</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-4">
+        <div class="card shadow">
+          <div class="col-12 card-header d-flex">
+            <h5 class="col-4 text-center">Client</h5>
+            <h5 class="col-4 text-center">Barber</h5>
+          </div>
+          <div class="barber-clients">
+            {% for client in clients %}
+            <div class="p-2 border-bottom card-body d-flex text-center">
+              <div class="col-4">
+                <h5>{{ client.name }}</h5>
+              </div>
+              <div class="col-4">
+                <h5>{{ client.barber }}</h5>
+              </div>
+              <div class="col-4">
+                <form action="{% url 'barbershop-delete' client.id barbers.id %}">
+                  {% csrf_token %}
+                  <button class="completed-btn red" type="submit"><i class="fas fa-check"></i></button>
+                </form>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
 {% endblock %}

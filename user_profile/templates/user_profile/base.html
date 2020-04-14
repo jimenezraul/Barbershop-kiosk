@@ -5,86 +5,92 @@
 <html>
 
 <head>
-    {% progressive_web_app_meta %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    {% if title %}
-        <title>Barbershop | {{ title }}</title>
-    {% else %}
-        <title>Barbershop</title>
-    {% endif %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'user_profile/assets/fonts/fontawesome-all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'user_profile/assets/fonts/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'user_profile/assets/fonts/line-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'user_profile/assets/css/Footer-Dark.css' %}">
-    <link rel="stylesheet" href="{% static 'user_profile/assets/css/style.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
-    <link href="{% static 'barbershop/assets/css/cropper.min.css' %}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    
-    
+  {% progressive_web_app_meta %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  {% if title %}
+  <title>Barbershop | {{ title }}</title>
+  {% else %}
+  <title>Barbershop</title>
+  {% endif %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'user_profile/assets/fonts/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user_profile/assets/fonts/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user_profile/assets/fonts/line-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user_profile/assets/css/Footer-Dark.css' %}">
+  <link rel="stylesheet" href="{% static 'user_profile/assets/css/style.css' %}">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
+  <link href="{% static 'barbershop/assets/css/cropper.min.css' %}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
 
-        
+
+
+
 </head>
 
 <body>
-    {% block content %}{% endblock %}
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-    <script src="{% static 'user_profile/assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'barbershop/assets/js/smart-forms.min.js' %}"></script>
-    <script src="{% static 'barbershop/assets/js/bs-animation.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
-    <script   src="https://code.jquery.com/jquery-3.4.1.js"   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
-    <script src="{% static 'barbershop/assets/js/barber-clients.js' %}"></script>
-    
-      <script>
-        // Get the modal
-        var barbernoti = document.getElementById("barberNoti");
-        
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-          barbernoti.classList = "d-flex barbernoti col-12 justify-content-center align-content-center p-0 shadow";
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          barbernoti.classList = "barbernoti col-12 justify-content-center";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == barbernoti) {
-            barbernoti.style.display = "none";
-          }
-        }
-        </script>
+  {% block content %}{% endblock %}
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script src="{% static 'user_profile/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'barbershop/assets/js/smart-forms.min.js' %}"></script>
+  <script src="{% static 'barbershop/assets/js/bs-animation.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
+  <script src="{% static 'barbershop/assets/js/barber-clients.js' %}"></script>
+
+  <script>
+    // Get the modal
+    var barbernoti = document.getElementById("barberNoti");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+      barbernoti.classList = "d-flex barbernoti col-12 justify-content-center align-content-center p-0 shadow";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      barbernoti.classList = "barbernoti col-12 justify-content-center";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == barbernoti) {
+        barbernoti.style.display = "none";
+      }
+    }
+  </script>
 
 
 
-    <!-- Footer-->
-    <div class="footer-dark mt-3">
-      <footer>
-          <div class="container">
-              <div class="row">
-               </div>
-              <p class="copyright">The Barbershop Kiosk© 2020</p>
-          </div>
-      </footer>
-     
+  <!-- Footer-->
+  <div class="footer-dark mt-3">
+    <footer>
+      <div class="container">
+        <div class="row">
+        </div>
+        <p class="copyright">The Barbershop Kiosk© 2020</p>
       </div>
-        {% block javascript %}
-    {% endblock %}
+    </footer>
+
+  </div>
+  {% block javascript %}
+  {% endblock %}
 </body>
 
 </html>

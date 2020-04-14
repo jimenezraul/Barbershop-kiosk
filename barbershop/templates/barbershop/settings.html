@@ -2,41 +2,44 @@
 {% load static %}
 {% block content %}
 <!-- Top Banner-->
-    <section>
-        <div class="container">
-            <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
-                <div class="col-12 position-relative">
-                    <div class="col-auto position-absolute arrow text-center">
-                        <a href="{% url 'user-profile'%}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
-                    </div>
-                        <h2 class="text-center text-dark" id="welcome"> Settings</h2>
-                        
-                        <div class="col-auto log-out position-absolute text-center">
-                            <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
-                        </div>
-
-                        <div class="col-12 heading-col d-flex justify-content-center">
-                            {% for message in messages %}
-                            
-                                <div id="alert-mobile" class="col-10 alert alert-{{message.tags}} alert-dismissible fade show message text-center" role="alert">
-                                    {{ message }}
-                                </div>
-                            
-                                
-                                {% endfor %}
-                                <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                        </div>
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-content-center align-items-center shadow bg-light" id="wait-list">
+            <div class="col-12 position-relative">
+                <div class="col-auto position-absolute arrow text-center">
+                    <a href="{% url 'user-profile'%}"><i class="red fas fa-arrow-circle-left mt-3"></i></a>
                 </div>
-                
-                  
-            
+                <h2 class="text-center text-dark" id="welcome"> Settings</h2>
+
+                <div class="col-auto log-out position-absolute text-center">
+                    <a class="logout" href="{% url 'logout_view' %}"><i class="red fas fa-sign-out-alt"></i></a>
+                </div>
+
+                <div class="col-12 heading-col d-flex justify-content-center">
+                    {% for message in messages %}
+
+                    <div id="alert-mobile" class="col-auto alert alert-{{message.tags}} fade show message text-center"
+                        role="alert">
+                        {{ message }}
+                    </div>
+
+
+                    {% endfor %}
+                    <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                        crossorigin="anonymous"></script>
+                </div>
             </div>
+
+
+
         </div>
-    
-    </section>
-    <!--  Cards Section -->
+    </div>
+
+</section>
+<!--  Cards Section -->
 <section class="list-table">
     <div class="container">
         <div class="row d-flex justify-content-center mb-4">
@@ -46,53 +49,58 @@
                 <div class="col-12">
                     <div class="card shadow">
                         <div class="card-header bg-danger">
-                            <div class="row d-flex justify-content-center align-items-center align-content-center client-bar">
-                                    <div class="col-12 text-center text-white">
-                                        <h4 class="font-l">Barbershop Logo</h4>
-                                    </div>
+                            <div
+                                class="row d-flex justify-content-center align-items-center align-content-center client-bar">
+                                <div class="col-12 text-center text-white">
+                                    <h4 class="font-l">Barbershop Logo</h4>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            
-                                {% for img in logo %}
-                            <div class="row d-flex justify-content-center align-items-center align-content-center">
-                                    <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                    </div>                                      
-                            </div>
-                                {% endfor %} 
-                                
-                                {% if logo.count == 0 %}
-                                <div class="row d-flex justify-content-end mt-3">
-                                    <div class="col-12 mb-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                        <form action="{% url 'barbershop-upload_image' %}" method="post" class="col-10" enctype="multipart/form-data">
-                                            {% csrf_token %}
 
-                                                {{ upload_image.image }}
-                                            
-                                            <input class="confirm-button" id="my-signup" type="submit" value="Upload">
-                                        </form> 
-                                    </div>
+                            {% for img in logo %}
+                            <div class="row d-flex justify-content-center align-items-center align-content-center">
+                                <div
+                                    class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
                                 </div>
-                                {% else %}
-                                {% for img in logo %}
-                                <div class="row d-flex justify-content-end mt-3">
-                                    <div class="col-12 mb-3 text-center text-white d-flex justify-content-center">
-                                        <form action="{% url 'barbershop-image_update' img.id %}" method="post" class="col-10" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                                <div class="logo-bg shadow">
-                                                    <img class="logo" src="{{ img.image.url }}">
-                                                </div>  
-                                                <div class="mt-3">
-                                                    
-                                                    {{ upload_image }}
-                                                </div>
-                                            <input class="confirm-button" id="my-update" type="submit" value="Update">
-                                        </form>
-                                    
-                                    </div>
+                            </div>
+                            {% endfor %}
+
+                            {% if logo.count == 0 %}
+                            <div class="row d-flex justify-content-end mt-3">
+                                <div
+                                    class="col-12 mb-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <form action="{% url 'barbershop-upload_image' %}" method="post" class="col-10"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+                                        {{ upload_image.image }}
+
+                                        <input class="confirm-button" id="my-signup" type="submit" value="Upload">
+                                    </form>
                                 </div>
-                                {% endfor %}
-                                {% endif %}
+                            </div>
+                            {% else %}
+                            {% for img in logo %}
+                            <div class="row d-flex justify-content-end mt-3">
+                                <div class="col-12 mb-3 text-center text-white d-flex justify-content-center">
+                                    <form action="{% url 'barbershop-image_update' img.id %}" method="post"
+                                        class="col-10" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="logo-bg shadow">
+                                            <img class="logo" src="{{ img.image.url }}">
+                                        </div>
+                                        <div class="mt-3">
+
+                                            {{ upload_image }}
+                                        </div>
+                                        <input class="confirm-button" id="my-update" type="submit" value="Update">
+                                    </form>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -100,162 +108,173 @@
                 <div class="col-12">
                     <div class="card shadow">
                         <div class="card-header bg-danger">
-                            <div class="row d-flex justify-content-end align-items-center align-content-center client-bar">
-                                    <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                        <h4 class="font-l">Barbers</h4>
-                                    </div>
-                                    
-                                    <div class="">
-                                        
-                                    </div>
-                            </div>
-                        </div>
-                                    
-                
-                        <div class="card-body mt-3">
-                                <form class="" method="post">
-                                    <div class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
-                                        <div class="col-8 mb-3">
-                                            {% csrf_token %}   
-                                            {{ form.barber }}
-                                        </div>
-                                        <div class="col-2 mb-3">
-                                            <button class="completed-btn red" id="my-update" type="submit"><i class="fas fa-user-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            <div class="client">
-                                
-                                {% for barber in barbers %}
-                
-                                <div id='client' class="client">
-                                        <div class="row d-flex justify-content-center align-items-center align-content-center">
-                                                <div class="col-8 text-center">
-                                                    <h4 class="client-btn mt-1 mb-2">{{ barber }}</h4>
-                                                </div>
-                                                <div class="col-2">
-                                                    <form action="{% url 'barberprofileupdate' barber.id %}">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
-                                                    </form> 
-                                                </div>
-                                                <div class="col-2">
-                                                    <form action="{% url 'barbershop-delete_barber' barber.id %}" method="post">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-trash-alt" alt="Delete" title="Delete"></i></button>
-                                                    </form> 
-                                                </div>
-                                                
-                                        </div>
-                                        <div class="row mb-3">
-
-                                        </div>
+                            <div
+                                class="row d-flex justify-content-end align-items-center align-content-center client-bar">
+                                <div
+                                    class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <h4 class="font-l">Barbers</h4>
                                 </div>
-                                
-                                {% endfor %} 
-                                
+
+                                <div class="">
+
+                                </div>
                             </div>
-                                
-                                
                         </div>
-                        
-                                <script type="text/javascript"
-                                        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-                                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
-                                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
-                                        <script>
-                                            // When the user clicks on div, open the popup
-                                            function showFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("show");
-                                            $('#btnviewdetails').text('Cancel').button("refresh")
-                                            }
-                                            function hideFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("hide");
-                                            }
-                                            </script>
+
+
+                        <div class="card-body mt-3">
+                            <form class="" method="post">
+                                <div
+                                    class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
+                                    <div class="col-8 mb-3">
+                                        {% csrf_token %}
+                                        {{ form.barber }}
+                                    </div>
+                                    <div class="col-2 mb-3">
+                                        <button class="completed-btn red" id="my-update" type="submit"><i
+                                                class="fas fa-user-plus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="client">
+
+                                {% for barber in barbers %}
+
+                                <div id='client' class="client">
+                                    <div
+                                        class="row d-flex justify-content-center align-items-center align-content-center">
+                                        <div class="col-8 text-center">
+                                            <h4 class="client-btn mt-1 mb-2">{{ barber }}</h4>
+                                        </div>
+                                        <div class="col-2">
+                                            <form action="{% url 'barberprofileupdate' barber.id %}">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-2">
+                                            <form action="{% url 'barbershop-delete_barber' barber.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-trash-alt" alt="Delete"
+                                                        title="Delete"></i></button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+
                         </div>
+
+                        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                        <script>
+                            // When the user clicks on div, open the popup
+                            function showFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("show");
+                                $('#btnviewdetails').text('Cancel').button("refresh")
+                            }
+                            function hideFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("hide");
+                            }
+                        </script>
+                    </div>
                 </div>
                 <!--Weather-->
                 <div class="col-12">
                     <div class="card shadow">
                         <div class="card-header bg-danger">
-                            <div class="row d-flex justify-content-end align-items-center align-content-center client-bar">
-                                    <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                        <h4 class="font-l">Weather ZipCode</h4>
-                                    </div>
-                                    
-                                    <div class="">
-                                        
-                                    </div>
+                            <div
+                                class="row d-flex justify-content-end align-items-center align-content-center client-bar">
+                                <div
+                                    class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <h4 class="font-l">Weather ZipCode</h4>
+                                </div>
+
+                                <div class="">
+
+                                </div>
                             </div>
                         </div>
-                                    
-                
+
+
                         <div class="card-body mt-3">
                             {% for zip in zipcode %}
-                
+
                             <div>
-                                    <div class="row d-flex justify-content-center align-items-center align-content-center">
-                                            <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                                
-                                            </div>                                      
+                                <div class="row d-flex justify-content-center align-items-center align-content-center">
+                                    <div
+                                        class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+
                                     </div>
+                                </div>
                             </div>
-                            
+
                             {% endfor %}
                             <div class="">
-                                
+
                                 {% if zipcode.count == 0 %}
                                 <div class="row d-flex justify-content-end mt-3">
-                                    <div class="col-12 mb-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <div
+                                        class="col-12 mb-3 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
                                         <form action="{% url 'barbershop-addzip' %}" class="col-8" method="post">
                                             {% csrf_token %}
                                             {{ add_zip }}
                                             <input class="confirm-button" id="my-signup" type="submit" value="Submit">
-                                        </form> 
+                                        </form>
                                     </div>
                                 </div>
-                                        {% else %}
-                                        {% for zip in zipcode %}
-                                        <div class="row d-flex justify-content-end">
-                                            <div class="col-12 mb-3 text-center text-white d-flex justify-content-center">
-                                                <form action="{% url 'barbershop-zipcode' zip.id %}" class="col-8" method="post">
-                                                    {% csrf_token %}
-                                                    {{ zip_form }}
-                                                    <input class="confirm-button" id="my-update" type="submit" value="Update">
-                                                </form>
-                                            
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    {% endif %}
-                                
+                                {% else %}
+                                {% for zip in zipcode %}
+                                <div class="row d-flex justify-content-end">
+                                    <div class="col-12 mb-3 text-center text-white d-flex justify-content-center">
+                                        <form action="{% url 'barbershop-zipcode' zip.id %}" class="col-8"
+                                            method="post">
+                                            {% csrf_token %}
+                                            {{ zip_form }}
+                                            <input class="confirm-button" id="my-update" type="submit" value="Update">
+                                        </form>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+
                             </div>
-                                
-                                
+
+
                         </div>
-                        
-                                <script type="text/javascript"
-                                        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-                                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
-                                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
-                                        <script>
-                                            // When the user clicks on div, open the popup
-                                            function showFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("show");
-                                            $('#btnviewdetails').text('Cancel').button("refresh")
-                                            }
-                                            function hideFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("hide");
-                                            }
-                                            </script>
-                        </div>
+
+                        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                        <script>
+                            // When the user clicks on div, open the popup
+                            function showFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("show");
+                                $('#btnviewdetails').text('Cancel').button("refresh")
+                            }
+                            function hideFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("hide");
+                            }
+                        </script>
+                    </div>
                 </div>
-               
+
             </div>
             <!--Right Columns Cards-->
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 m-0 p-0">
@@ -263,268 +282,292 @@
                 <div class="col-12">
                     <div class="card shadow">
                         <div class="card-header bg-danger">
-                            <div class="row d-flex justify-content-end align-items-center align-content-center client-bar">
-                                    <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                        <h4 class="font-l">Men's Services</h4>
-                                    </div>
-                                    
-                                    <div class="">
-                                        
-                                    </div>
-                            </div>
-                        </div>
-                                    
-                
-                        <div class="card-body mt-3">
-                                <form class="" action="{% url 'services-newmen' %}" method="post">
-                                    <div class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
-                                        <div class="col-6 mb-3 p-0">
-                                            {% csrf_token %}    
-                                            {{ men_form.service }}
-                                        </div>
-                                        <div class="col-3 mb-3 p-0">   
-                                            {{ men_form.price }}
-                                        </div>
-                                        <div class="col-1 mb-3">
-                                            <button class="completed-btn red" type="submit"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            <div class="">
-                                
-                                {% for service in menservices %}
-                
-                                <div id='' class="">
-                                        <div class="row d-flex justify-content-center align-items-center align-content-center">
-                                                <div class="col-6 col-sm-6 col-lg-6 text-center p-0">
-                                                    <h4 class="client-btn mt-1 mb-2 border-right">{{ service.service }}</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 col-lg-3">
-                                                    <h4 class="client-btn mt-1 mb-2 text-center">${{ service.price }}</h4>
-                                                </div>
-                                                <div class="col-1">
-                                                    <form action="{% url 'services-menupdate' service.id %}">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
-                                                    </form> 
-                                                </div>
-                                                <div class="col-1">
-                                                    <form action="{% url 'services-delete_menservice' service.id %}" method="post">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-trash-alt" alt="Delete" title="Delete"></i></button>
-                                                    </form> 
-                                                </div>
-                                                
-                                        </div>
-                                        <div class="row mb-3">
-    
-                                        </div>
+                            <div
+                                class="row d-flex justify-content-end align-items-center align-content-center client-bar">
+                                <div
+                                    class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <h4 class="font-l">Men's Services</h4>
                                 </div>
-                                
-                                {% endfor %} 
-                                
+
+                                <div class="">
+
+                                </div>
                             </div>
-                                
-                                
                         </div>
-                        
-                                <script type="text/javascript"
-                                        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-                                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
-                                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
-                                        <script>
-                                            // When the user clicks on div, open the popup
-                                            function showFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("show");
-                                            $('#btnviewdetails').text('Cancel').button("refresh")
-                                            }
-                                            function hideFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("hide");
-                                            }
-                                            </script>
+
+
+                        <div class="card-body mt-3">
+                            <form class="" action="{% url 'services-newmen' %}" method="post">
+                                <div
+                                    class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
+                                    <div class="col-6 mb-3 p-0">
+                                        {% csrf_token %}
+                                        {{ men_form.service }}
+                                    </div>
+                                    <div class="col-3 mb-3 p-0">
+                                        {{ men_form.price }}
+                                    </div>
+                                    <div class="col-1 mb-3">
+                                        <button class="completed-btn red" type="submit"><i
+                                                class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="">
+
+                                {% for service in menservices %}
+
+                                <div id='' class="">
+                                    <div
+                                        class="row d-flex justify-content-center align-items-center align-content-center">
+                                        <div class="col-6 col-sm-6 col-lg-6 text-center p-0">
+                                            <h4 class="client-btn mt-1 mb-2 border-right">{{ service.service }}</h4>
+                                        </div>
+                                        <div class="col-4 col-sm-3 col-lg-3">
+                                            <h4 class="client-btn mt-1 mb-2 text-center">${{ service.price }}</h4>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{% url 'services-menupdate' service.id %}">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{% url 'services-delete_menservice' service.id %}"
+                                                method="post">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-trash-alt" alt="Delete"
+                                                        title="Delete"></i></button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+
                         </div>
+
+                        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                        <script>
+                            // When the user clicks on div, open the popup
+                            function showFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("show");
+                                $('#btnviewdetails').text('Cancel').button("refresh")
+                            }
+                            function hideFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("hide");
+                            }
+                        </script>
+                    </div>
                 </div>
                 <!--Kid's Services-->
                 <div class="col-12">
                     <div class="card shadow">
                         <div class="card-header bg-danger">
-                            <div class="row d-flex justify-content-end align-items-center align-content-center client-bar">
-                                    <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                        <h4 class="font-l">Kid's Services</h4>
-                                    </div>
-                                    
-                                    <div class="">
-                                        
-                                    </div>
-                            </div>
-                        </div>
-                                    
-                
-                        <div class="card-body mt-3">
-                                <form class="" action="{% url 'services-newkid' %}" method="post">
-                                    <div class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
-                                        <div class="col-6 mb-3 p-0">
-                                            {% csrf_token %}    
-                                            {{ kid_form.service }}
-                                        </div>
-                                        <div class="col-3 mb-3 p-0">   
-                                            {{ kid_form.price }}
-                                        </div>
-                                        <div class="col-1 mb-3">
-                                            <button class="completed-btn red" type="submit"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            <div class="">
-                                
-                                {% for service in kidservices %}
-                
-                                <div id='' class="">
-                                        <div class="row d-flex justify-content-center align-items-center align-content-center">
-                                                <div class="col-6 col-sm-6 col-lg-6 text-center p-0">
-                                                    <h4 class="client-btn mt-1 mb-2 border-right">{{ service.service }}</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 col-lg-3">
-                                                    <h4 class="client-btn mt-1 mb-2 text-center">${{ service.price }}</h4>
-                                                </div>
-                                                <div class="col-1">
-                                                    <form action="{% url 'services-kidupdate' service.id %}">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
-                                                    </form> 
-                                                </div>
-                                                <div class="col-1">
-                                                    <form action="{% url 'services-delete_kidservice' service.id %}" method="post">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-trash-alt" alt="Delete" title="Delete"></i></button>
-                                                    </form> 
-                                                </div>
-                                                
-                                        </div>
-                                        <div class="row mb-3">
-    
-                                        </div>
+                            <div
+                                class="row d-flex justify-content-end align-items-center align-content-center client-bar">
+                                <div
+                                    class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <h4 class="font-l">Kid's Services</h4>
                                 </div>
-                                
-                                {% endfor %} 
-                                
+
+                                <div class="">
+
+                                </div>
                             </div>
-                                
-                                
                         </div>
-                        
-                                <script type="text/javascript"
-                                        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-                                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
-                                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
-                                        <script>
-                                            // When the user clicks on div, open the popup
-                                            function showFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("show");
-                                            $('#btnviewdetails').text('Cancel').button("refresh")
-                                            }
-                                            function hideFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("hide");
-                                            }
-                                            </script>
+
+
+                        <div class="card-body mt-3">
+                            <form class="" action="{% url 'services-newkid' %}" method="post">
+                                <div
+                                    class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
+                                    <div class="col-6 mb-3 p-0">
+                                        {% csrf_token %}
+                                        {{ kid_form.service }}
+                                    </div>
+                                    <div class="col-3 mb-3 p-0">
+                                        {{ kid_form.price }}
+                                    </div>
+                                    <div class="col-1 mb-3">
+                                        <button class="completed-btn red" type="submit"><i
+                                                class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="">
+
+                                {% for service in kidservices %}
+
+                                <div id='' class="">
+                                    <div
+                                        class="row d-flex justify-content-center align-items-center align-content-center">
+                                        <div class="col-6 col-sm-6 col-lg-6 text-center p-0">
+                                            <h4 class="client-btn mt-1 mb-2 border-right">{{ service.service }}</h4>
+                                        </div>
+                                        <div class="col-4 col-sm-3 col-lg-3">
+                                            <h4 class="client-btn mt-1 mb-2 text-center">${{ service.price }}</h4>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{% url 'services-kidupdate' service.id %}">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{% url 'services-delete_kidservice' service.id %}"
+                                                method="post">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-trash-alt" alt="Delete"
+                                                        title="Delete"></i></button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+
                         </div>
+
+                        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                        <script>
+                            // When the user clicks on div, open the popup
+                            function showFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("show");
+                                $('#btnviewdetails').text('Cancel').button("refresh")
+                            }
+                            function hideFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("hide");
+                            }
+                        </script>
+                    </div>
                 </div>
                 <!--Other Services-->
                 <div class="col-12">
                     <div class="card shadow">
                         <div class="card-header bg-danger">
-                            <div class="row d-flex justify-content-end align-items-center align-content-center client-bar">
-                                    <div class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
-                                        <h4 class="font-l">Other Services</h4>
-                                    </div>
-                                    
-                                    <div class="">
-                                        
-                                    </div>
-                            </div>
-                        </div>
-                                    
-                
-                        <div class="card-body mt-3">
-                                <form class="" action="{% url 'services-newother' %}" method="post">
-                                    <div class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
-                                        <div class="col-6 mb-3 p-0">
-                                            {% csrf_token %}    
-                                            {{ other_form.service }}
-                                        </div>
-                                        <div class="col-3 mb-3 p-0">   
-                                            {{ other_form.price }}
-                                        </div>
-                                        <div class="col-1 mb-3">
-                                            <button class="completed-btn red" type="submit"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            <div class="">
-                                
-                                {% for service in otherservices %}
-                
-                                <div id='' class="">
-                                        <div class="row d-flex justify-content-center align-items-center align-content-center">
-                                                <div class="col-6 col-sm-6 col-lg-6 text-center p-0">
-                                                    <h4 class="client-btn mt-1 mb-2 border-right">{{ service.service }}</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 col-lg-3">
-                                                    <h4 class="client-btn mt-1 mb-2 text-center">${{ service.price }}</h4>
-                                                </div>
-                                                <div class="col-1">
-                                                    <form action="{% url 'services-otherupdate' service.id %}">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
-                                                    </form> 
-                                                </div>
-                                                <div class="col-1">
-                                                    <form action="{% url 'services-delete_otherservice' service.id %}" method="post">
-                                                        {% csrf_token %}
-                                                        <button class="completed-btn red" type="submit"><i class="fas fa-trash-alt" alt="Delete" title="Delete"></i></button>
-                                                    </form> 
-                                                </div>
-                                                
-                                        </div>
-                                        <div class="row mb-3">
-    
-                                        </div>
+                            <div
+                                class="row d-flex justify-content-end align-items-center align-content-center client-bar">
+                                <div
+                                    class="col-12 text-center text-white d-flex flex-column justify-content-center align-items-center align-content-center">
+                                    <h4 class="font-l">Other Services</h4>
                                 </div>
-                                
-                                {% endfor %} 
-                                
+
+                                <div class="">
+
+                                </div>
                             </div>
-                                
-                                
                         </div>
-                        
-                                <script type="text/javascript"
-                                        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-                                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
-                                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
-                                        <script>
-                                            // When the user clicks on div, open the popup
-                                            function showFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("show");
-                                            $('#btnviewdetails').text('Cancel').button("refresh")
-                                            }
-                                            function hideFunction() {
-                                            var popup = document.getElementById("myPopup");
-                                            popup.classList.toggle("hide");
-                                            }
-                                            </script>
+
+
+                        <div class="card-body mt-3">
+                            <form class="" action="{% url 'services-newother' %}" method="post">
+                                <div
+                                    class="row border-bottom d-flex justify-content-center align-items-center align-content-center mb-4">
+                                    <div class="col-6 mb-3 p-0">
+                                        {% csrf_token %}
+                                        {{ other_form.service }}
+                                    </div>
+                                    <div class="col-3 mb-3 p-0">
+                                        {{ other_form.price }}
+                                    </div>
+                                    <div class="col-1 mb-3">
+                                        <button class="completed-btn red" type="submit"><i
+                                                class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="">
+
+                                {% for service in otherservices %}
+
+                                <div id='' class="">
+                                    <div
+                                        class="row d-flex justify-content-center align-items-center align-content-center">
+                                        <div class="col-6 col-sm-6 col-lg-6 text-center p-0">
+                                            <h4 class="client-btn mt-1 mb-2 border-right">{{ service.service }}</h4>
+                                        </div>
+                                        <div class="col-4 col-sm-3 col-lg-3">
+                                            <h4 class="client-btn mt-1 mb-2 text-center">${{ service.price }}</h4>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{% url 'services-otherupdate' service.id %}">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-pencil-alt" alt="Edit" title="Edit"></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{% url 'services-delete_otherservice' service.id %}"
+                                                method="post">
+                                                {% csrf_token %}
+                                                <button class="completed-btn red" type="submit"><i
+                                                        class="fas fa-trash-alt" alt="Delete"
+                                                        title="Delete"></i></button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+
                         </div>
+
+                        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+                        <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+                        <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+                        <script>
+                            // When the user clicks on div, open the popup
+                            function showFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("show");
+                                $('#btnviewdetails').text('Cancel').button("refresh")
+                            }
+                            function hideFunction() {
+                                var popup = document.getElementById("myPopup");
+                                popup.classList.toggle("hide");
+                            }
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
 </section>
-            
+
 {% endblock content %}

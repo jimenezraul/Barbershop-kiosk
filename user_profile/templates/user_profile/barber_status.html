@@ -1,27 +1,30 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
 {% block content %}
-   <section>
-                <div class="container">
-                    <div class="row d-flex justify-content-center align-items-center align-content-center">
-                            <div class="form col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex justify-content-center align-items-center align-content-center">
-                                    <form action="{% url 'barber_status' barbers.id %}" class="site-form shadow" method="POST">
-                                        {% csrf_token %}
-                                        <h1>Barber Status</h1>
-                                        <H5>Barber: <span class="red font-weight-bold">{{ barbers.barber }}</span></H5>
-                                        <div class="d-none">{{ form.barber }}</div>
-                                        <div class="d-none">{{ form.phone }}</div>
-                                        <div class="d-none">{{ form.license_num }}</div>
-                                        <div class="d-none">{{ form.hire_date }}</div>
-                                        <h5>Available: <input type="checkbox" name="available" {{ checkbox }} data-toggle="toggle" data-on="Yes" data-off="No" id="id_available" data-onstyle="primary" data-offstyle="danger"></h5>
-                                        <input class="confirm-button" id="my-signup" type="submit" value="Save">
-                                        <a href="{% url 'barberprofile' barbers.id %}" class="confirm-button">Cancel</a>
-                                    </form> 
-                            
-                            </div>
-                            
-                    </div>
-                </div>
-                
-            </section>
+<section>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center align-content-center">
+            <div
+                class="form col-11 col-sm-11 col-md-10 col-lg-8 text-center text-white d-flex justify-content-center align-items-center align-content-center">
+                <form action="{% url 'barber_status' barbers.id %}" class="site-form shadow" method="POST">
+                    {% csrf_token %}
+                    <h1>Barber Status</h1>
+                    <H5>Barber: <span class="red font-weight-bold">{{ barbers.barber }}</span></H5>
+                    <div class="d-none">{{ form.barber }}</div>
+                    <div class="d-none">{{ form.phone }}</div>
+                    <div class="d-none">{{ form.license_num }}</div>
+                    <div class="d-none">{{ form.hire_date }}</div>
+                    <h5>Available: <input type="checkbox" name="available" {{ checkbox }} data-toggle="toggle"
+                            data-on="Yes" data-off="No" id="id_available" data-onstyle="primary" data-offstyle="danger">
+                    </h5>
+                    <input class="confirm-button" id="my-signup" type="submit" value="Save">
+                    <a href="{% url 'barberprofile' barbers.id %}" class="confirm-button">Cancel</a>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
 {% endblock content %}
