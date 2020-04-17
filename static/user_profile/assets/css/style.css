@@ -433,3 +433,14 @@ select, label, input {
 .vh-auto {
   height: 100vh;
 }
+
+#outFrame{
+  background-color:transparent;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display:none;
+  z-index: 1;
+}

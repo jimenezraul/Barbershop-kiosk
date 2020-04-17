@@ -31,7 +31,7 @@
 
 </head>
 
-<body>
+<body class="body">
   {% block content %}{% endblock %}
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
   <script src="{% static 'user_profile/assets/js/jquery.min.js' %}"></script>
@@ -58,9 +58,12 @@
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
+    var overlay = document.getElementById('outFrame');
+
     // When the user clicks the button, open the modal
     btn.onclick = function () {
       barbernoti.classList = "d-flex barbernoti col-12 justify-content-center align-content-center p-0 shadow";
+      overlay.style.display = 'block';
     }
 
     // When the user clicks on <span> (x), close the modal
@@ -70,8 +73,9 @@
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
-      if (event.target == barbernoti) {
-        barbernoti.style.display = "none";
+      if (event.target.id == 'outFrame') {
+        barbernoti.classList = "barbernoti col-12 justify-content-center";
+        overlay.style.display = 'none';
       }
     }
   </script>

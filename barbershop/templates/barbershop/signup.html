@@ -82,6 +82,7 @@
                             {% csrf_token %}
                             <h1>Sign Up</h1>
                             {{ form.name }}
+                            {{form.status}}
                             <select name="barber" required="" id="id_barber">
                                 <option value="" selected="">Select a Barber</option>
                                 <option value="Any">Any</option>

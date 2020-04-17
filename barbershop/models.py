@@ -28,7 +28,15 @@ class Barbers(models.Model):
 
 
 class Client(models.Model):
+    WAITING = 'WAIT'
+    SERVING = 'SERV'
+    COMPLETED = 'CMPL'
 
+    STATUS_CHOICES = [
+        (WAITING, 'Waiting'),
+        (SERVING, 'Serving'),
+        (COMPLETED, 'Completed'),
+    ]
     name = models.CharField(max_length=30)
     barber = models.CharField(max_length=30)
     date = models.TimeField(auto_now_add=True)
@@ -38,6 +46,12 @@ class Client(models.Model):
     completed = models.BooleanField(default=False)
     completed_by = models.ForeignKey(
         Barbers, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.CharField(
+        max_length=2,
+        choices=STATUS_CHOICES,
+        default=WAITING,
+    )
+    
 
     def __str__(self):
         return self.name

@@ -64,7 +64,7 @@
         <div class="d-flex d-md-none row justify-content-center align-content-center align-items-center shadow bg-light"
             id="wait-list">
             <div class="col-12 col-md-6 title-bar">
-                <h2 class="text-center text-dark" id="welcome"></i> Barber View
+                <h2 class="text-center text-dark" id="welcome"> Main View
                 </h2>
                 <div class="col-12 heading-col d-flex justify-content-center">
                     {% for message in messages %}
@@ -80,11 +80,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-3 text-center">
-                <h5 class="ewt">Estimated Wait Time</h5>
+                <h5 class="ewt text-g">Estimated Wait Time</h5>
 
                 <div class="col-3 col-sm-3 col-md-8 col-lg-5 time justify-content-center d-flex d-md-none">{{ eta }}
                 </div>
-                <p class="timename d-block d-md-none">{{ time_display }}</p>
+                <p class="timename d-block d-md-none text-g">{{ time_display }}</p>
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center align-content-center">
                 <div class="col-4 text-center">
@@ -222,7 +222,7 @@
                                             {% for i in users.paginator.page_range %}
                                             {% if users.number == i %}
                                             <li class="page-item active"><a class="page-link"><span>{{ i }} <span
-                                                            class="sr-only">(current)</span></a></span></li>
+                                                            class="sr-only">(current)</span></a></li>
                                             {% else %}
                                             <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
                                             </li>
