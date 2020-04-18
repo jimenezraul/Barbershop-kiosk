@@ -256,10 +256,24 @@ def delete_client(request, id, barber_id):
         form = instance
         context = {
             'form': form,
-            'title': 'Delete'
+            'title': 'Delete',
+            "barber": barber,
         }
         return render(request, 'barbershop/delete.html', context)
 
+@login_required(login_url='register')
+def client_status(request, id, barber_id):
+    instance = Client.objects.get(pk=id)
+    barber = Barbers.objects.get(pk=barber_id)
+    
+    instance.status = "Serving"
+    instance.save()
+    messages.success(request, f"{instance.name} is been serve by {barber.barber}!")
+    try:
+        return redirect('barberprofile', barber.id)
+    except:
+        return redirect('barbershop-waitinglist')
+    
 
 @login_required(login_url='register')
 def update(request, id):

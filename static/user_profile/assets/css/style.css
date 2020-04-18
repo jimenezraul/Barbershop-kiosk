@@ -444,3 +444,7 @@ select, label, input {
   display:none;
   z-index: 1;
 }
+
+#Capa_1, #Layer_1{
+  fill: #ffffff;
+}

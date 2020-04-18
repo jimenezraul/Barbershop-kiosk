@@ -9,6 +9,7 @@ urlpatterns = [
     path('waiting/', views.waiting, name='barbershop-waiting'),
     path('signup/', views.signup, name='barbershop-signup'),
     path('<id>/delete/<barber_id>', views.delete_client, name='barbershop-delete'),
+    path('<id>/status/<barber_id>', views.client_status, name='barbershop-status'),
     path('<id>/update', views.update, name='barbershop-update'),
     path('update_client/', views.update_client, name='barbershop-update_client'),
     path('settings/', views.settings, name='barbershop-settings'),

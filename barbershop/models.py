@@ -36,9 +36,9 @@ class Barbers(models.Model):
 
 
 class Client(models.Model):
-    WAITING = 'WAIT'
-    SERVING = 'SERV'
-    COMPLETED = 'CMPL'
+    WAITING = 'Waiting'
+    SERVING = 'Serving'
+    COMPLETED = 'Completed'
 
     STATUS_CHOICES = [
         (WAITING, 'Waiting'),
@@ -55,7 +55,7 @@ class Client(models.Model):
     completed_by = models.ForeignKey(
         Barbers, on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(
-        max_length=2,
+        max_length=10,
         choices=STATUS_CHOICES,
         default=WAITING,
     )

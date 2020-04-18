@@ -139,7 +139,7 @@
         <div class="row">
 
             <!--Grid column-->
-            <div class="col-md-12 text-left">
+            <div class="p-0 col-md-12 text-left">
 
                 <div class="card mt-2">
                     <div class="card-body p-0">
@@ -162,6 +162,9 @@
 
                                         <th class="font-weight-bold text-center">
                                             <strong>Time</strong>
+                                        </th>
+                                        <th class="font-weight-bold text-center">
+                                            <strong>Status</strong>
                                         </th>
                                         <th class="font-weight-bold text-center">
                                             <strong>Edit</strong>
@@ -191,6 +194,11 @@
                                         <td>
                                             <p class="text-center">
                                                 <strong>{{ client.date }}</strong>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-center">
+                                                <strong>{{ client.status }}</strong>
                                             </p>
                                         </td>
                                         <td class="font-weight-bold text-center">
