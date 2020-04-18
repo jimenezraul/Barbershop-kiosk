@@ -25,6 +25,14 @@ class Barbers(models.Model):
         hire = self.hire_date
         todays_date = datetime.now().date()
         return todays_date.year - hire.year - ((todays_date.month, todays_date.day) < (hire.month, hire.day))
+    
+    def save(self, *args, **kwargs):
+        try:
+            photo = Barbers.objects.get(id=self.id)
+            if photo.file != self.file:
+                photo.file.delete()
+        except: pass
+        super(Barbers, self).save(*args, **kwargs)
 
 
 class Client(models.Model):

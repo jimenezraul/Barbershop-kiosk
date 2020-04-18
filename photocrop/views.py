@@ -15,6 +15,7 @@ def photo_list(request, id=None):
         if request.method == 'POST':
             form = PhotoForm(request.POST, request.FILES, instance=instance)
             if form.is_valid():
+                form.user = instance.user
                 form.save()
                 return redirect('user-profile')
     else:

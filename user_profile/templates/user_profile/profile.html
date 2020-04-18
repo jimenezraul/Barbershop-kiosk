@@ -125,13 +125,10 @@
         <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
         {% endfor %}
       </div>
-      <form action="{% url 'photo' %}" method="post" enctype="multipart/form-data" id="formUpload">
+      <form action="{% url 'photo' user.id %}" method="post" enctype="multipart/form-data" id="formUpload">
         {% csrf_token %}
         <script src="{% static 'barbershop/assets/js/jquery-3.1.1.min.js' %}"></script>
         <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
-          <select name="user" id="id_user">
-            <option value="{{ user.id }}" selected="">{{ user }}</option>
-          </select>
         </div>
       </form>
 

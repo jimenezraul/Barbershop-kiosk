@@ -12,7 +12,7 @@ class PhotoForm(forms.ModelForm):
     
     class Meta:
         model = Photo
-        fields = ('file', 'x', 'y', 'width', 'height', 'user')
+        fields = ('file', 'x', 'y', 'width', 'height')
     
     def save(self):
         photo = super(PhotoForm, self).save()

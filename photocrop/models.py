@@ -10,3 +10,11 @@ class Photo(models.Model):
     class Meta:
         verbose_name = 'photo'
         verbose_name_plural = 'photos'
+
+    def save(self, *args, **kwargs):
+        try:
+            photo = Photo.objects.get(id=self.id)
+            if photo.file != self.file:
+                photo.file.delete()
+        except: pass
+        super(Photo, self).save(*args, **kwargs)
