@@ -571,9 +571,8 @@ def upload_image(request):
     if request.method == 'POST':
         form = forms.ImageUploadForm(request.POST, request.FILES, request.user)
         if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
+            form.user = request.user
+            form.save()
             messages.success(request, "Logo Uploaded!")
             return redirect('barbershop-settings')
 

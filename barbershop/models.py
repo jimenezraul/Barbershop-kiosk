@@ -76,9 +76,17 @@ class ZipCode(models.Model):
 
 class LogoImage(models.Model):
 
-    image = models.ImageField(upload_to='logo_image/')
+    file = models.ImageField(upload_to='logo_image/')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, default=1)
 
     def __str__(self):
-        return self.image.name
+        return self.file.name
+
+    def save(self, *args, **kwargs):
+        try:
+            photo = LogoImage.objects.get(id=self.id)
+            if photo.file != self.file:
+                photo.file.delete()
+        except: pass
+        super(LogoImage, self).save(*args, **kwargs)

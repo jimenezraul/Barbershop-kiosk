@@ -738,11 +738,12 @@ h3 {
 .logo-bg {
   background-color: #495c85;
   width: 100%;
+  padding: 15px;
 }
 
-#id_image {
+#id_file {
   width: 100%;
-  border: 2px solid grey;
+  border: 2px solid rgb(197, 197, 197);
   background-color: #dc3545;
   border-radius: 5px;
   padding: 2px;
@@ -903,4 +904,8 @@ h3 {
 
 a.logout {
   font-size: 30px;
+}
+
+label{
+  display: none;
 }
