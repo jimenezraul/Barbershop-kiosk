@@ -28,7 +28,7 @@
             <div class="row">
                 <div
                     class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-6 text-center text-sm-center text-md-center text-lg-left text-xl-left">
-                    <a class="navbar-brand text-dark mb-2 heading-logo shadow" href="#">The BarberShop Kiosk</a></div>
+                    <a class="navbar-brand text-dark mb-2 heading-logo" href="#">The BarberShop Kiosk</a></div>
                 <div
                     class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-6 d-flex justify-content-center align-items-center justify-content-sm-center justify-content-md-center justify-content-lg-end justify-content-xl-end mb-2">
                     <form action="{% url 'login_view' %}" method="post">
@@ -62,17 +62,38 @@
     <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 d-flex justify-content-center main-logo"
-                    style="background-image: url({% static 'users/assets/img/Barber.jpg' %})">
-                    <div></div>
+                <div class="col-12 d-flex justify-content-center main-logo">
+                    <a class="credits" style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                href="https://unsplash.com/@onatecan?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+                target="_blank" rel="noopener noreferrer"
+                title="Download free do whatever you want high-resolution photos from Nathon Oski"><span
+                    style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                        style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                        viewBox="0 0 32 32">
+                        <title>unsplash-logo</title>
+                        <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>
+                    </svg></span><span style="display:inline-block;padding:2px 3px">Picture By: Nathon Oski</span></a>
                 </div>
             </div>
         </div>
     </div>
     <div class="register-photo">
         <div class="form-container">
-            <div class="image-holder d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell"
-                style="background-image: url({% static 'users/assets/img/Barber.jpg' %})"></div>
+
+            <div class="image-holder d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell"><a
+                    class="credits"
+                    style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                    href="https://unsplash.com/@onatecan?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+                    target="_blank" rel="noopener noreferrer"
+                    title="Download free do whatever you want high-resolution photos from Nathon Oski"><span
+                        style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                            style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                            viewBox="0 0 32 32">
+                            <title>unsplash-logo</title>
+                            <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>
+                        </svg></span><span style="display:inline-block;padding:2px 3px">Picture By: Nathon
+                        Oski</span></a></div>
+
             <form action="{% url 'register' %}" method="POST">
                 {% csrf_token %}
                 <h2 class="text-center"><strong>Create</strong> an account.</h2><input
