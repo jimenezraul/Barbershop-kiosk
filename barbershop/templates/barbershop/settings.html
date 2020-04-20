@@ -160,7 +160,7 @@
                                     <form action="{% url 'barbershop-image_update' img.id %}" method="post"
                                         class="col-10" enctype="multipart/form-data" id="formUpload">
                                         {% csrf_token %}
-                                        <div class="logo-bg rounded shadow">
+                                        <div class="p-3 logo-bg rounded shadow">
                                             <img class="logo" src="{{ img.file.url }}">
                                         </div>
                                         <div class="mt-3">

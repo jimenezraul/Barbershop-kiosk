@@ -239,12 +239,13 @@ def signup(request):
 
 
 @login_required(login_url='register')
-def delete_client(request, id, barber_id):
+def complete_client(request, id, barber_id):
     instance = Client.objects.get(pk=id)
     barber = Barbers.objects.get(pk=barber_id)
     if request.method == 'POST':
         instance.completed = True
         instance.completed_by = barber
+        instance.status = "Completed"
         instance.date_completed = date.today()
         instance.save()
         messages.success(request, f"{instance.name} is Completed!")

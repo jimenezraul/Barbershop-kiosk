@@ -75,23 +75,24 @@
 
                                                         <td>
                                                             <h5 class="text-center">
-                                                                <strong>{{ client.name }}</strong>
+                                                                {{ client.name }}
                                                             </h5>
                                                         </td>
                                                         <td>
                                                             <h5 class="text-center">
-                                                                <strong>{{ client.barber }}</strong>
+                                                                {{ client.barber }}
                                                             </h5>
                                                         </td>
 
                                                         <td>
-                                                            <p class="text-center">
-                                                                <strong>{{ client.date }}</strong>
-                                                            </p>
+                                                            <h5 class="text-center">
+                                                                {{ client.date }}
+                                                            </h5>
                                                         </td>
                                                         <td>
                                                             <p class="text-center">
-                                                                <strong>{{ client.status }}</strong>
+                                                                <span
+                                                                    class="p-2 {% if client.status == 'Waiting' %} badge badge-primary {% else %} badge badge-success {% endif %}">{{ client.status }}</span>
                                                             </p>
                                                         </td>
                                                     </tr>
