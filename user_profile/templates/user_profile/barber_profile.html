@@ -71,7 +71,6 @@
 {% block content %}
 <section>
   <div class="container">
-
     <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
       <div class="d-none d-md-block col-12 col-md-6 heading-col">
         <h4 class="text-center text-dark" id="welcome">Hello {{ barbers.barber}}!
@@ -90,7 +89,7 @@
       <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i
             class="fas fa-arrow-circle-left"></i></a></div>
       <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
-      <div id="myBtn" class="col-auto barber_noti"><i class="far fa-bell"></i></div>
+      <div id="myBtn" class="col-auto barber_noti"><i class="fas fa-bell"></i></div>
       {% if anniversary.count == 0 %}
 
       {% endif %}
@@ -103,37 +102,44 @@
       {% endfor %}
 
 
+      <div id="outFrame">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12">
+              <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
+                <div role="menu"
+                  class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
+                  <span class="close pr-2">&times;</span>
+                  <h6 class="text-white text-center dropdown-header rounded">Notifications</h6>
+                  <div class="col-12">
+                    {% if anniversary.count == 0 %}
+                    <p class="text-center mt-2">No Notifications</p>
+                    {% endif %}
+                    {% if anniversary != 0 %}
+                    {% for a in anniversary %}
+                    {%if a.id == barbers.id %}
+                    {% else %}
+                    <div class="d-flex justify-content-center align-content-center align-items-center">
+                      <div class="col-2 text-center p-0 beer"><img class="rounded-circle" src="{{ a.file.url }}" alt="">
+                      </div>
 
-      <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
-        <div role="menu"
-          class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
-          <span class="close pr-2">&times;</span>
-          <h6 class="text-white text-center dropdown-header rounded">Notifications</h6>
-          <div class="col-12">
-            {% if anniversary.count == 0 %}
-            <p class="text-center mt-2">No Notifications</p>
-            {% endif %}
-            {% if anniversary != 0 %}
-            {% for a in anniversary %}
-            {%if a.id == barbers.id %}
-            {% else %}
-            <div class="d-flex justify-content-center align-content-center align-items-center">
-              <div class="col-2 text-center p-0 beer"><img class="rounded-circle" src="{{ a.file.url }}" alt="">
-              </div>
-
-              <div class="col-10 mt-2 border-bottom">
-                <p class="font-weight-bold m-0 ">Congratulate {{ a.barber }} for another year at the BarberShop!</p>
-                <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>Celebrating
-                    {{ a.years_in_shop }} years today!</small></p>
+                      <div class="col-10 mt-2 border-bottom">
+                        <p class="font-weight-bold m-0 ">Congratulate {{ a.barber }} for another year at the BarberShop!
+                        </p>
+                        <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>Celebrating
+                            {{ a.years_in_shop }} years today!</small></p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
               </div>
             </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
           </div>
         </div>
       </div>
-      <div id="outFrame"></div>
       {% if completed.count == 0 %}
       <div>
         <p></p>
