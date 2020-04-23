@@ -29,7 +29,7 @@
 
         <div class="row d-flex">
 
-            <div class="col-9 mb-4">
+            <div class="col-12 mb-4">
                 <div class="clients list-table">
                     <div class="container">
                         <div class="row">
@@ -153,108 +153,7 @@
 
             </div>
 
-            <div class="col-3">
-                {% if logo.count == 0 %}
-
-                {% else %}
-                <div class="card border-0">
-                    <img class="logo-bg" src="{{ logo.file.url }}" alt="Image">
-                </div>
-                {% endif %}
-                <div class="card">
-                    <div class="card-header bg-danger text-center">
-                        <h4 class="font-l text-white">Weather</h4>
-                    </div>
-                    <div class="weather-link">
-                        <div class="card-body text-center">
-                            <figure class="sky">
-                                <img src="http://openweathermap.org/img/wn/{{ city_weather.icon }}@2x.png" alt="Image">
-                            </figure>
-                            <h4 class="card-title font-b city text-g">{{ city_weather.city }}</h4>
-                            <p class="card-text font-b bg-danger temp mx-auto text-white">
-                                {{ city_weather.temperature }}°F</p>
-                            <p class="card-text d-bottom font-b description text-g">{{ city_weather.description }}</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header bg-danger text-center">
-                        <h4 class="font-l text-white">Prices</h4>
-                    </div>
-                    <div class="services">
-                        <div class="card-body">
-                            <h4 class="card-title font-b city mt-3 text-g">Men's Haircut</h4>
-                            {% if not menservices %}
-                            <p class="font-weight-bold">No Service</p>
-                            <p>Add Services in settings.</p>
-                            <a href="{% url 'barbershop-settings' %}"><button
-                                    class="btn btn-primary border">Settings</button></a>
-                            {% endif %}
-                            {% for service in menservices %}
-
-                            <div class="col-12 d-flex p-0 m-0">
-                                <div class="col-8 p-0 ">
-                                    <p class="font-weight-bold">{{ service.service }}</p>
-                                </div>
-                                <div class="col-4 p-0">
-                                    <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            <h4 class="card-title font-b city mt-3 text-g">Kid's Haircut</h4>
-                            {% if not kidservices %}
-                            <p class="font-weight-bold">No Service</p>
-                            <p>Add Services in settings.</p>
-                            <a href="{% url 'barbershop-settings' %}"><button
-                                    class="btn btn-primary border">Settings</button></a>
-                            {% endif %}
-                            {% for service in kidservices %}
-                            <div class="col-12 d-flex p-0 m-0">
-                                <div class="col-8 p-0 ">
-                                    <p class="font-weight-bold">{{ service.service }}</p>
-                                </div>
-                                <div class="col-4 p-0">
-                                    <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            <h4 class="card-title font-b city mt-3 text-g">Other Services</h4>
-                            {% if not otherservices %}
-                            <p class="font-weight-bold">No Service</p>
-                            <p>Add Services in settings.</p>
-                            <a href="{% url 'barbershop-settings' %}"><button
-                                    class="btn btn-primary border">Settings</button></a>
-                            {% endif %}
-                            {% for service in otherservices %}
-                            <div class="col-12 d-flex p-0 m-0">
-                                <div class="col-8 p-0 ">
-                                    <p class="font-weight-bold">{{ service.service }}</p>
-                                </div>
-                                <div class="col-4 p-0">
-                                    <p class="font-weight-bold border-left pl-2"> ${{ service.price }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            <p class="d-bottom"></p>
-                        </div>
-                    </div>
-                </div>
-                <!-- 
-            {% if user.is_authenticated %}
-            <div class="card mb-4">
-                <div class="card-header bg-danger text-center"><h4 class="font-l text-white">Users</h4></div>
-                    <div class="">
-                        <div class="card-body">
-                            <h4 class="card-title font-b city mt-3">Profile</h4>
-                            <p class="">Welcome, {{ user.first_name }}! </p>
-                            <p class="d-bottom"></p>
-                        </div>
-                    </div>
-            </div>
-            {% endif %}  
-            -->
-            </div>
+            
 
         </div>
     </div>

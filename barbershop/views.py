@@ -17,7 +17,7 @@ from decimal import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from photocrop.models import Photo
+from photocrop.models import Photo, Gallery
 
 
 _LOGGER = logging.getLogger()
@@ -36,7 +36,8 @@ def waitinglist(request):
     wel_message = ''
     try:
         if clients.count() > 0:
-            client = clients[0]
+            client = clients.filter(status="Waiting")
+            client = client[0]
             s = str(client.date)
             start_time = datetime.strptime(s, "%H:%M:%S.%f")
             e = str(datetime.now().time())
@@ -142,7 +143,8 @@ def waiting(request):
     wel_message = ''
     try:
         if clients.count() > 0:
-            client = clients[0]
+            client = clients.filter(status="Waiting")
+            client = client[0]
             s = str(client.date)
             start_time = datetime.strptime(s, "%H:%M:%S.%f")
             e = str(datetime.now().time())
@@ -613,3 +615,33 @@ def barber_pro_list(request):
 @login_required(login_url='register')
 def home_page(request):
     return render(request, "barbershop/home.html")
+
+@login_required(login_url='register')
+def prices(request):
+    logo = LogoImage.objects.filter(user=request.user)
+    galleries = Gallery.objects.filter(user=request.user)
+
+    if galleries.count() > 0:
+        galleries = galleries[0:4]
+    else:
+        galleries = None
+
+    if logo.count() > 0:
+        logo = logo[0]
+    else:
+        logo = None
+
+    men_service = MenServices.objects.filter(user=request.user)
+    men_service = men_service[0:4]
+    kid_service = KidServices.objects.filter(user=request.user)
+    kid_service = kid_service[0:4]
+    other_service = OtherServices.objects.filter(user=request.user)
+    other_service = other_service[0:4]
+    context = {
+        "logo": logo,
+        "men": men_service,
+        "kid": kid_service,
+        "other": other_service,
+        "galleries": galleries,
+    }
+    return render(request, "barbershop/prices_menu.html", context)

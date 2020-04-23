@@ -21,4 +21,6 @@ urlpatterns = [
     path('logo/uploaded/', views.upload_image, name='barbershop-upload_image'),
     path('barber_pro_list', views.barber_pro_list, name='barbershop-barberprolist'),
     path('logo/uploaded/<id>', views.image_update, name='barbershop-image_update'),
+    path('prices/', views.prices, name='barbershop-prices'),
+
 ]
