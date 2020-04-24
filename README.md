@@ -8,4 +8,4 @@
 ## Sign Up View
 The client walking into the barbershop and sign up in a tablet kiosk with Name and preferred barber.
 
-![Image description](SignUp.png =250x250)
+![Image description](SignUp.png | width=100)
