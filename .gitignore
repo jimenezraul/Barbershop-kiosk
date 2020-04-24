@@ -46,4 +46,4 @@ ehthumbs.db
 bin/*
 include/*
 lib/*
-*.png
+media/*
