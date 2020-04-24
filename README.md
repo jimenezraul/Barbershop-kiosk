@@ -43,3 +43,9 @@ Here they will see which client is waiting for them and they will have a service
 In the settings, the owner will have the ability to add or remove barbers and services.
 
 ![Image description](settings.png)
+
+## Prices View
+
+The prices view is a section to replace old prices banners on the wall with a digital display, this will show prices entered in the settings section.
+
+![Image description](prices.png)
