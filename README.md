@@ -26,7 +26,7 @@ Clients will see thier names, preferred barber and check in time on a display in
 
 ![Image description](main_view.png)
 
-## Barber Profiles
+## All Barber's Profiles
 
 Each barber has their own profile.
 
