@@ -37,3 +37,9 @@ Each barber has their own profile.
 Here they will see which client is waiting for them and they will have a service button when they start serving the client and a completed button when they finish with the client. Each profile is filtered to see only the customers waiting for you or customers that selected ANY. Barbers can update available status to let customer know if their available to take any walking customer.
 
 ![Image description](Barber_Profile.png)
+
+## Owner Settings
+
+In the settings, the owner will have the ability to add or remove barbers and services.
+
+![Image description](settings.png)
