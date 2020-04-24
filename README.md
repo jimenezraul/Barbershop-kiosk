@@ -22,6 +22,6 @@
 ![Image description](barber_profiles.png)
 
 ## Barber Profile
-### here they will see which client is waiting for them and they will have a service button when they start serving the client and a completed button when they finish with the client.
+### Here they will see which client is waiting for them and they will have a service button when they start serving the client and a completed button when they finish with the client. Each profile is filtered to see only the customers waiting for you or customers that selected ANY. Barbers can update available status to let customer know if their available to take any walking customer.
 
 ![Image description](Barber_Profile.png)
