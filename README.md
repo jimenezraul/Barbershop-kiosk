@@ -16,3 +16,12 @@
 ## Waiting Room View
 ### Clients will see thier names, preferred barber and check in time on a display in the waiting room. The display will show the estimated waiting time.
 ![Image description](Waitinglist.png)
+
+## Barber Profiles
+### Each barber has their own profile.
+![Image description](barber_profiles.png)
+
+## Barber Profile
+### here they will see which client is waiting for them and they will have a service button when they start serving the client and a completed button when they finish with the client.
+
+![Image description](Barber_Profile.png)
