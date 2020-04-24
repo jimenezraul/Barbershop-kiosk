@@ -22,6 +22,10 @@ The client walking into the barbershop and sign up in a tablet kiosk with Name a
 Clients will see thier names, preferred barber and check in time on a display in the waiting room. The display will show the estimated waiting time.
 ![Image description](Waitinglist.png)
 
+## Employees Main View
+
+![Image description](main_view.png
+
 ## Barber Profiles
 
 Each barber has their own profile.
