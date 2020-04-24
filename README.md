@@ -12,3 +12,7 @@
 ![Image description](SignUp.png)
 ## Select a barber
 ![Image description](Select_a_barber.png)
+
+## Waiting Room View
+### Clients will see thier names, preferred barber and check in time on a display in the waiting room. The display will show the estimated waiting time.
+![Image description](Select_a_barber.png)
