@@ -5,6 +5,8 @@
 
 ## This is a Kiosk System to keep track of the walking clients in a barbershop.
 
+![Image description](Menu.png)
+
 ## Sign Up View
 
 The client walking into the barbershop and sign up in a tablet kiosk with Name and preferred barber.
