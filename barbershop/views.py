@@ -620,6 +620,7 @@ def home_page(request):
 def prices(request):
     logo = LogoImage.objects.filter(user=request.user)
     galleries = Gallery.objects.filter(user=request.user)
+    
 
     if galleries.count() > 0:
         galleries = galleries[0:4]

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from phone_field import PhoneField
 from datetime import datetime, date, timedelta
+from django.urls import reverse
 
 
 class Barbers(models.Model):
@@ -33,6 +34,15 @@ class Barbers(models.Model):
                 photo.file.delete()
         except: pass
         super(Barbers, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        photo = Barbers.objects.get(id=self.id)
+        photo.file.delete()
+        return super(Barbers, self).delete(*args, **kwargs)
+
+    @property
+    def object_delete(self):
+        return f"/{self.pk}/delete_barber/"
 
 
 class Client(models.Model):
@@ -89,4 +99,9 @@ class LogoImage(models.Model):
             if photo.file != self.file:
                 photo.file.delete()
         except: pass
+        super(LogoImage, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        photo = LogoImage.objects.get(id=self.id)
+        photo.file.delete()
         super(LogoImage, self).save(*args, **kwargs)
