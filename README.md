@@ -24,7 +24,7 @@ Clients will see thier names, preferred barber and check in time on a display in
 
 ## Employees Main View
 
-![Image description](main_view.png
+![Image description](main_view.png)
 
 ## Barber Profiles
 
