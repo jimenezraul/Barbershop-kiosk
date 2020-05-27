@@ -403,6 +403,22 @@ select, label, input {
   cursor: pointer;
 }
 
+.close2 {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+}
+
+.close2:hover, .close2:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .dropdown-header {
   background-color: #dc3545;
 }
@@ -445,7 +461,114 @@ select, label, input {
   display:none;
   z-index: 1;
 }
+#outOfFrame{
+  background-color:transparent;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index: 1;
+  display:none;
+}
+
 
 #Capa_1, #Layer_1{
   fill: #ffffff;
+}
+
+@media (max-width:1200px) {
+  #barberCompleted {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    z-index: 1;
+    /* Sit on top */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+}
+
+@media (max-width:2000px) {
+  #barberCompleted {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    z-index: 1;
+    /* Sit on top */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+}
+
+@media (max-width:594px) {
+  #barberCompleted {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 1;
+    /* Sit on top */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+}
+
+@media (max-width:415px) {
+  #barberCompleted {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 17px;
+    z-index: 1;
+    /* Sit on top */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+}
+
+@media (max-width:320px) {
+  #barberCompleted {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 15px;
+    z-index: 1;
+    /* Sit on top */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+}
+
+@media (max-width:300px) {
+  #barberCompleted {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    z-index: 2;
+    /* Sit on top */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
 }

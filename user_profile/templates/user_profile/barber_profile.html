@@ -85,10 +85,19 @@
       {% endif %}
 
 
-      <!--end notifications-->
+
       <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i
             class="fas fa-arrow-circle-left"></i></a></div>
-      <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
+      <div id="myCompleted" class="col-auto client-complete"><i class="fas fa-users"></i></div>
+      
+      {% if completed.count == 0 %}
+      <div>
+        <p></p>
+      </div>
+      {% else %}
+      <span class="client-noti badge badge-light">{{ completed.count }}</span>
+      {% endif %}
+
       <div id="myBtn" class="col-auto barber_noti"><i class="fas fa-bell"></i></div>
       {% if anniversary.count == 0 %}
 
@@ -140,13 +149,39 @@
           </div>
         </div>
       </div>
-      {% if completed.count == 0 %}
-      <div>
-        <p></p>
+
+      <div id="outOfFrame">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12">
+              <div id="barberCompleted" class="barbernoti col-12 justify-content-center align-content-center shadow">
+                <div role="menu"
+                  class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
+                  <span class="close2 pr-2">&times;</span>
+                  <h6 class="text-white text-center dropdown-header rounded">Customers Completed</h6>
+                  <div class="col-12">
+                    {% if completed.count == 0 %}
+                    <p class="text-center mt-2">No Customers</p>
+                    {% endif %}
+                    {% if completed != 0 %}
+                    {% for complete in completed %}
+                    <div class="d-flex justify-content-center align-content-center align-items-center">
+                      
+
+                      <div class="col-12 mt-2 border-bottom">
+                        <p class=" m-0 mb-2 text-center">Client: <span class="font-weight-bold">{{ complete.name }}</span> | Completed At: <span class="font-weight-bold">{{ complete.completed_time}}</span></p>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {% else %}
-      <span class="client-noti badge badge-light">{{ completed.count }}</span>
-      {% endif %}
+
 
 
       <div class="col-auto heading-col">
@@ -351,7 +386,6 @@
 </div>
 </div>
 </div>
-
 
 
 {% endblock %}

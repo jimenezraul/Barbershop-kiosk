@@ -249,6 +249,7 @@ def complete_client(request, id, barber_id):
         instance.completed_by = barber
         instance.status = "Completed"
         instance.date_completed = date.today()
+        instance.completed_time = datetime.now().strftime("%H:%M %p")
         instance.save()
         messages.success(request, f"{instance.name} is Completed!")
         try:
@@ -264,19 +265,21 @@ def complete_client(request, id, barber_id):
         }
         return render(request, 'barbershop/delete.html', context)
 
+
 @login_required(login_url='register')
 def client_status(request, id, barber_id):
     instance = Client.objects.get(pk=id)
     barber = Barbers.objects.get(pk=barber_id)
-    
+
     instance.status = "Serving"
     instance.save()
-    messages.success(request, f"{instance.name} is been serve by {barber.barber}!")
+    messages.success(
+        request, f"{instance.name} is been serve by {barber.barber}!")
     try:
         return redirect('barberprofile', barber.id)
     except:
         return redirect('barbershop-waitinglist')
-    
+
 
 @login_required(login_url='register')
 def update(request, id):
@@ -616,11 +619,11 @@ def barber_pro_list(request):
 def home_page(request):
     return render(request, "barbershop/home.html")
 
+
 @login_required(login_url='register')
 def prices(request):
     logo = LogoImage.objects.filter(user=request.user)
     galleries = Gallery.objects.filter(user=request.user)
-    
 
     if galleries.count() > 0:
         galleries = galleries[0:4]

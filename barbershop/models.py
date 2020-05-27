@@ -64,6 +64,7 @@ class Client(models.Model):
     completed = models.BooleanField(default=False)
     completed_by = models.ForeignKey(
         Barbers, on_delete=models.CASCADE, blank=True, null=True)
+    completed_time = models.CharField(max_length=30, blank=True, null=True)
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICES,
