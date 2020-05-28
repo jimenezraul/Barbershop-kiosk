@@ -249,7 +249,7 @@ def complete_client(request, id, barber_id):
         instance.completed_by = barber
         instance.status = "Completed"
         instance.date_completed = date.today()
-        instance.completed_time = datetime.now().strftime("%H:%M %p")
+        instance.completed_time = datetime.now().strftime("%I:%M %p")
         instance.save()
         messages.success(request, f"{instance.name} is Completed!")
         try:
@@ -264,21 +264,6 @@ def complete_client(request, id, barber_id):
             "barber": barber,
         }
         return render(request, 'barbershop/delete.html', context)
-
-
-@login_required(login_url='register')
-def client_status(request, id, barber_id):
-    instance = Client.objects.get(pk=id)
-    barber = Barbers.objects.get(pk=barber_id)
-
-    instance.status = "Serving"
-    instance.save()
-    messages.success(
-        request, f"{instance.name} is been serve by {barber.barber}!")
-    try:
-        return redirect('barberprofile', barber.id)
-    except:
-        return redirect('barbershop-waitinglist')
 
 
 @login_required(login_url='register')

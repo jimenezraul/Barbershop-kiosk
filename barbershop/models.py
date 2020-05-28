@@ -26,13 +26,14 @@ class Barbers(models.Model):
         hire = self.hire_date
         todays_date = datetime.now().date()
         return todays_date.year - hire.year - ((todays_date.month, todays_date.day) < (hire.month, hire.day))
-    
+
     def save(self, *args, **kwargs):
         try:
             photo = Barbers.objects.get(id=self.id)
             if photo.file != self.file:
                 photo.file.delete()
-        except: pass
+        except:
+            pass
         super(Barbers, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -46,15 +47,7 @@ class Barbers(models.Model):
 
 
 class Client(models.Model):
-    WAITING = 'Waiting'
-    SERVING = 'Serving'
-    COMPLETED = 'Completed'
 
-    STATUS_CHOICES = [
-        (WAITING, 'Waiting'),
-        (SERVING, 'Serving'),
-        (COMPLETED, 'Completed'),
-    ]
     name = models.CharField(max_length=30)
     barber = models.CharField(max_length=30)
     date = models.TimeField(auto_now_add=True)
@@ -65,12 +58,6 @@ class Client(models.Model):
     completed_by = models.ForeignKey(
         Barbers, on_delete=models.CASCADE, blank=True, null=True)
     completed_time = models.CharField(max_length=30, blank=True, null=True)
-    status = models.CharField(
-        max_length=10,
-        choices=STATUS_CHOICES,
-        default=WAITING,
-    )
-    
 
     def __str__(self):
         return self.name
@@ -99,7 +86,8 @@ class LogoImage(models.Model):
             photo = LogoImage.objects.get(id=self.id)
             if photo.file != self.file:
                 photo.file.delete()
-        except: pass
+        except:
+            pass
         super(LogoImage, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

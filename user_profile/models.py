@@ -7,7 +7,7 @@ class Address(models.Model):
     street = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=50)
-    zip_code = models.CharField(max_length=12, default='32738')
+    zip_code = models.CharField(max_length=12, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, default=1)
 
