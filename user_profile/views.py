@@ -100,7 +100,16 @@ def barber_profile(request, id):
     today_month = datetime.now().date()
     anniversary = Barbers.objects.filter(user=request.user, hire_date__month=datetime.now().date().month,
                                          hire_date__day=datetime.now().date().day,).exclude(barber=barber)
+    clients = Client.objects.filter(user=request.user, completed=False)
+    clients = clients.filter(Q(barber=barber) | Q(barber='Any'))
+    completed = Client.objects.filter(
+        completed_by=barber).filter(date_completed=datetime.now())
+
+    photoform = BarberPhoto()
+    form = NewBarber(instance=barber)
+
     # anniversary_reminder = today_month - timedelta(days=-7)  <-- reminder a week before
+
     if not barber.hire_date:
         hire = 0
         years = 0
@@ -123,11 +132,6 @@ def barber_profile(request, id):
             happy_hire_day = ""
             happy_hire_greeting = ""
 
-    photoform = BarberPhoto()
-    clients = Client.objects.filter(user=request.user, completed=False)
-    clients = clients.filter(Q(barber=barber) | Q(barber='Any'))
-    completed = Client.objects.filter(
-        completed_by=barber).filter(date_completed=datetime.now())
     if not barber.phone:
         area_code = "000"
         first_3_number = "000"
@@ -137,11 +141,11 @@ def barber_profile(request, id):
         first_3_number = barber.phone[3:6]
         last_4_number = barber.phone[6:]
 
-    form = NewBarber(instance=barber)
     if barber.available == False:
         checkbox = "unchecked"
     else:
         checkbox = "checked"
+        
     context = {
         "hire": hire,
         "todays_date": todays_date,
@@ -166,6 +170,9 @@ def barber_profile(request, id):
 @login_required(login_url='register')
 def barber_status(request, id):
     barbers = Barbers.objects.get(pk=id)
+
+    form = NewBarber(instance=barbers)
+
     if request.method == 'POST':
         form = NewBarber(request.POST or None, instance=barbers)
         if form.is_valid:
@@ -173,7 +180,6 @@ def barber_status(request, id):
             messages.success(request, "Status Updated!")
             return redirect('barberprofile', id)
 
-    form = NewBarber(instance=barbers)
     if barbers.available == False:
         checkbox = "unchecked"
     else:
@@ -190,6 +196,11 @@ def barber_status(request, id):
 @login_required(login_url='register')
 def barber_profile_update(request, id):
     barbers = Barbers.objects.get(pk=id)
+
+    form = NewBarber(instance=barbers)
+
+    number = barbers.phone
+
     if request.method == 'POST':
         form = NewBarber(request.POST or None, instance=barbers)
         if form.is_valid:
@@ -197,8 +208,6 @@ def barber_profile_update(request, id):
             messages.success(request, "Info Updated!")
             return redirect('barbershop-settings')
 
-    form = NewBarber(instance=barbers)
-    number = barbers.phone
     context = {
         'form': form,
         'barbers': barbers,
