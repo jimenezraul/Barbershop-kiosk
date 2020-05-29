@@ -88,7 +88,7 @@
                     </p>
                     {% endif %}
                     <p>License #: {{ barber.license_num }}</p>
-                    <p>Hire Date: {{ barber.hire_date }}</p>
+                    <p>Hire Date: <span class="font-weight-bold">{{ barber.hire_date }}</span></p>
                     {% if barber.available == False %}
                     <p>Available: <span class='pro-info no font-weight-bold'>No</span></p>
                     {% else %}
