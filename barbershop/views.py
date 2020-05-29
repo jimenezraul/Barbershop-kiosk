@@ -25,17 +25,18 @@ _LOGGER = logging.getLogger()
 
 @login_required(login_url='register')
 def waitinglist(request):
+    # QS Objects
     photos = Photo.objects.filter(user=request.user)
     barbers = Barbers.objects.filter(user=request.user)
+    clients = Client.objects.filter(user=request.user, completed=False)
+
     if photos.count() == 1:
         photos = photos[0]
 
-    clients = Client.objects.filter(user=request.user, completed=False)
-    date_now = [(client.date) for client in clients]
-    fmt = '%H:%M'
-    wel_message = ''
+    # Estimate Waiting Time
     try:
         if clients.count() > 0:
+            fmt = '%H:%M'
             client = clients[0]
             start_time = str(client.date)
             start_time = datetime.strptime(start_time, "%H:%M:%S.%f")
@@ -45,8 +46,6 @@ def waitinglist(request):
             estimate_time = datetime.strptime(
                 str(total_time), "%H:%M:%S.%f").strftime(fmt)
             estimate_time = estimate_time[1:]
-            client_name = client.name
-            #wel_message = f'Hi {client_name}, be ready... We will call you soon!'
             if estimate_time[0] != '0':
                 time_display = "Hour"
             else:
@@ -58,6 +57,7 @@ def waitinglist(request):
         estimate_time = '0:00'
         time_display = "Minutes"
 
+    # Pagination
     page = request.GET.get('page', 1)
 
     paginator = Paginator(clients, 20)
@@ -67,6 +67,7 @@ def waitinglist(request):
         users = paginator.page(1)
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
+
     context = {
         'clients': users,
         'eta': estimate_time,
@@ -81,22 +82,20 @@ def waitinglist(request):
 
 @login_required(login_url='register')
 def waiting(request):
+    # QS Objects
     kid = KidServices.objects.filter(user=request.user)
     men = MenServices.objects.filter(user=request.user)
     other = OtherServices.objects.filter(user=request.user)
-    zip = ZipCode.objects.filter(user=request.user)
     logo = LogoImage.objects.filter(user=request.user)
+    clients = Client.objects.filter(user=request.user, completed=False)
 
     if logo.count() == 1:
         logo = logo[0]
-    else:
-        logo = LogoImage.objects.filter(user=request.user)
 
-    clients = Client.objects.filter(user=request.user, completed=False)
-    fmt = '%H:%M'
-    wel_message = ''
+    # Estimated Wait Time
     try:
         if clients.count() > 0:
+            fmt = '%H:%M'
             client = clients[0]
             start_time = str(client.date)
             start_time = datetime.strptime(start_time, "%H:%M:%S.%f")
@@ -106,8 +105,6 @@ def waiting(request):
             estimate_time = datetime.strptime(
                 str(total_time), "%H:%M:%S.%f").strftime(fmt)
             estimate_time = estimate_time[1:]
-            client_name = client.name
-            #wel_message = f'Hi {client_name}, be ready... We will call you soon!'
             if estimate_time[0] != '0':
                 time_display = "Hour"
             else:
@@ -119,6 +116,7 @@ def waiting(request):
         estimate_time = '0:00'
         time_display = "Minutes"
 
+    # Pagination
     page = request.GET.get('page', 1)
 
     paginator = Paginator(clients, 20)
@@ -146,13 +144,9 @@ def waiting(request):
 
 @login_required(login_url='register')
 def signup(request):
-    logo = LogoImage.objects.filter(user=request.user)
-    client = Client.objects.filter(user=request.user)
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
 
+    # QS Objects
+    client = Client.objects.filter(user=request.user)
     barberlist = Barbers.objects.filter(user=request.user)
 
     if request.method == 'POST':
@@ -185,15 +179,17 @@ def signup(request):
             'form': form,
             'title': 'SignUp',
             'barberlist': barberlist,
-            'logo': logo,
         }
         return render(request, "barbershop/signup.html", context)
 
 
 @login_required(login_url='register')
 def complete_client(request, id, barber_id):
+
+    # QS Objects
     instance = Client.objects.get(pk=id)
     barber = Barbers.objects.get(pk=barber_id)
+
     if request.method == 'POST':
         instance.completed = True
         instance.completed_by = barber
@@ -218,7 +214,9 @@ def complete_client(request, id, barber_id):
 
 @login_required(login_url='register')
 def update(request, id):
+    # Instance Client
     instance = Client.objects.get(pk=id)
+
     if request.method == 'POST':
         form = forms.UpdateForm(request.POST or None, instance=instance)
         if form.is_valid():
@@ -236,7 +234,9 @@ def update(request, id):
 
 @login_required(login_url='register')
 def update_client(request):
+    # QS Objecst
     clients = Client.objects.all()
+
     context = {
         'clients': clients,
         'title': 'Update'
@@ -246,7 +246,7 @@ def update_client(request):
 
 @login_required(login_url='register')
 def settings(request):
-    # Database objects
+    # QS objects
     barbers = Barbers.objects.filter(user=request.user)
     zip_code = ZipCode.objects.filter(user=request.user)
     menservices = MenServices.objects.filter(user=request.user)
@@ -255,23 +255,28 @@ def settings(request):
     logo = LogoImage.objects.filter(user=request.user)
     photos = Photo.objects.filter(user=request.user)
     client = Client.objects.filter(user=request.user)
-    if photos.count() == 1:
-        photos = photos[0]
+
     # Forms
     men_form = forms2.MenServiceForm()
     kid_form = forms2.KidServiceForm()
     other_form = forms2.OtherServiceForm()
     form = forms.NewBarber()
     add_zip = forms.ZipCodes()
+
+    # Select the first picture in the queryset
+    if photos.count() == 1:
+        photos = photos[0]
+
     if zip_code.count() > 0:
         zip_form = forms.ZipCodes(instance=zip_code[0])
     else:
-        zip_form = forms.ZipCodes()
+        zip_form = add_zip
 
     if logo.count() > 0:
         upload_image = forms.ImageUploadForm(instance=logo[0])
     else:
         upload_image = forms.ImageUploadForm()
+
     if request.method == 'POST':
         if str(request.user) == "Demo":
             if barbers.count() == 5:
@@ -324,6 +329,7 @@ def settings(request):
 @login_required(login_url='register')
 def delete_barber(request, id):
     instance = Barbers.objects.get(pk=id)
+
     if request.method == 'POST':
         instance.delete()
         messages.success(
@@ -334,6 +340,7 @@ def delete_barber(request, id):
 @login_required(login_url='register')
 def zipcode(request, id):
     instance = ZipCode.objects.get(pk=id)
+
     if request.method == 'POST':
         form = forms.ZipCodes(request.POST or None, instance=instance)
         if form.is_valid():
@@ -402,6 +409,7 @@ def completed(request):
 
     completed_clients = Client.objects.filter(
         user=request.user, completed=True)
+
     if completed_clients.count() > 0:
         completed_clients = Client.objects.filter(user=request.user,
                                                   date=datetime.now())
@@ -414,6 +422,7 @@ def completed(request):
         users = paginator.page(1)
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
+
     context = {
         'todays_year': this_year,
         'last_year': last_year,
@@ -521,6 +530,7 @@ def upload_image(request):
 @login_required(login_url='register')
 def image_update(request, id):
     instance = LogoImage.objects.get(pk=id)
+
     if request.method == 'POST':
         form = forms.ImageUploadForm(
             request.POST, request.FILES, instance=instance)
@@ -532,8 +542,12 @@ def image_update(request, id):
 
 @login_required(login_url='register')
 def barber_pro_list(request):
+    # QS Objects
     barbers = Barbers.objects.filter(user=request.user)
+
+    # Form
     form = forms.NewBarber()
+
     if request.method == 'POST':
         form = forms.NewBarber(request.POST)
         if form.is_valid():
@@ -543,6 +557,7 @@ def barber_pro_list(request):
             instance.save()
             messages.success(request, f"{name} was successfully added!")
             return redirect('barbershop-barberprolist')
+
     context = {
         "barbers": barbers,
         "form": form,
@@ -557,6 +572,7 @@ def home_page(request):
 
 @login_required(login_url='register')
 def prices(request):
+    # QS Objects
     logo = LogoImage.objects.filter(user=request.user)
     galleries = Gallery.objects.filter(user=request.user)
 
