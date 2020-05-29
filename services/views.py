@@ -50,14 +50,8 @@ def new_other_service(request):
 
 
 def update_menservices(request, id):
-    logo = LogoImage.objects.filter(user=request.user)
-
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
-
     instance = MenServices.objects.get(pk=id)
+
     if request.method == 'POST':
         form = forms.MenServiceForm(request.POST or None, instance=instance)
         if form.is_valid():
@@ -69,20 +63,13 @@ def update_menservices(request, id):
         context = {
             'form': form,
             'title': 'Update',
-            'logo': logo,
         }
         return render(request, 'barbershop/service_update.html', context)
 
 
 def update_kidservices(request, id):
-    logo = LogoImage.objects.filter(user=request.user)
-
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
-
     instance = KidServices.objects.get(pk=id)
+
     if request.method == 'POST':
         form = forms.KidServiceForm(request.POST or None, instance=instance)
         if form.is_valid():
@@ -94,20 +81,13 @@ def update_kidservices(request, id):
         context = {
             'form': form,
             'title': 'Update',
-            'logo': logo,
         }
         return render(request, 'barbershop/service_update.html', context)
 
 
 def update_otherservices(request, id):
-    logo = LogoImage.objects.filter(user=request.user)
-
-    if logo.count() == 1:
-        logo = logo[0]
-    else:
-        logo = None
-
     instance = OtherServices.objects.get(pk=id)
+
     if request.method == 'POST':
         form = forms.OtherServiceForm(request.POST or None, instance=instance)
         if form.is_valid():
@@ -119,13 +99,13 @@ def update_otherservices(request, id):
         context = {
             'form': form,
             'title': 'Update',
-            'logo': logo,
         }
         return render(request, 'barbershop/service_update.html', context)
 
 
 def delete_menservice(request, id):
     instance = MenServices.objects.get(pk=id)
+    
     if request.method == 'POST':
         instance.delete()
         messages.success(request, f"{instance.service} was deleted.")
@@ -134,6 +114,7 @@ def delete_menservice(request, id):
 
 def delete_kidservice(request, id):
     instance = KidServices.objects.get(pk=id)
+
     if request.method == 'POST':
         instance.delete()
         messages.success(request, f"{instance.service} was deleted.")
@@ -142,6 +123,7 @@ def delete_kidservice(request, id):
 
 def delete_otherservice(request, id):
     instance = OtherServices.objects.get(pk=id)
+
     if request.method == 'POST':
         instance.delete()
         messages.success(request, f"{instance.service} was deleted.")

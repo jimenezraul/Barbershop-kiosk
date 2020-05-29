@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 def register(request):
     """Register a new user."""
     logo = LogoImage.objects.all()
+
     if logo.count() == 1:
         logo = logo[0]
     else:
@@ -27,6 +28,7 @@ def register(request):
             return redirect("barbershop-waitinglist")
     else:
         form = UserRegisterForm()
+
     context = {
         'form': form,
         'logo': logo,
@@ -37,6 +39,7 @@ def register(request):
 
 def login_view(request):
     logo = LogoImage.objects.all()
+
     if logo.count() == 1:
         logo = logo[0]
     else:
@@ -59,6 +62,7 @@ def login_view(request):
                 return redirect(request.POST.get('next'))
         except:
             return redirect('barbershop-waitinglist')
+            
     context = {
         'logo': logo,
         'title': "Login - Register",

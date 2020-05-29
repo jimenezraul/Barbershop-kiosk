@@ -9,6 +9,7 @@ from barbershop.forms import BarberPhoto
 
 def photo_list(request, id=None):
     photos = Photo.objects.filter(user=request.user)
+    
     if photos.count() > 0:
         img_id = photos[0].id
         instance = Photo.objects.get(pk=img_id)
@@ -29,6 +30,7 @@ def photo_list(request, id=None):
 
 def barber_photo(request, id):
     photos = Barbers.objects.filter(pk=id)
+
     if photos.count() > 0:
         img_id = photos[0].id
         instance = Barbers.objects.get(pk=img_id)
