@@ -572,3 +572,9 @@ select, label, input {
     /* Black w/ opacity */
   }
 }
+
+.module-border-wrap {
+  padding: 3px;
+  position: relative;
+  background: linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237), rgb(246, 79, 89));
+}
