@@ -36,30 +36,26 @@ def waitinglist(request):
     wel_message = ''
     try:
         if clients.count() > 0:
-            client = clients.filter(status="Waiting")
-            client = client[0]
-            s = str(client.date)
-            start_time = datetime.strptime(s, "%H:%M:%S.%f")
-            e = str(datetime.now().time())
-            end_time = datetime.strptime(e, "%H:%M:%S.%f")
+            client = clients[0]
+            start_time = str(client.date)
+            start_time = datetime.strptime(start_time, "%H:%M:%S.%f")
+            end_time = str(datetime.now().time())
+            end_time = datetime.strptime(end_time, "%H:%M:%S.%f")
             total_time = end_time - start_time
             estimate_time = datetime.strptime(
                 str(total_time), "%H:%M:%S.%f").strftime(fmt)
-            eta = estimate_time
-            time_list = list(eta)
-            time_list[0] = ""
-            final_list = "".join(time_list)
+            estimate_time = estimate_time[1:]
             client_name = client.name
             #wel_message = f'Hi {client_name}, be ready... We will call you soon!'
-            if time_list[1] != '0':
+            if estimate_time[0] != '0':
                 time_display = "Hour"
             else:
                 time_display = "Minutes"
         else:
-            final_list = '0:00'
+            estimate_time = '0:00'
             time_display = "Minutes"
     except:
-        final_list = '0:00'
+        estimate_time = '0:00'
         time_display = "Minutes"
 
     page = request.GET.get('page', 1)
@@ -73,7 +69,7 @@ def waitinglist(request):
         users = paginator.page(paginator.num_pages)
     context = {
         'clients': users,
-        'eta': final_list,
+        'eta': estimate_time,
         'time_display': time_display,
         'title': "BarberView",
         'users': users,
@@ -90,84 +86,39 @@ def waiting(request):
     other = OtherServices.objects.filter(user=request.user)
     zip = ZipCode.objects.filter(user=request.user)
     logo = LogoImage.objects.filter(user=request.user)
-    """
-    total = 0  
-
-    for service in men:
-        prices = service.price
-        total += prices
-    subtotal = total
-    tax_rate = Decimal(.06)
-    tax = total * tax_rate
-    tax = round(tax, 2)
-    total = total + tax
-    total = round(total, 2)
-     """
 
     if logo.count() == 1:
         logo = logo[0]
     else:
         logo = LogoImage.objects.filter(user=request.user)
 
-    if zip.count() > 0:
-        zip_code = str(zip[0])
-        url = 'http://api.openweathermap.org/data/2.5/weather?zip={},us&units=imperial&APPID=8e16366457d9058e262706b08183b818'
-        zip = zip_code
-        r = requests.get(url.format(zip)).json()
-        r_list = list(str(r['main']['temp']))
-        r_list[2:] = ""
-        f_temp = "".join(r_list)
-        city_weather = {
-            'city': r['name'],
-            'temperature': f_temp,
-            'humidity': r['main']['humidity'],
-            'description': r['weather'][0]['description'],
-            'icon': r['weather'][0]['icon'],
-        }
-    else:
-        url = 'http://api.openweathermap.org/data/2.5/weather?zip={},us&units=imperial&APPID=8e16366457d9058e262706b08183b818'
-        zip = '10001'
-        r = requests.get(url.format(zip)).json()
-        r_list = list(str(r['main']['temp']))
-        r_list[2:] = ""
-        f_temp = "".join(r_list)
-        city_weather = {
-            'city': r['name'],
-            'temperature': f_temp,
-            'humidity': r['main']['humidity'],
-            'description': r['weather'][0]['description'],
-            'icon': r['weather'][0]['icon'],
-        }
     clients = Client.objects.filter(user=request.user, completed=False)
     fmt = '%H:%M'
     wel_message = ''
     try:
         if clients.count() > 0:
-            client = clients.filter(status="Waiting")
-            client = client[0]
-            s = str(client.date)
-            start_time = datetime.strptime(s, "%H:%M:%S.%f")
-            e = str(datetime.now().time())
-            end_time = datetime.strptime(e, "%H:%M:%S.%f")
+            client = clients[0]
+            start_time = str(client.date)
+            start_time = datetime.strptime(start_time, "%H:%M:%S.%f")
+            end_time = str(datetime.now().time())
+            end_time = datetime.strptime(end_time, "%H:%M:%S.%f")
             total_time = end_time - start_time
             estimate_time = datetime.strptime(
                 str(total_time), "%H:%M:%S.%f").strftime(fmt)
-            eta = estimate_time
-            my_list = list(eta)
-            my_list[0] = ""
-            final_list = "".join(my_list)
+            estimate_time = estimate_time[1:]
             client_name = client.name
             #wel_message = f'Hi {client_name}, be ready... We will call you soon!'
-            if my_list[1] != '0':
+            if estimate_time[0] != '0':
                 time_display = "Hour"
             else:
                 time_display = "Minutes"
         else:
-            final_list = '0:00'
+            estimate_time = '0:00'
             time_display = "Minutes"
     except:
-        final_list = '0:00'
+        estimate_time = '0:00'
         time_display = "Minutes"
+
     page = request.GET.get('page', 1)
 
     paginator = Paginator(clients, 20)
@@ -182,9 +133,8 @@ def waiting(request):
         'kidservices': kid,
         'menservices': men,
         'otherservices': other,
-        'city_weather': city_weather,
         'clients': users,
-        'eta': final_list,
+        'eta': estimate_time,
         'time_display': time_display,
         'title': "ClientView",
         'logo': logo,
