@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,7 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tkk8l3h4l6tgui#li*y889p1=ckmi2ohyr9tnlxqnio5+h4#do'
+with open("key.txt") as key:
+    secret_key = key
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -167,3 +168,5 @@ PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
 
 DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
+

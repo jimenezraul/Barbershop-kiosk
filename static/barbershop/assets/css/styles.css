@@ -1,5 +1,6 @@
 body {
   background-color: #495c85;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -279,11 +280,7 @@ a {
   font-style: italic;
 }
 
-label {
-  display: none;
-}
-
-#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email, #id_barbershop, #id_hire_date, #id_phone, #id_license_num, #id_street, #id_city, #id_state {
+#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email, #id_barbershop, #id_hire_date, #id_phone, #id_license_num, #id_street, #id_city, #id_state, #id_date {
   display: block;
   width: 80%;
   font-weight: 500;
@@ -339,10 +336,6 @@ h3 {
   margin-bottom: 2px;
   padding-right: 10px;
   min-height: 20px;
-}
-
-.list-table {
-  min-height: 86vh;
 }
 
 .div-border {
@@ -532,6 +525,11 @@ h3 {
   margin: 0;
 }
 
+.sky img {
+  height: 100px;
+  width: 100px;
+}
+
 .font-l {
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
@@ -561,11 +559,6 @@ h3 {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-style: italic;
-}
-
-.sky img {
-  height: 100px;
-  width: 100px;
 }
 
 .r-client-info {
@@ -740,9 +733,9 @@ h3 {
   width: 100%;
 }
 
-#id_image {
+#id_file {
   width: 100%;
-  border: 2px solid grey;
+  border: 2px solid rgb(197, 197, 197);
   background-color: #dc3545;
   border-radius: 5px;
   padding: 2px;

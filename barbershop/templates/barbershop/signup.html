@@ -36,16 +36,6 @@
     <link rel="stylesheet" href="{% static 'barbershop/assets/css/Newsletter-Subscription-Form.css' %}">
     <link rel="stylesheet" href="{% static 'barbershop/assets/css/styles.css' %}">
     <link rel="apple-touch-icon" href="{% static '/barbershop/assets/img/180x180.jpg' %}">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132458520-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-132458520-1');
-    </script>
 </head>
 
 <body>
@@ -73,7 +63,6 @@
 
                             {% endfor %}
                             <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
                                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                                 crossorigin="anonymous"></script>
@@ -82,12 +71,15 @@
                             {% csrf_token %}
                             <h1>Sign Up</h1>
                             {{ form.name }}
+                            {{form.status}}
                             <select name="barber" required="" id="id_barber">
                                 <option value="" selected="">Select a Barber</option>
                                 <option value="Any">Any</option>
                                 {% for barber in barberlist %}
                                 {% if barber.available == True %}
-                                <option value="{{ barber }}">{{ barber }}</option>
+                                <option value="{{ barber }}" data-imagesrc="{{ barber.file.url }}">
+                                    {{ barber }}
+                                </option>
                                 {% else %}
                                 {% endif %}
                                 {% endfor %}
@@ -104,8 +96,37 @@
         </div>
 
     </section>
-
-
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+    <script src="{% static 'barbershop/assets/js/barber-avail.js' %}"></script>
+    <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+    <script>
+        // When the user clicks on div, open the popup
+        function showFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+            $('#btnviewdetails').text('Cancel').button("refresh")
+        }
+        function hideFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("hide");
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+    <script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
+    <script type="text/javascript"
+        src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js"></script>
+   
 
 
     {% endblock content %}
+
+</body>
+
+</html>

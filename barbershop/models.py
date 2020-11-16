@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from phone_field import PhoneField
 from datetime import datetime, date, timedelta
+from django.urls import reverse
 
 
 class Barbers(models.Model):
@@ -26,6 +27,28 @@ class Barbers(models.Model):
         todays_date = datetime.now().date()
         return todays_date.year - hire.year - ((todays_date.month, todays_date.day) < (hire.month, hire.day))
 
+    def save(self, *args, **kwargs):
+        try:
+            photo = Barbers.objects.get(id=self.id)
+            if photo.file != self.file:
+                photo.file.delete()
+        except:
+            pass
+        super(Barbers, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        photo = Barbers.objects.get(id=self.id)
+        photo.file.delete()
+        return super(Barbers, self).delete(*args, **kwargs)
+
+    @property
+    def object_delete(self):
+        return f"/{self.pk}/delete_barber/"
+
+    @property
+    def get_absolute_url(self):
+        return f"/barber_profile/{self.pk}"
+
 
 class Client(models.Model):
 
@@ -38,6 +61,7 @@ class Client(models.Model):
     completed = models.BooleanField(default=False)
     completed_by = models.ForeignKey(
         Barbers, on_delete=models.CASCADE, blank=True, null=True)
+    completed_time = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -54,9 +78,23 @@ class ZipCode(models.Model):
 
 class LogoImage(models.Model):
 
-    image = models.ImageField(upload_to='logo_image/')
+    file = models.ImageField(upload_to='logo_image/')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE, default=1)
 
     def __str__(self):
-        return self.image.name
+        return self.file.name
+
+    def save(self, *args, **kwargs):
+        try:
+            photo = LogoImage.objects.get(id=self.id)
+            if photo.file != self.file:
+                photo.file.delete()
+        except:
+            pass
+        super(LogoImage, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        photo = LogoImage.objects.get(id=self.id)
+        photo.file.delete()
+        super(LogoImage, self).save(*args, **kwargs)

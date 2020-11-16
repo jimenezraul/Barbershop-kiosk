@@ -1,6 +1,5 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
-{% load pwa %}
 {% block content %}
 
 <section>
@@ -10,7 +9,7 @@
             id="wait-list">
             <div class="col-12 col-md-3 d-flex justify-content-center align-middle">
                 <div class="col-4 text-center p-0">
-                    <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i
+                    <a class="barbers-profiles" href="{% url 'barbershop-barberprofilelist'%}"><i
                             class="red fas fa-users"></i></a>
                     <p class="m-0"><small>Barbers</small></p>
                 </div>
@@ -64,7 +63,7 @@
         <div class="d-flex d-md-none row justify-content-center align-content-center align-items-center shadow bg-light"
             id="wait-list">
             <div class="col-12 col-md-6 title-bar">
-                <h2 class="text-center text-dark" id="welcome"></i> Barber View
+                <h2 class="text-center text-dark" id="welcome"> Main View
                 </h2>
                 <div class="col-12 heading-col d-flex justify-content-center">
                     {% for message in messages %}
@@ -80,15 +79,15 @@
                 </div>
             </div>
             <div class="col-12 col-md-3 text-center">
-                <h5 class="ewt">Estimated Wait Time</h5>
+                <h5 class="ewt text-g">Estimated Wait Time</h5>
 
                 <div class="col-3 col-sm-3 col-md-8 col-lg-5 time justify-content-center d-flex d-md-none">{{ eta }}
                 </div>
-                <p class="timename d-block d-md-none">{{ time_display }}</p>
+                <p class="timename d-block d-md-none text-g">{{ time_display }}</p>
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center align-content-center">
                 <div class="col-4 text-center">
-                    <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i
+                    <a class="barbers-profiles" href="{% url 'barbershop-barberprofilelist'%}"><i
                             class="red fas fa-users"></i></a>
                     <p class="m-0"><small>Barbers</small></p>
                 </div>
@@ -139,7 +138,7 @@
         <div class="row">
 
             <!--Grid column-->
-            <div class="col-md-12 text-left">
+            <div class="p-0 col-md-12 text-left">
 
                 <div class="card mt-2">
                     <div class="card-body p-0">
@@ -163,6 +162,7 @@
                                         <th class="font-weight-bold text-center">
                                             <strong>Time</strong>
                                         </th>
+
                                         <th class="font-weight-bold text-center">
                                             <strong>Edit</strong>
                                         </th>
@@ -179,20 +179,21 @@
 
                                         <td>
                                             <h5 class="text-center">
-                                                <strong>{{ client.name }}</strong>
+                                                {{ client.name }}
                                             </h5>
                                         </td>
                                         <td>
                                             <h5 class="text-center">
-                                                <strong>{{ client.barber }}</strong>
+                                                {{ client.barber }}
                                             </h5>
                                         </td>
 
                                         <td>
-                                            <p class="text-center">
-                                                <strong>{{ client.date }}</strong>
-                                            </p>
+                                            <h5 class="text-center">
+                                                {{ client.date }}
+                                            </h5>
                                         </td>
+
                                         <td class="font-weight-bold text-center">
                                             <form action="{% url 'barbershop-update' client.id %}">
                                                 {% csrf_token %}
@@ -222,7 +223,7 @@
                                             {% for i in users.paginator.page_range %}
                                             {% if users.number == i %}
                                             <li class="page-item active"><a class="page-link"><span>{{ i }} <span
-                                                            class="sr-only">(current)</span></a></span></li>
+                                                            class="sr-only">(current)</span></a></li>
                                             {% else %}
                                             <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
                                             </li>
@@ -254,3 +255,9 @@
 </div>
 
 {% endblock content %}
+<div class="col-2">
+    <form action="{% url 'barbershop-status' client.id barbers.id %}">
+        {% csrf_token %}
+        <button class="completed-btn red" type="submit"><i class="fas fa-check"></i></button>
+    </form>
+</div>

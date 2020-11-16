@@ -1,0 +1,121 @@
+{% extends 'user_profile/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
+      <div class="d-none d-md-block col-12 col-md-6 heading-col">
+        <h4 class="text-center text-dark" id="welcome">Appointments for {{ barber.barber}}.
+        </h4>
+
+      </div>
+      {% if not barber.file %}
+      <div class="col-12 text-center pic-col"><i class="icon-red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+      {% else %}
+      <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image"
+          src="{{ barber.file.url }}" height="200px" width="200px"></div>
+      {% endif %}
+
+      <div class="col-auto back-col"><a href="{{ barber.get_absolute_url }}"><i
+            class="fas fa-arrow-circle-left"></i></a></div>
+
+      <div class="col-auto heading-col">
+        {% for message in messages %}
+        <div class="row d-flex justify-content-center align-items-center align-content-center">
+          <div id="mydiv" class="mt-2 col-12 alert alert-{{ message.tags }} fade show message text-center"
+            id="success-alert" role="alert">
+            {{ message }}
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<div>
+  <div class="container-fluid shadow">
+    <div class="row row-2">
+      <div class="col">
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="">
+  <div class="container">
+    <div class="row d-flex justify-content-center card-margin-appintments">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">Morning</h5>
+        </div>
+        {% for i in morning %}
+        <a href="" class="text-dark text-decoration-none">
+          <div class="card mt-2 card-animation">
+            <div class="card-body">
+              <h5 class="text-font">Time: <span class='pro-info float-right font-weight-bold'>{{ i |time:"g:i A"}}</span></h5>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">Afternoon</h5>
+        </div>
+        {% for i in afternoon %}
+        <a href="" class="text-dark text-decoration-none">
+          <div class="card mt-2 card-animation">
+            <div class="card-body">
+              <h5 class="text-font">Time: <span class='pro-info float-right font-weight-bold'>{{ i |time:"g:i A"}}</span></h5>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">Evening</h5>
+        </div>
+        {% for i in evening %}
+        <a href="" class="text-dark text-decoration-none">
+          <div class="card mt-2 card-animation">
+            <div class="card-body">
+              <h5 class="text-font">Time: <span class='pro-info float-right font-weight-bold'>{{ i |time:"g:i A"}}</span></h5>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
+<script src="{% static 'barbershop/assets/js/barber-avail.js' %}"></script>
+<script src="{% static 'barbershop/assets/js/time.js' %}"></script>
+<script>
+  // When the user clicks on div, open the popup
+  function showFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+    $('#btnviewdetails').text('Cancel').button("refresh")
+  }
+  function hideFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("hide");
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+<script src="{% static 'barbershop/assets/js/alert.js' %}"></script>
+<script src="{% static 'barbershop/assets/js/alert-mobile.js' %}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}

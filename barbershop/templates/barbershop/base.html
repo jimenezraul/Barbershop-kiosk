@@ -1,9 +1,9 @@
 {% load static %}
 
+
 {% load pwa %}
 <!DOCTYPE html>
-<div lang="en">
-
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+        <link href="{% static 'barbershop/assets/css/cropper.min.css' %}" rel="stylesheet">
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,700,700i,800,800i,900,900i">
         <link rel="stylesheet" href="{% static 'barbershop/assets/fonts/fontawesome-all.min.css' %}">
@@ -41,8 +42,6 @@
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
             rel="stylesheet">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $(function () {
@@ -55,7 +54,7 @@
         {% block content %}{% endblock %}
 
         <!-- Footer-->
-        <div class="footer-dark mt-3">
+       <!--  <div class="footer-dark mt-3">
             <footer>
                 <div class="container">
                     <div class="row">
@@ -64,8 +63,10 @@
                 </div>
             </footer>
 
-        </div>
+        </div>-->
 
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="{% static 'barbershop/assets/js/autorefresh.js' %}"></script>
         <script src="{% static 'barbershop/assets/js/barber-avail.js' %}"></script>
         <script src="{% static 'barbershop/assets/js/time.js' %}"></script>
@@ -87,6 +88,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+        <script src="{% static 'barbershop/assets/js/cropper.min.js' %}"></script>
+        {% block javascript %}
+        {% endblock %}
     </body>
 
     </html>

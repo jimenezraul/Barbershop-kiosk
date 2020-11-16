@@ -23,6 +23,7 @@
 # Pictures #
 ######################
 *.png
+*.jpg
 
 # Logs and databases #
 ######################
@@ -30,6 +31,7 @@
 *.sql
 *.sqlite
 *.sqlite3
+key.txt
 
 # OS generated files #
 ######################
@@ -45,4 +47,18 @@ ehthumbs.db
 bin/*
 include/*
 lib/*
-*.png
+media/*
+users/__pycache__/*
+website/__pycache__/*
+user_profile/migrations/*
+user_profile/__pycache__/*
+static/client_secret.json
+static/token.pkl
+services/migrations/__pycache__/*
+services/__pycache__/*
+photocrop/migrations/__pycache__/*
+photocrop/__pycache__/*
+barbershop/templatetags/__pycache__/*
+barbershop/migrations/__pycache__/*
+barbershop/__pycache__/*
+barbershop/migrations/*

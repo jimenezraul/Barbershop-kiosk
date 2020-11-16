@@ -71,7 +71,6 @@
 {% block content %}
 <section>
   <div class="container">
-
     <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
       <div class="d-none d-md-block col-12 col-md-6 heading-col">
         <h4 class="text-center text-dark" id="welcome">Hello {{ barbers.barber}}!
@@ -86,11 +85,20 @@
       {% endif %}
 
 
-      <!--end notifications-->
-      <div class="col-auto back-col"><a href="{% url 'barbershop-barberprolist' %}"><i
+
+      <div class="col-auto back-col"><a href="{% url 'barbershop-barberprofilelist' %}"><i
             class="fas fa-arrow-circle-left"></i></a></div>
-      <div class="col-auto client-complete"><i class="fas fa-users"></i></div>
-      <div id="myBtn" class="col-auto barber_noti"><i class="far fa-bell"></i></div>
+      <div id="myCompleted" class="col-auto client-complete"><i class="fas fa-users"></i></div>
+
+      {% if completed.count == 0 %}
+      <div>
+        <p></p>
+      </div>
+      {% else %}
+      <span class="client-noti badge badge-light">{{ completed.count }}</span>
+      {% endif %}
+
+      <div id="myBtn" class="col-auto barber_noti"><i class="fas fa-bell"></i></div>
       {% if anniversary.count == 0 %}
 
       {% endif %}
@@ -101,46 +109,82 @@
       <span class="barber-count-noti badge badge-light">{{anniversary.count}}</span>
       {% endif %}
       {% endfor %}
-      <!--<div class="barber-count-noti text-center"><p>{{anniversary.count}}</p></div> -->
 
 
-      <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
-        <div role="menu"
-          class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
-          <span class="close pr-2">&times;</span>
-          <h6 class="text-white text-center dropdown-header rounded">Notifications</h6>
-          <div class="col-12">
-            {% if anniversary.count == 0 %}
-            <p class="text-center mt-2">No Notifications</p>
-            {% endif %}
-            {% if anniversary != 0 %}
-            {% for a in anniversary %}
-            {%if a.id == barbers.id %}
-            {% else %}
-            <div class="d-flex justify-content-center align-content-center align-items-center">
-              <div class="col-2 text-center p-0 beer"><img class="rounded-circle" src="{{ a.file.url }}" alt="">
-              </div>
+      <div id="outFrame">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12">
+              <div id="barberNoti" class="barbernoti col-12 justify-content-center align-content-center shadow">
+                <div role="menu"
+                  class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
+                  <span class="close pr-2">&times;</span>
+                  <h6 class="text-white text-center dropdown-header rounded">Notifications</h6>
+                  <div class="col-12">
+                    {% if anniversary.count == 0 %}
+                    <p class="text-center mt-2">No Notifications</p>
+                    {% endif %}
+                    {% if anniversary != 0 %}
+                    {% for a in anniversary %}
+                    {%if a.id == barbers.id %}
+                    {% else %}
+                    <div class="d-flex justify-content-center align-content-center align-items-center">
+                      <div class="col-2 text-center p-0 beer"><img class="rounded-circle module-border-wrap"
+                          src="{{ a.file.url }}" alt="">
+                      </div>
 
-              <div class="col-10 mt-2 border-bottom">
-                <p class="font-weight-bold m-0 ">Congratulate {{ a.barber }} for another year at the BarberShop!</p>
-                <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>Celebrating
-                    {{ a.years_in_shop }} years today!</small></p>
+                      <div class="col-10 mt-2 border-bottom">
+                        <p class="font-weight-bold m-0 ">Congratulate {{ a.barber }} for another year at the BarberShop!
+                        </p>
+                        <p class="text-center border gradient p-1 text-white pb-2 rounded mt-2"><small>Celebrating
+                            {{ a.years_in_shop }} years today!</small></p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
               </div>
             </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
           </div>
         </div>
       </div>
 
-      {% if completed.count == 0 %}
-      <div>
-        <p></p>
+      <div id="outOfFrame">
+        <div class="container">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12">
+              <div id="barberCompleted" class="barbernoti col-12 justify-content-center align-content-center shadow">
+                <div role="menu"
+                  class="col-11 col-sm-10 col-md-6 col-lg-5 p-0 dropdown-menu dropdown-menu-right show dropdown-list dropdown-menu-right animated--grow-in">
+                  <span class="close2 pr-2">&times;</span>
+                  <h6 class="text-white text-center dropdown-header rounded">Customers Completed</h6>
+                  <div class="col-12">
+                    {% if completed.count == 0 %}
+                    <p class="text-center mt-2">No Customers</p>
+                    {% endif %}
+                    {% if completed != 0 %}
+                    {% for complete in completed %}
+                    <div class="d-flex justify-content-center align-content-center align-items-center">
+
+
+                      <div class="col-12 mt-2 border-bottom">
+                        <p class=" m-0 mb-2 text-center">Client: <span
+                            class="font-weight-bold">{{ complete.name }}</span> | Completed At: <span
+                            class="font-weight-bold">{{ complete.completed_time}}</span></p>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {% else %}
-      <span class="client-noti badge badge-light">{{ completed.count }}</span>
-      {% endif %}
+
 
 
       <div class="col-auto heading-col">
@@ -156,10 +200,7 @@
       </div>
       <form action="{% url 'barberphoto' barbers.id %}" method="post" enctype="multipart/form-data" id="formUpload">
         {% csrf_token %}
-        <div class="col-auto camera-col"><i class="fas fa-camera shadow"></i>{{  photoform }}
-          <select name="user" id="id_user">
-            <option value="{{ barbers.barber }}" selected="">{{ user }}</option>
-          </select>
+        <div class="col-auto camera-col"><i class="card-animation fas fa-camera shadow"></i>{{  photoform }}
         </div>
       </form>
 
@@ -203,10 +244,10 @@
     </div>
   </div>
 </div>
-<div class="min-vh-100">
+<div class="">
   <div class="container">
     <div class="row d-flex justify-content-center card-margin">
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-4 p-0">
         <div class="card shadow">
           <h5 class="card-header">Barber's Info</h5>
           <div class="card-body">
@@ -237,13 +278,22 @@
             </form>
           </div>
         </div>
+        <a href="/appointment_services/{{barbers.id}}" class="text-dark text-decoration-none">
+        <div class="card mt-3 card-animation">
+          <div class="card-body">
+            <div class="row justify-content-center align-content-center">
+              <h4 class="text-font">Book Now</h4>
+            </div>
+          </div>
+        </div>
+      </a>
 
       </div>
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-4">
         <div class="card shadow">
           <div class="col-12 card-header d-flex">
-            <h5 class="col-4 text-center">Client</h5>
-            <h5 class="col-4 text-center">Barber</h5>
+            <h5 class="m-0 col-4 text-center">Client</h5>
+            <h5 class="m-0 col-4 text-center">Barber</h5>
           </div>
           <div class="barber-clients">
             {% for client in clients %}
@@ -255,7 +305,7 @@
                 <h5>{{ client.barber }}</h5>
               </div>
               <div class="col-4">
-                <form action="{% url 'barbershop-delete' client.id barbers.id %}">
+                <form action="{% url 'barbershop-complete' client.id barbers.id %}">
                   {% csrf_token %}
                   <button class="completed-btn red" type="submit"><i class="fas fa-check"></i></button>
                 </form>
@@ -271,7 +321,5 @@
 </div>
 </div>
 </div>
-
-
 
 {% endblock %}

@@ -7,9 +7,9 @@
   display: table-cell;
   position: relative;
   width: auto;
-  background: url(../../assets/img/meeting.jpg);
+  background: url(/static/users/assets/img/Barber.jpg);
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   height: 100%;
 }
 
@@ -151,10 +151,17 @@
 }
 
 .main-logo {
+  background: url(/static/users/assets/img/Barber.jpg);
   position: relative;
   height: 300px;
   width: auto;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
+}
+
+.credits{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }

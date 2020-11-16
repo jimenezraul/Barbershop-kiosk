@@ -1,0 +1,88 @@
+.bg-black {
+  background-color: black;
+}
+
+.bg-image {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 98%;
+  height: 100%;
+  opacity: .1;
+  margin-right: 28px;
+}
+
+.col-8.position-relative {
+  z-index: 1;
+}
+
+.right-sidebar {
+  background-color: red;
+  border-left: 4px solid #dee2e6!important;
+}
+
+.services {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.icon.ion-ios-arrow-right {
+  float: right;
+}
+
+.services {
+  font-family: 'Oswald';
+  font-weight: 800;
+  font-size: 80px;
+}
+
+h2 {
+  font-family: 'Oswald';
+  font-weight: 800;
+}
+
+p {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+.images {
+  border-radius: 1rem;
+}
+
+.cards-col {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 1rem;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.border-bottom2 {
+  border-bottom: 4px solid #dee2e6!important;
+}
+
+#Layer_1 {
+  width: 80px;
+  height: 80px;
+  fill: white;
+}
+
