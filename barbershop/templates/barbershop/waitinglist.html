@@ -1,6 +1,5 @@
 {% extends 'barbershop/base.html' %}
 {% load static %}
-{% load pwa %}
 {% block content %}
 
 <section>
@@ -10,7 +9,7 @@
             id="wait-list">
             <div class="col-12 col-md-3 d-flex justify-content-center align-middle">
                 <div class="col-4 text-center p-0">
-                    <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i
+                    <a class="barbers-profiles" href="{% url 'barbershop-barberprofilelist'%}"><i
                             class="red fas fa-users"></i></a>
                     <p class="m-0"><small>Barbers</small></p>
                 </div>
@@ -88,7 +87,7 @@
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center align-content-center">
                 <div class="col-4 text-center">
-                    <a class="barbers-profiles" href="{% url 'barbershop-barberprolist'%}"><i
+                    <a class="barbers-profiles" href="{% url 'barbershop-barberprofilelist'%}"><i
                             class="red fas fa-users"></i></a>
                     <p class="m-0"><small>Barbers</small></p>
                 </div>
@@ -258,7 +257,7 @@
 {% endblock content %}
 <div class="col-2">
     <form action="{% url 'barbershop-status' client.id barbers.id %}">
-      {% csrf_token %}
-      <button class="completed-btn red" type="submit"><i class="fas fa-check"></i></button>
+        {% csrf_token %}
+        <button class="completed-btn red" type="submit"><i class="fas fa-check"></i></button>
     </form>
-  </div>
+</div>

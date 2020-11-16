@@ -4,14 +4,37 @@ from django.contrib.auth.models import User
 from photocrop.forms import PhotoForm
 from photocrop.models import Photo
 from barbershop.models import LogoImage, Barbers, Client
-from .forms import AddressForm
-from .models import Address
+from .forms import AddressForm, AppointmentForm
+from .models import Address, Appointment, Token
 from django.contrib import messages
 from .forms import UserUpdateForm
 from barbershop.forms import NewBarber, BarberPhoto
 from django.db.models import Q
 from datetime import datetime, date, timedelta
 import json
+import datefinder
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+import pickle
+import pytz
+from .api import *
+from django.http import HttpResponseRedirect
+
+
+# scopes = ['https://www.googleapis.com/auth/calendar']
+
+# json_data = 'static/client_secret.json'
+# token = "static/token.pkl"
+# flow = InstalledAppFlow.from_client_secrets_file(json_data, scopes=scopes)
+# credentials = pickle.load(open(token, "rb"))
+# service = build("calendar", "v3", credentials=credentials)
+
+# result = service.calendarList().list().execute()
+
+# calendar_id = result['items'][1]['id']
+
+# result = service.events().list(calendarId=calendar_id,
+#                                timeZone='America/New_York').execute()
 
 
 @login_required(login_url='register')
@@ -94,6 +117,12 @@ def update_user_info(request, id):
     return render(request, "user_profile/update_user_info.html", context)
 
 
+def time_slots(s_time, e_time):
+    while s_time <= e_time:
+        yield s_time.strftime("%I:%M%p")
+        s_time += timedelta(minutes=30)
+
+
 @login_required(login_url='register')
 def barber_profile(request, id):
     barber = Barbers.objects.get(pk=id)
@@ -145,7 +174,7 @@ def barber_profile(request, id):
         checkbox = "unchecked"
     else:
         checkbox = "checked"
-        
+
     context = {
         "hire": hire,
         "todays_date": todays_date,
@@ -162,13 +191,32 @@ def barber_profile(request, id):
         "happy_hire_day": happy_hire_day,
         'happy_hire_greeting': happy_hire_greeting,
         "anniversary": anniversary,
-        "title": "Barber Profile"
+        "title": "Barber Profile",
     }
     return render(request, "user_profile/barber_profile.html", context)
 
 
 @login_required(login_url='register')
 def barber_status(request, id):
+    ''' # Get info
+    token = Token.objects.all()
+    token = token[0].token
+    setmore = Setmore()
+    service = get_services(token, setmore.all_services)
+    print(service["response"])
+
+    # Is token is invalid refresh token
+    if service["response"] == False:
+        return redirect("update-token", id)
+    for i in service["data"]["services"]:
+        print(f"id: {i['key']}")
+        print(f"Service: {i['service_name']}")
+        print(f"Price: ${i['cost']}")
+        print(f"Duration: {i['duration']} min")
+
+    catergory_service = get_services(token, setmore.category_key, )
+    '''
+
     barbers = Barbers.objects.get(pk=id)
 
     form = NewBarber(instance=barbers)
@@ -215,3 +263,180 @@ def barber_profile_update(request, id):
 
     }
     return render(request, "user_profile/barber_profile_update.html", context)
+
+
+@login_required(login_url='register')
+def create_appointment(request, id, time):
+    barber = Barbers.objects.filter(pk=id)
+    barber = barber[0]
+    appt = Appointment()
+
+    time = time
+    appt.name = request.POST["name"]
+    appt.date = request.POST['date']
+    appt.time = time
+    appt.barber = barber
+    appt.user = request.user
+    appt.save()
+
+    '''
+    if len(matches):
+        start_time = matches[0]
+        end_time = start_time + timedelta(minutes=duration)
+
+    event = {
+        'summary': summary,
+        'location': location,
+        'description': description,
+        'start': {
+            'dateTime': start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+            'timeZone': 'America/New_York',
+        },
+        'end': {
+            'dateTime': end_time.strftime("%Y-%m-%dT%H:%M:%S"),
+            'timeZone': 'America/New_York',
+        },
+        'reminders': {
+            'useDefault': False,
+            'overrides': [
+                {'method': 'popup', 'minutes': 15},
+            ],
+        },
+    }
+
+    service.events().insert(calendarId=calendar_id, body=event).execute()
+    '''
+    return redirect('barberprofile', barber.id)
+
+
+@login_required(login_url='register')
+def appointment(request, id, time):
+    barber = Barbers.objects.filter(pk=id)[0]
+    form = AppointmentForm()
+    context = {
+        "barber": barber,
+        "form": form,
+        "time": time,
+    }
+    return render(request, "user_profile/create_appointment.html", context)
+
+
+@login_required(login_url='register')
+def update_token(request, id):
+    barber = Barbers.objects.filter(pk=id)
+    barber = barber[0]
+    refresh_token_return = refresh_token(request, id=id)
+    if "barber_profile/" in refresh_token_return:
+        return redirect(refresh_token_return)
+    else:
+        return redirect("appointment-services", id)
+
+
+def appointment_services(request, id):
+    barber = Barbers.objects.get(pk=id)
+    form = NewBarber(instance=barber)
+    token = Token.objects.filter(user=request.user)
+    if token:
+        token = token[0].token
+
+    # Get categories and if the response is false will redirect to refresh the token
+    categories = get_service_by_category(token)
+    if categories["response"] == False:
+        return redirect("update-token", id)
+
+    men_category = [i for i in categories["data"]["service_categories"]
+                    if i["categoryName"] == "Men`s Haircut"][0]
+    kid_category = [i for i in categories["data"]["service_categories"]
+                    if i["categoryName"] == "Kid`s Haircut (12 yrs & under)"][0]
+    other_category = [i for i in categories["data"]
+                      ["service_categories"] if i["categoryName"] == "Other"][0]
+    staff = get_staff(token)
+
+    # Check if Barber's Name is in data and filtered
+    staff = [i for i in staff["data"]["staffs"]
+             if i["first_name"] == barber.barber]
+
+    # Get the Barbers Key
+    if staff:
+        staff_key = staff[0]["key"]
+    else:
+        staff_key = None
+
+    men_list = get_service_by_category_key(token, men_category["key"])
+    men_list = [i for i in men_list["data"]["services"]
+                if i["staff_keys"][0] == staff_key]
+    kid_list = get_service_by_category_key(token, kid_category["key"])
+    kid_list = [i for i in kid_list["data"]["services"]
+                if i["staff_keys"][0] == staff_key]
+    other_list = get_service_by_category_key(token, other_category["key"])
+    other_list = [i for i in other_list["data"]
+                  ["services"] if i["staff_keys"][0] == staff_key]
+
+    # service_key = men_list[0]["key"]
+
+    # slots = get_available_slots(token, staff_key, service_key, "11/06/2020")
+
+    services = {
+        "men_category": men_category["categoryName"],
+        "men_list": men_list,
+        "kid_category": kid_category["categoryName"],
+        "kid_list": kid_list,
+        "other_category": other_category["categoryName"],
+        "other_list": other_list,
+    }
+
+    context = {
+        "barber": barber,
+        "services": services,
+        "form": form,
+        "staff_key": staff_key,
+    }
+    return render(request, "user_profile/appointment_services.html", context)
+
+
+def appointment_slots(request, id, staff_key, service_key):
+    barber = Barbers.objects.get(pk=id)
+    date_selected = request.GET["date_picker"]
+    token = Token.objects.filter(user=request.user)
+    if token:
+        token = token[0].token
+
+    slots = get_available_slots(token, staff_key, service_key, date_selected)
+    if slots["response"] == False:
+        return redirect("update-token", id)
+
+    morning = []
+    afternoon = []
+    evening = []
+    for i in slots["data"]["slots"]:
+        if i < "12":
+            hour = datetime.strptime(i, '%H.%M')
+            morning.append(hour)
+        if i >= "12" and i < "16":
+            hour = datetime.strptime(i, '%H.%M')
+            afternoon.append(hour)
+        if i >= "16":
+            hour = datetime.strptime(i, '%H.%M')
+            evening.append(hour)
+
+    context = {
+        "barber": barber,
+        "slots": slots,
+        "morning": morning,
+        "afternoon": afternoon,
+        "evening": evening,
+    }
+    return render(request, "user_profile/appointment_slots.html", context)
+
+
+def appointment_date(request, id, staff_key, service_key):
+    barber = Barbers.objects.get(pk=id)
+    staff_key = staff_key
+    service_key = service_key
+
+    context = {
+        "barber": barber,
+        "staff_key": staff_key,
+        "service_key": service_key,
+    }
+    return render(request, "user_profile/appointment_date.html", context)

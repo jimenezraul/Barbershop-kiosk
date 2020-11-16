@@ -18,7 +18,7 @@ urlpatterns = [
     path('completed/', views.completed, name='barbershop-completed'),
     path('completed/last_year/', views.completed_last_year, name='barbershop-completed_last_year'),
     path('logo/uploaded/', views.upload_image, name='barbershop-upload_image'),
-    path('barber_pro_list', views.barber_pro_list, name='barbershop-barberprolist'),
+    path('barber_profile_list', views.barber_profile_list, name='barbershop-barberprofilelist'),
     path('logo/uploaded/<id>', views.image_update, name='barbershop-image_update'),
     path('prices/', views.prices, name='barbershop-prices'),
 

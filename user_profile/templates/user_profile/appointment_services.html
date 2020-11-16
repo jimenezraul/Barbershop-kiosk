@@ -1,0 +1,108 @@
+{% extends 'user_profile/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
+      <div class="d-none d-md-block col-12 col-md-6 heading-col">
+        <h4 class="text-center text-dark" id="welcome">Appointments for {{ barber.barber}}.
+        </h4>
+
+      </div>
+      {% if not barber.file %}
+      <div class="col-12 text-center pic-col"><i class="icon-red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+      {% else %}
+      <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image"
+          src="{{ barber.file.url }}" height="200px" width="200px"></div>
+      {% endif %}
+
+      <div class="col-auto back-col"><a href="{{ barber.get_absolute_url }}"><i
+            class="fas fa-arrow-circle-left"></i></a></div>
+
+      <div class="col-auto heading-col">
+        {% for message in messages %}
+        <div class="row d-flex justify-content-center align-items-center align-content-center">
+          <div id="mydiv" class="mt-2 col-12 alert alert-{{ message.tags }} fade show message text-center"
+            id="success-alert" role="alert">
+            {{ message }}
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<div>
+  <div class="container-fluid shadow">
+    <div class="row row-2">
+      <div class="col">
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="">
+  <div class="container">
+    <div class="row d-flex justify-content-center card-margin-appintments">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">{{ services.men_category }}</h5>
+        </div>
+        {% for i in services.men_list %}
+        <a href="/appointment_date/{{barber.id}}/{{staff_key}}/{{i.key}}" class="text-dark text-decoration-none">
+          <div class="card mt-2 card-animation">
+            <div class="card-body">
+              <h5 class="text-font">Service: <span class='pro-info float-right font-weight-bold'>{{ i.service_name }}</span></h5>
+              <h5 class="text-font">Price: <span class='pro-info float-right font-weight-bold'>${{ i.cost|floatformat }}</span></h5>
+              <h5 class="text-font">Duration: <span class='pro-info float-right font-weight-bold'>{{ i.duration }} min</span></h5>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">{{ services.kid_category }}</h5>
+        </div>
+        {% for i in services.kid_list %}
+        <a href="/appointment_date/{{barber.id}}/{{staff_key}}/{{i.key}}" class="text-dark text-decoration-none">
+          <div class="card mt-2 card-animation">
+            <div class="card-body">
+              <h5 class="text-font">Service: <span class='pro-info float-right font-weight-bold'>{{ i.service_name }}</span></h5>
+              <h5 class="text-font">Price: <span class='pro-info float-right font-weight-bold'>${{ i.cost|floatformat }}</span></h5>
+              <h5 class="text-font">Duration: <span class='pro-info float-right font-weight-bold'>{{ i.duration }} min</span></h5>
+
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+        <div class="card shadow">
+          <h5 class="card-header">{{ services.other_category }}</h5>
+        </div>
+        {% for i in services.other_list %}
+        <a href="/appointment_date/{{barber.id}}/{{staff_key}}/{{i.key}}" class="text-dark text-decoration-none">
+          <div class="card mt-2 card-animation">
+            <div class="card-body">
+              <h5 class="text-font">Service: <span class='pro-info float-right font-weight-bold'>{{ i.service_name }}</span></h5>
+              <h5 class="text-font">Price: <span class='pro-info float-right font-weight-bold'>${{ i.cost|floatformat }}</span></h5>
+              <h5 class="text-font">Duration: <span class='pro-info float-right font-weight-bold'>{{ i.duration }} min</span></h5>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

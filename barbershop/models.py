@@ -45,6 +45,10 @@ class Barbers(models.Model):
     def object_delete(self):
         return f"/{self.pk}/delete_barber/"
 
+    @property
+    def get_absolute_url(self):
+        return f"/barber_profile/{self.pk}"
+
 
 class Client(models.Model):
 

@@ -280,7 +280,7 @@ a {
   font-style: italic;
 }
 
-#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email, #id_barbershop, #id_hire_date, #id_phone, #id_license_num, #id_street, #id_city, #id_state {
+#id_name, #id_barber, #id_zip_code, #id_first_name, #id_last_name, #id_email, #id_barbershop, #id_hire_date, #id_phone, #id_license_num, #id_street, #id_city, #id_state, #id_date {
   display: block;
   width: 80%;
   font-weight: 500;

@@ -18,6 +18,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from photocrop.models import Photo, Gallery
+from django.http import HttpResponseRedirect
+import json
+from .ewt import Estimate
 
 
 _LOGGER = logging.getLogger()
@@ -34,28 +37,10 @@ def waitinglist(request):
         photos = photos[0]
 
     # Estimate Waiting Time
-    try:
-        if clients.count() > 0:
-            fmt = '%H:%M'
-            client = clients[0]
-            start_time = str(client.date)
-            start_time = datetime.strptime(start_time, "%H:%M:%S.%f")
-            end_time = str(datetime.now().time())
-            end_time = datetime.strptime(end_time, "%H:%M:%S.%f")
-            total_time = end_time - start_time
-            estimate_time = datetime.strptime(
-                str(total_time), "%H:%M:%S.%f").strftime(fmt)
-            estimate_time = estimate_time[1:]
-            if estimate_time[0] != '0':
-                time_display = "Hour"
-            else:
-                time_display = "Minutes"
-        else:
-            estimate_time = '0:00'
-            time_display = "Minutes"
-    except:
-        estimate_time = '0:00'
-        time_display = "Minutes"
+    estimate = Estimate(clients)
+    estimate = estimate.get_estimate()
+    estimate_time = estimate[0]
+    time_display = estimate[1]
 
     # Pagination
     page = request.GET.get('page', 1)
@@ -329,7 +314,7 @@ def settings(request):
 @login_required(login_url='register')
 def delete_barber(request, id):
     instance = Barbers.objects.get(pk=id)
-
+    print("Hello Raul")
     if request.method == 'POST':
         instance.delete()
         messages.success(
@@ -541,7 +526,7 @@ def image_update(request, id):
 
 
 @login_required(login_url='register')
-def barber_pro_list(request):
+def barber_profile_list(request):
     # QS Objects
     barbers = Barbers.objects.filter(user=request.user)
 
@@ -557,12 +542,12 @@ def barber_pro_list(request):
             instance.save()
             messages.success(request, f"{name} was successfully added!")
             return redirect('barbershop-barberprolist')
-
+    
     context = {
         "barbers": barbers,
         "form": form,
     }
-    return render(request, "barbershop/barber_pro_list.html", context)
+    return render(request, "barbershop/barber_profile_list.html", context)
 
 
 @login_required(login_url='register')

@@ -1,0 +1,70 @@
+{% extends 'user_profile/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center profile-top-row shadow">
+            <div class="d-none d-md-block col-12 col-md-6 heading-col">
+                <h4 class="text-center text-dark" id="welcome">Appointments for {{ barber.barber}}.
+                </h4>
+
+            </div>
+            {% if not barber.file %}
+            <div class="col-12 text-center pic-col"><i class="icon-red fas fa-user-circle pl-1 pr-1 shadow"></i></div>
+            {% else %}
+            <div class="col-12 text-center pic-col"><img class="rounded-circle border-white shadow profile-image"
+                    src="{{ barber.file.url }}" height="200px" width="200px"></div>
+            {% endif %}
+
+            <div class="col-auto back-col"><a href="{{ barber.get_absolute_url }}"><i
+                        class="fas fa-arrow-circle-left"></i></a></div>
+
+            <div class="col-auto heading-col">
+                {% for message in messages %}
+                <div class="row d-flex justify-content-center align-items-center align-content-center">
+                    <div id="mydiv" class="mt-2 col-12 alert alert-{{ message.tags }} fade show message text-center"
+                        id="success-alert" role="alert">
+                        {{ message }}
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<div>
+    <div class="container-fluid shadow">
+        <div class="row row-2">
+            <div class="col">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="container">
+        <div class="row d-flex justify-content-center card-margin-appintments">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+                <div class="card shadow">
+                    <h5 class="card-header">Select a Date.</h5>
+                </div>
+                <div class="card shadow mt-2">
+                    <div class="card-body border-bottom">
+                        <form method="GET" action="{% url 'appointment-slots' barber.id staff_key service_key %}">
+                            <input type="text" class="picker_date" name="date_picker" value="" placeholder="Date"
+                                id="id_date_picker">
+                                <button class="btn btn-primary float-right" type="submit">Next</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

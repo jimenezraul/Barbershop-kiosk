@@ -74,6 +74,10 @@ body {
   margin-top: 80px;
 }
 
+.card-margin-appintments {
+  margin-top: 80px;
+}
+
 .pro-info {
   font-size: 15px;
   font-weight: 400;
@@ -85,8 +89,7 @@ body {
 }
 
 .btn-border {
-  position: absolute;
-  right: 15px;
+  float: right;
   border-radius: 25px;
   border: 1px solid white;
 }
@@ -154,7 +157,7 @@ select, label, input {
   display: none;
 }
 
-#id_street, #id_city, #id_state {
+#id_street, #id_city, #id_state, #id_date, #id_date_picker {
   display: block;
   width: 80%;
   font-weight: 500;
@@ -165,6 +168,19 @@ select, label, input {
   text-indent: 15px;
   height: 42px;
   opacity: .6;
+}
+
+.date_picker {
+  margin-top: 80px;
+}
+
+.picker_date {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  text-indent: 15px;
 }
 
 .red {
@@ -451,29 +467,29 @@ select, label, input {
   height: 100vh;
 }
 
-#outFrame{
-  background-color:transparent;
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  display:none;
+#outFrame {
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
   z-index: 1;
 }
-#outOfFrame{
-  background-color:transparent;
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
+
+#outOfFrame {
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  display:none;
+  display: none;
 }
 
-
-#Capa_1, #Layer_1{
+#Capa_1, #Layer_1 {
   fill: #ffffff;
 }
 
@@ -577,4 +593,25 @@ select, label, input {
   padding: 3px;
   position: relative;
   background: linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237), rgb(246, 79, 89));
+}
+
+.btn-p{
+  text-decoration: none;
+}
+
+.text-font{
+  color: #505e6c!important;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+.card-animation{
+  transition: transform .2s;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.card-animation:hover{
+  transform: scale(1.1);
+  z-index: 1;
+  box-shadow: 1px 5px 25px rgba(49, 49, 49, 0.76)!important;
 }
