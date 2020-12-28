@@ -16,7 +16,7 @@ chardet==3.0.4
 dataclasses==0.6
 datefinder==0.7.1
 defusedxml==0.6.0
-Django==3.0.8
+Django
 django-allauth==0.41.0
 django-autoslug==1.9.7
 django-multiselectfield==0.1.9
