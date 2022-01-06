@@ -9,7 +9,7 @@ billiard==3.6.3.0
 braintree==3.58.0
 bson==0.5.8
 cachetools==4.1.0
-celery==4.4.3
+celery==5.2.2
 certifi==2019.11.28
 cffi==1.13.2
 chardet==3.0.4
